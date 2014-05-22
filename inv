@@ -5,3 +5,6 @@ twilight-sparkle.131.countess ansible_python_interpreter=python2
 rarity.131.countess ansible_python_interpreter=python2
 pinkie-pie.131.countess ansible_python_interpreter=python2
 celestia.131.countess ansible_python_interpreter=python2
+pluto.131.countess ansible_python_interpreter=python2
+chibi-moon.131.countess ansible_python_interpreter=python2
+moonlight-knight.131.countess ansible_python_interpreter=python2
