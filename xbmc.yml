@@ -1,0 +1,25 @@
+---
+- include: system.yml
+- name: Set up media-specific bits
+  hosts: alarmpi.131.countess:media_pi.131.countess:twilight-sparkle.131.countess
+  user: root
+  tasks:
+   - name: Change hostname
+     lineinfile: dest=/etc/hostname line='twilight-sparkle'
+         regexp='[\w]+'
+   - name: Install things
+     pacman: name=base-devel,mpd,xbmc-rbp
+   - name: Add mountpoints to /mnt
+     file: path=/mnt/{{ item }} state=directory
+     with_items:
+      - music
+      - videos
+   - name: Add videos to fstab
+     lineinfile: dest=/etc/fstab
+         line='locutus:/data/media/{{ item }} /mnt/{{ item }} nfs4 ro,auto,rsize=32768,udp,noatime 0 0'
+         regexp='locutus:/data/media/{{ item }}[a-z04/ ]*'
+     with_items:
+      - music
+      - videos
+   - name: Add xbmc unpriviledged user
+     user: name=xbmc

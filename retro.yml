@@ -1,0 +1,17 @@
+---
+- include: system.yml
+- name: Set up retro-specific bits
+  hosts: alarmpi.131.countess:pinkie-pie.131.countess
+  user: root
+  tasks:
+   - name: Change hostname
+     lineinfile: dest=/etc/hostname line='pinkie-pie' regexp='[\w]+'
+   - name: Add mountpoints to /mnt
+     file: path=/mnt/{{ item }} state=directory
+     with_items:
+      - roms
+   - name: Add mountpoints to fstab
+     lineinfile: dest=/etc/fstab line='locutus:/data/media/{{ item }}  /mnt/{{ item }} nfs4  defaults 0 0'
+         regexp='locutus:/data/media/{{ item }}[a-z04/ ]*'
+     with_items:
+      - roms

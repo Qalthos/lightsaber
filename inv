@@ -1,0 +1,7 @@
+
+[raspberry]
+alarmpi.131.countess ansible_python_interpreter=python2
+twilight-sparkle.131.countess ansible_python_interpreter=python2
+rarity.131.countess ansible_python_interpreter=python2
+pinkie-pie.131.countess ansible_python_interpreter=python2
+celestia.131.countess ansible_python_interpreter=python2
