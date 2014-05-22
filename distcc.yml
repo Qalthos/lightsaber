@@ -11,7 +11,7 @@
                 line='BUILDENV=(\1 distcc \2)'
   - name: Set up distcc hosts
     lineinfile: dest=/etc/makepkg.conf regexp='^(#)?DISTCC_HOSTS'
-                line='DISTCC_HOSTS="pinkie-pie rarity twilight-sparkle celestia"'
+        line='DISTCC_HOSTS="chibi-moon moonlight-knight pluto celestia"'
   - name: Set MAKEFLAGS
     lineinfile: dest=/etc/makepkg.conf regexp='^(#)?MAKEFLAGS'
                 line='MAKEFLAGS="-j4"'
