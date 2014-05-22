@@ -1,7 +1,7 @@
 ---
 - include: system.yml
 - name: Set up retro-specific bits
-  hosts: alarmpi.131.countess:pinkie-pie.131.countess:chibi-moon.131.countess
+  hosts: alarmpi.131.countess:chibi-moon.131.countess
   user: root
   tasks:
    - name: Change hostname
