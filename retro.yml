@@ -1,11 +1,11 @@
 ---
 - include: system.yml
 - name: Set up retro-specific bits
-  hosts: alarmpi.131.countess:pinkie-pie.131.countess
+  hosts: alarmpi.131.countess:pinkie-pie.131.countess:chibi-moon.131.countess
   user: root
   tasks:
    - name: Change hostname
-     lineinfile: dest=/etc/hostname line='pinkie-pie' regexp='[\w]+'
+     lineinfile: dest=/etc/hostname line='chibi-moon' regexp='[\w]+'
    - name: Add mountpoints to /mnt
      file: path=/mnt/{{ item }} state=directory
      with_items:
