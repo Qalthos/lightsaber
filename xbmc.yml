@@ -1,7 +1,7 @@
 ---
 - include: system.yml
 - name: Set up media-specific bits
-  hosts: alarmpi.131.countess:pluto.131.countess:twilight-sparkle.131.countess
+  hosts: alarmpi.131.countess:pluto.131.countess
   user: root
   tasks:
    - name: Change hostname
