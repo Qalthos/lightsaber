@@ -1,0 +1,7 @@
+---
+- name: Install python2 so that ansible can be run.
+  hosts: alarmpi.131.countess
+  user: root
+  tasks:
+    - name: Install python2
+      raw: yes | pacman -Sy python2
