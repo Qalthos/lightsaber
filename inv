@@ -1,7 +1,18 @@
+[media]
+luna.131.countess
+
+[pitop]
+artemis.131.countess
+jupiter.131.countess
+
+[retro]
+chibiusa.131.countess
 
 [raspberry]
 alarmpi.131.countess
 celestia.131.countess
-pluto.131.countess
-chibi-moon.131.countess
-artemis.131.countess
+
+[raspberry:children]
+media
+pitop
+retro
