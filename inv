@@ -1,7 +1,7 @@
 
 [raspberry]
-alarmpi.131.countess ansible_python_interpreter=python2
-celestia.131.countess ansible_python_interpreter=python2
-pluto.131.countess ansible_python_interpreter=python2
-chibi-moon.131.countess ansible_python_interpreter=python2
-artemis.131.countess ansible_python_interpreter=python2
+alarmpi.131.countess
+celestia.131.countess
+pluto.131.countess
+chibi-moon.131.countess
+artemis.131.countess
