@@ -4,4 +4,4 @@
   user: root
   tasks:
     - name: Install python2
-      raw: yes | pacman -Sy python2
+      raw: pacman -Sy --needed --noconfirm python2
