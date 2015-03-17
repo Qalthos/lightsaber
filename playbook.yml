@@ -9,7 +9,7 @@
   remote_user: nate
   sudo: yes
   roles:
-    - common
+    - base
 
 - hosts: retro
   remote_user: nate
