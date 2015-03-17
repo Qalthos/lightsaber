@@ -1,0 +1,18 @@
+---
+- hosts: media
+  remote_user: nate
+  sudo: yes
+  roles:
+    - media
+
+- hosts: pitop
+  remote_user: nate
+  sudo: yes
+  roles:
+    - common
+
+- hosts: retro
+  remote_user: nate
+  sudo: yes
+  roles:
+    - retro
