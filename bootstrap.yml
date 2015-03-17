@@ -1,7 +1,26 @@
 ---
-- name: Install python2 so that ansible can be run.
+- name: Install python2 and set up sudo
   hosts: alarmpi.131.countess
   remote_user: root
+  vars_prompt:
+    - name: password
+      prompt: "New password"
+      private: yes
+      encrypt: md5_crypt
+      confirm: yes
+    - name: hostname
+      prompt: "New hostname for device"
   tasks:
     - name: Install python2
       raw: pacman -Sy --needed --noconfirm python2
+    - name: Allow group 'wheel' to use sudo
+      lineinfile:
+          dest=/etc/sudoers
+          line='%wheel ALL=(ALL) ALL'
+          regexp='(# )?%wheel ALL=\(ALL\) ALL'
+    - name: Add user 'nate' with group 'wheel'
+      user: name=nate shell=/usr/bin/zsh groups=wheel append=yes password={{ password }}
+    - name: Copy public keys for user 'nate'
+      authorized_key: user=nate key=https://github.com/qalthos.keys
+    - name: Update hostname
+      hostname: name={{ hostname }}
