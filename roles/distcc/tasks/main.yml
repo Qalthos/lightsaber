@@ -9,7 +9,7 @@
 - name: Set up distcc hosts
   lineinfile:
       dest=/etc/makepkg.conf regexp='^(#)?DISTCC_HOSTS'
-      line='DISTCC_HOSTS="chibi-moon artemis pluto celestia"'
+      line='DISTCC_HOSTS="{{ ' '.join(groups['raspberry'])  }}"'
 - name: Set MAKEFLAGS
   lineinfile:
       dest=/etc/makepkg.conf regexp='^(#)?MAKEFLAGS'
