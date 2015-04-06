@@ -14,7 +14,7 @@
     - name: password
       prompt: "New user password"
       private: yes
-      encrypt: md5_crypt
+      encrypt: sha512_crypt
       confirm: yes
     - name: hostname
       prompt: "New hostname for device"
@@ -27,7 +27,7 @@
           line='%wheel ALL=(ALL) ALL'
           regexp='(# )?%wheel ALL=\(ALL\) ALL'
     - name: Add user 'nate' with group 'wheel'
-      user: name=nate shell=/usr/bin/zsh groups=wheel append=yes password={{ password }}
+      user: name=nate groups=wheel append=yes password={{ password }}
     - name: Copy public keys for user 'nate'
       authorized_key: user=nate key=https://github.com/qalthos.keys
     - name: Update hostname
