@@ -5,16 +5,6 @@
       state=installed update_cache=yes
 - name: Remove useless stuff
   pacman: name=heirloom-mailx state=absent recurse=yes
-- name: Disable WiFi dongle powersave
-  lineinfile:
-      dest=/etc/modprobe.d/8192cu.conf create=yes
-      line='options 8192cu rtw_power_mgnt=0 rtw_ips_mode=1'
-      regexp='options 8192cu rtw_power_mgnt'
-- name: Switch to US NTP pool
-  lineinfile:
-      dest=/etc/ntp.conf backrefs=yes
-      line='server \1.us.pool.ntp.org\2'
-      regexp='server (\d)(?:.us)?.pool.ntp.org(|.)?'
 
 # Set up personal environment
 - name: Set shell to zsh
@@ -34,3 +24,26 @@
       repo=git://github.com/Qalthos/scripts.git
       dest=/home/nate/scripts
       accept_hostkey=yes
+
+- name: Disable WiFi dongle powersave
+  lineinfile:
+      dest=/etc/modprobe.d/8192cu.conf create=yes
+      line='options 8192cu rtw_power_mgnt=0 rtw_ips_mode=1'
+      regexp='^options 8192cu'
+- name: Switch to US NTP pool
+  lineinfile:
+      dest=/etc/ntp.conf backrefs=yes
+      line='server \1.us.pool.ntp.org\2'
+      regexp='server (\d)(?:.us)?.pool.ntp.org(|.)?'
+- name: Disable root login
+  lineinfile:
+      dest=/etc/ssh/sshd_config
+      line="PermitRootLogin no"
+      regexp="^PermitRootLogin"
+  notify: Restart sshd
+- name: Disable password auth
+  lineinfile:
+      dest=/etc/ssh/sshd_config
+      line="PasswordAuthentication no"
+      regexp="^PasswordAuthentication"
+  notify: Restart sshd
