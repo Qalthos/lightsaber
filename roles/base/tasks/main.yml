@@ -1,7 +1,7 @@
 ---
 - name: Install neat stuff
   pacman:
-      name=git,htop,nfs-utils,ntp,sudo,vim,zsh
+      name=git,htop,nfs-utils,ntp,vim,zsh,dialog,wpa_supplicant
       state=installed update_cache=yes
 - name: Remove useless stuff
   pacman: name=heirloom-mailx state=absent recurse=yes
@@ -17,6 +17,8 @@
       regexp='server (\d)(?:.us)?.pool.ntp.org(|.)?'
 
 # Set up personal environment
+- name: Set shell to zsh
+  user: name=nate shell=/usr/bin/zsh
 - name: Clone dot-files
   sudo: no
   git:
