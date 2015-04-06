@@ -22,7 +22,7 @@
   sudo: no
   git:
       repo=git://github.com/Qalthos/scripts.git
-      dest=/home/nate/scripts
+      dest=/home/nate/bin
       accept_hostkey=yes
 
 - name: Disable WiFi dongle powersave
