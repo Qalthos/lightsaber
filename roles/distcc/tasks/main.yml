@@ -8,15 +8,18 @@
       line='BUILDENV=(\1 distcc \2)'
 - name: Set up distcc hosts
   lineinfile:
-      dest=/etc/makepkg.conf regexp='^(#)?DISTCC_HOSTS'
+      dest=/etc/makepkg.conf
+      regexp='^(#)?DISTCC_HOSTS'
       line='DISTCC_HOSTS="{{ ' '.join(groups['raspberry'])  }}"'
 - name: Set MAKEFLAGS
   lineinfile:
-      dest=/etc/makepkg.conf regexp='^(#)?MAKEFLAGS'
+      dest=/etc/makepkg.conf
+      regexp='^(#)?MAKEFLAGS'
       line='MAKEFLAGS="-j4"'
 - name: Set distcc arguments
   lineinfile:
-      dest=/etc/conf.d/distccd regexp=DISTCC_ARGS
+      dest=/etc/conf.d/distccd
+      regexp='^DISTCC_ARGS'
       line='DISTCC_ARGS="--user nobody --allow 192.168.1.0/24"'
 - name: Enable & start distccd
   service: name=distccd state=started enabled=yes
