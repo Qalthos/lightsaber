@@ -1,18 +1,26 @@
 ---
-- name: Install python2 and set up sudo
-  hosts: alarmpi.131.countess
+- name: Install python2
+  hosts: alarmpi
+  remote_user: root
+  gather_facts: False
+  tasks:
+    - name: Install python2
+      raw: pacman -Sy --needed --noconfirm python2
+
+- name: Set up sudo & change hostname
+  hosts: alarmpi
   remote_user: root
   vars_prompt:
     - name: password
-      prompt: "New password"
+      prompt: "New user password"
       private: yes
       encrypt: md5_crypt
       confirm: yes
     - name: hostname
       prompt: "New hostname for device"
   tasks:
-    - name: Install python2
-      raw: pacman -Sy --needed --noconfirm python2
+    - name: Install sudo
+      pacman: name=sudo state=installed
     - name: Allow group 'wheel' to use sudo
       lineinfile:
           dest=/etc/sudoers
@@ -23,4 +31,7 @@
     - name: Copy public keys for user 'nate'
       authorized_key: user=nate key=https://github.com/qalthos.keys
     - name: Update hostname
-      hostname: name={{ hostname }}
+      #hostname: name={{ hostname }}
+      command: hostnamectl set-hostname {{ hostname }}
+    - name: Disable root password
+      user: name=root password=!
