@@ -1,0 +1,5 @@
+---
+- name: Install X & associated packages
+  pacman:
+      name=herbstluftwm,dzen2,dmenu,conky,lightdm-gtk-greeter
+      state=installed
