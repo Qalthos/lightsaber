@@ -1,4 +1,10 @@
 ---
+- hosts: raspberry
+  remote_user: nate
+  sudo: yes
+  roles:
+    - base_raspi
+
 - hosts: media
   remote_user: nate
   sudo: yes
