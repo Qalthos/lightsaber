@@ -10,6 +10,7 @@
   sudo: yes
   roles:
     - media
+    - distcc
 
 - hosts: pitop
   remote_user: nate
@@ -22,3 +23,4 @@
   sudo: yes
   roles:
     - retro
+    - distcc
