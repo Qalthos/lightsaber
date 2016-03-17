@@ -1,0 +1,9 @@
+---
+- name: Install development tools
+  package:
+      name=base-devel,hub,alsa-utils,python-virtualenvwrapper,rsync
+      state=installed
+- name: Install general programs
+  package:
+      name=firefox,thunderbird,liferea,audacious,hexchat,pidgin
+      state=installed
