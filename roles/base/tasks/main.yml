@@ -8,16 +8,16 @@
 - name: Set shell to zsh
   user: name=nate shell=/usr/bin/zsh
 - name: Clone dot-files
-  sudo: no
+  become: no
   git:
       repo=git://github.com/Qalthos/dot-files.git
       dest=/home/nate/dot-files
       accept_hostkey=yes
 - name: Set-up dot files
-  sudo: no
+  become: no
   script: /home/nate/dot-files/install.sh
 - name: Clone scripts
-  sudo: no
+  become: no
   git:
       repo=git://github.com/Qalthos/scripts.git
       dest=/home/nate/bin

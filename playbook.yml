@@ -1,26 +1,26 @@
 ---
 - hosts: raspberry
   remote_user: nate
-  sudo: yes
+  become: yes
   roles:
     - base_raspi
 
 - hosts: media
   remote_user: nate
-  sudo: yes
+  become: yes
   roles:
     - media
     - distcc
 
 - hosts: pitop
   remote_user: nate
-  sudo: yes
+  become: yes
   roles:
     - desktop
 
 - hosts: retro
   remote_user: nate
-  sudo: yes
+  become: yes
   roles:
     - retro
     - distcc
