@@ -1,6 +1,6 @@
 ---
 - name: Install neat stuff
-  pacman:
+  package:
       name=git,htop,vim,zsh
       state=installed update_cache=yes
 

@@ -1,9 +1,9 @@
 ---
 - name: Install X & associated packages
-  pacman:
+  package:
       name=xorg,xorg-xinit,xterm,lightdm-gtk-greeter,herbstluftwm,dzen2,dmenu,conky,feh,lilyterm
       state=installed
 - name: Make sure xf86-video-odroid-c1 is not present
-  pacman:
+  package:
       name=xf86-video-odroid-c1
       state=absent

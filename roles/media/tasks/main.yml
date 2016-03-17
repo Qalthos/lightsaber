@@ -1,6 +1,6 @@
 ---
 - name: Install things
-  pacman: name=base-devel,mpd,kodi-rbp
+  package: name=base-devel,mpd,kodi-rbp
 - name: Add mountpoints to /mnt
   file: path=/mnt/{{ item }} state=directory
   with_items:

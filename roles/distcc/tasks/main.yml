@@ -1,6 +1,6 @@
 ---
 - name: Install distcc
-  pacman: name=distcc, state=installed
+  package: name=distcc, state=installed
 - name: Unblock distcc
   lineinfile:
       dest=/etc/makepkg.conf backrefs=yes

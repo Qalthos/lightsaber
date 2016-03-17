@@ -1,10 +1,10 @@
 ---
 - name: Install neat stuff
-  pacman:
+  package:
       name=nfs-utils,ntp,dialog,wpa_supplicant
       state=installed update_cache=yes
 - name: Remove useless stuff
-  pacman: name=heirloom-mailx state=absent recurse=yes
+  package: name=heirloom-mailx state=absent recurse=yes
 
 - name: Disable WiFi dongle powersave
   lineinfile:
