@@ -31,7 +31,6 @@
     - name: Copy public keys for user 'nate'
       authorized_key: user=nate key=https://github.com/qalthos.keys
     - name: Update hostname
-      #hostname: name={{ hostname }}
-      command: hostnamectl set-hostname {{ hostname }}
+      hostname: name={{ hostname }}
     - name: Disable root password
       user: name=root password=!
