@@ -1,9 +1,9 @@
 ---
 - name: Install development tools
   package:
-      name=base-devel,hub,alsa-utils,python-virtualenvwrapper,rsync
+      name=base-devel,hub,alsa-utils,python-virtualenvwrapper,rsync,pluma
       state=installed
 - name: Install general programs
   package:
-      name=firefox,thunderbird,liferea,audacious,hexchat,pidgin
+      name=firefox,thunderbird,liferea,audacious,hexchat,pidgin,eom,mpv,atril,engrampa
       state=installed

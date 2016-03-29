@@ -1,7 +1,7 @@
 ---
 - name: Install neat stuff
   package:
-      name=git,htop,vim,zsh
+      name=git,htop,vim,zsh,mlocate
       state=installed update_cache=yes
 
 # Set up personal environment
