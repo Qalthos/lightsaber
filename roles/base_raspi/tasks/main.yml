@@ -23,9 +23,9 @@
       line="PermitRootLogin no"
       regexp="^PermitRootLogin"
   notify: Restart sshd
-- name: Disable password auth
+- name: Enable password auth
   lineinfile:
       dest=/etc/ssh/sshd_config
-      line="PasswordAuthentication no"
+      line="PasswordAuthentication yes"
       regexp="^PasswordAuthentication"
   notify: Restart sshd
