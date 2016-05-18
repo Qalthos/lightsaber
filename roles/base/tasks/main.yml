@@ -1,5 +1,5 @@
 ---
-- name: Install neat stuff
+- name: Install required environment tools
   package:
       name=git,htop,vim,zsh,mlocate
       state=installed update_cache=yes
@@ -7,18 +7,23 @@
 # Set up personal environment
 - name: Set shell to zsh
   user: name=nate shell=/usr/bin/zsh
-- name: Clone dot-files
-  become: no
-  git:
-      repo=git://github.com/Qalthos/dot-files.git
-      dest=/home/nate/dot-files
-      accept_hostkey=yes
-- name: Set-up dot files
-  become: no
-  script: /home/nate/dot-files/install.sh
 - name: Clone scripts
   become: no
   git:
       repo=git://github.com/Qalthos/scripts.git
       dest=/home/nate/bin
       accept_hostkey=yes
+- name: transfer dotfiles
+  become: no
+  copy: src={{ item }} dest=/home/nate/.{{ item }} force=yes backup=yes
+  with_items:
+      - gitconfig
+      - profile
+      - ssh/
+      - tmux.conf
+      - vim/
+      - vimrc
+      - xmodmap
+      - zsh/
+      - zshrc
+      - zprofile

@@ -1,0 +1,11 @@
+[user]
+	name = Nathaniel Case
+	email = Qalthos@gmail.com
+[color]
+	ui = true
+[push]
+	default = current
+[diff]
+	algorithm = patience
+[core]
+	autocrlf = input

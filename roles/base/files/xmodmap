@@ -1,0 +1,5 @@
+keycode 66 = Control_L
+keycode 107 = Menu
+
+clear Lock
+add Control = Control_L

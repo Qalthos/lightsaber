@@ -1,0 +1,9 @@
+#==Common======
+alias ls="ls --color"
+alias cp="cp -v"
+alias chx="chmod +x"
+alias svim="sudo vim -u ~/.vimrc"
+alias q="touch /tmp/q && less +F -R /tmp/q"
+
+#==My Boxen====
+alias tower="rdesktop fourecks -f -b -P -x m -z -a 16 -g 100%"

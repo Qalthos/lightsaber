@@ -1,0 +1,110 @@
+setopt PROMPT_SUBST
+
+# Skip tput if not available
+if [ -t 1 ]; then
+    c_red=%{`tput setaf 1`%}
+    c_green=%{`tput setaf 2`%}
+    c_yellow=%{`tput setaf 3`%}
+    c_blue=%{`tput setaf 4`%}
+    c_magen=%{`tput setaf 5`%}
+    c_cyan=%{`tput setaf 6`%}
+    c_white=%{`tput setaf 7`%}
+    clr=%{`tput sgr0`%}
+fi
+
+parse_git_branch () {
+    if git rev-parse --git-dir >/dev/null 2>&1; then
+        gitver=$(git branch 2>/dev/null| sed -n '/^\*/s/^\* //p')
+        numfil=$(git status -s -uno | wc -l)
+        untracked=$(git status -s | egrep "^\?" | wc -l)
+        echo -e "(±:${gitver}:${numfil}:${untracked})"
+    elif hg status -q >/dev/null 2>&1; then
+        hgver=$(hg branch 2>/dev/null)
+        numfil=$(hg status | wc -l)
+        echo -e "(☿:${hgver}:${numfil})"
+    else
+        return 0
+    fi
+}
+
+branch_color () {
+    color=$c_red
+    if git rev-parse --git-dir >/dev/null 2>&1; then
+        if git status -uno | grep "nothing to commit" 2>&1 > /dev/null; then
+            color=$c_green
+        fi
+    elif hg status -q >/dev/null 2>&1; then
+        if expr $(hg status | wc -l) = 0 2>&1 > /dev/null; then
+            color=$c_green
+        fi
+    else
+        return 0
+    fi
+    echo -ne $color
+}
+
+battery() {
+    if [[ ! -e /sys/class/power_supply/BAT0 ]]; then return 0; fi
+    let total=10 max_all=0 bat_id=0
+    typeset -A pct max state
+    for file in /sys/class/power_supply/BAT*; do
+        state[$bat_id]=$(cat $file/status)
+        if [[ -e $file/energy_full_design ]]; then
+            ((max[$bat_id] = $(cat $file/energy_full_design)))
+            ((pct[$bat_id] = 1.0 * $(cat $file/energy_now) / max[$bat_id]))
+            ((max_all += max[$bat_id]))
+        else
+            # Battery is not being detected properly
+            # Set max to 1 to avoid divide by zero
+            ((max[$bat_id] = 1))
+            ((pct[$bat_id] = 0))
+        fi
+        ((bat_id++))
+    done
+    ((unit = max_all / total))
+    output=''
+    for x in ${(k)state}; do
+        ((units = max[$x] / unit))
+        output+=$(batt_str $state[$x] $pct[$x] $units)
+    done
+    echo $output
+}
+
+batt_str() {
+    let i=0
+    triangles=''
+    ((full = $2 * $3))
+    while ((i < full)); do
+        if [[ $1 == 'Charging' ]]; then
+            triangles+=◀
+        elif [[ $1 == 'Unknown' ]]; then
+            triangles+=◆
+        elif [[ $1 == 'Full' ]]; then
+            triangles+=◼
+        else
+            triangles+=▶
+        fi
+        ((i++))
+    done
+    while ((i < $3)); do
+        if [[ $1 == 'Charging' ]]; then
+            triangles=◁$triangles
+        elif [[ $1 == 'Unknown' ]]; then
+            triangles=◇$triangles
+        else
+            triangles=▷$triangles
+        fi
+        ((i++))
+    done
+    if (($2 > .6)); then
+        color=$c_green
+    elif (($2 > .25)); then
+        color=$c_yellow
+    else
+        color=$c_red
+    fi
+    echo $color$triangles
+}
+
+export PROMPT='$c_green%n$clr@$c_cyan%m$clr:$c_blue%~$clr$(branch_color)$(parse_git_branch)$clr%# '
+export RPROMPT='$(battery)$clr'
