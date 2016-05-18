@@ -7,6 +7,8 @@
 # Set up personal environment
 - name: Set shell to zsh
   user: name=nate shell=/usr/bin/zsh
+- name: Refresh public keys
+  authorized_key: user=nate key=https://github.com/qalthos.keys
 - name: Clone scripts
   become: no
   git:

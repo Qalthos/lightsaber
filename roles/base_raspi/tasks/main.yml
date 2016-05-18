@@ -1,5 +1,5 @@
 ---
-- name: Install neat stuff
+- name: Install useful packages
   package:
       name=nfs-utils,ntp,dialog,wpa_supplicant
       state=installed update_cache=yes
