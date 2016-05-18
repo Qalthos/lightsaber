@@ -10,7 +10,7 @@
 - name: Clone scripts
   become: no
   git:
-      repo=git://github.com/Qalthos/scripts.git
+      repo=http://github.com/Qalthos/scripts.git
       dest=/home/nate/bin
       accept_hostkey=yes
 - name: transfer dotfiles
