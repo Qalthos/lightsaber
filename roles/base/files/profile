@@ -20,7 +20,7 @@ fi
 export GPODDER_HOME=~/.gpodder
 export NO_AT_BRIDGE=1
 
-if [ -n "$DISPLAY" ]
+if [ -n "$DISPLAY" ]; then
     xmodmap .xmodmap
 fi
 
