@@ -1,7 +1,9 @@
 ---
+- name: enable en_US.UTF-8 locale
+  locale_gen: name=en_US.UTF-8 state=present
 - name: Install required environment tools
   package:
-      name=git,htop,vim,zsh,mlocate
+      name=git,htop,tmux,vim,zsh,mlocate
       state=installed update_cache=yes
 
 # Set up personal environment
