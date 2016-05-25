@@ -5,12 +5,6 @@
   roles:
     - base_raspi
 
-- hosts: workstation
-  remote_user: nate
-  become: yes
-  roles:
-    - workstation
-
 - hosts: media
   remote_user: nate
   become: yes
@@ -30,3 +24,9 @@
   roles:
     - retro
     - distcc
+
+- hosts: workstation
+  remote_user: nate
+  become: yes
+  roles:
+    - workstation
