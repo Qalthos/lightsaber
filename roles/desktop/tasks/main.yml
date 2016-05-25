@@ -1,9 +1,17 @@
 ---
-- name: Install X & associated packages
+- name: Install X
   package:
-      name=xorg,xorg-xinit,xterm,lightdm-gtk-greeter,herbstluftwm,dzen2,dmenu,conky,feh,lilyterm
-      state=installed
+      name: xorg,xorg-xinit,xterm,lightdm-gtk-greeter
+      state: installed
+- name: Install desktop applications
+  package:
+      name: herbstluftwm,dzen2,dmenu,conky,feh,lilyterm
+      state: installed
+- name: Install themes
+  package:
+      name: numix-themes,elementary-icon-theme
+      state: installed
 - name: Make sure xf86-video-odroid-c1 is not present
   package:
-      name=xf86-video-odroid-c1
-      state=absent
+      name: xf86-video-odroid-c1
+      state: absent
