@@ -1,0 +1,6 @@
+---
+- hosts: all
+  remote_user: nate
+  become: yes
+  roles:
+    - base
