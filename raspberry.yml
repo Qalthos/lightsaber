@@ -3,7 +3,7 @@
   remote_user: nate
   become: yes
   roles:
-    - base_raspi
+    - raspberry
 
 - hosts: media
   remote_user: nate
