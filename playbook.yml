@@ -1,7 +1,7 @@
 ---
-- { include: base.yml }
+- include: base.yml
 
-- { include: raspberry.yml }
+- include: raspberry.yml
 
 - hosts: workstation
   remote_user: nate
