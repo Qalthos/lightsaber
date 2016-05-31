@@ -9,7 +9,7 @@
       line: "{{ item.line }}"
   with_items:
       - { regexp: '^BUILDENV=\(([ !\w]*) (?:!)?distcc ([ !\w]*)\)', line: 'BUILDENV=(\1 distcc \2)' }
-      - { regexp: '^(#)?DISTCC_HOSTS', line: 'DISTCC_HOSTS="{{ ' '.join(groups['raspberry']) }}"' }
+      - { regexp: '^(#)?DISTCC_HOSTS', line: "DISTCC_HOSTS=\"{{ ' '.join(groups['raspberry']) }}\"" }
       - { regexp: '^(#)?MAKEFLAGS', line: 'MAKEFLAGS="-j4"' }
 - name: Set distcc arguments
   lineinfile:
