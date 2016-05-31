@@ -15,3 +15,4 @@
   package:
       name: xf86-video-odroid-c1
       state: absent
+  when: ansible_machine[:3] == 'arm'
