@@ -67,9 +67,7 @@ case $DISTRO in
         source /usr/share/autojump/autojump.zsh
         ;;
 esac
-if hash $venv 2>/dev/null; then
-    source $venv
-fi
+source $venv
 echo $DISTRO
 
 if hash fortune 2>/dev/null; then
