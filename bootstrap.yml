@@ -26,6 +26,8 @@
           dest=/etc/sudoers
           line='%wheel ALL=(ALL) ALL'
           regexp='(# )?%wheel ALL=\(ALL\) ALL'
+    - name: Remove 'alarm' user
+      user: name=alarm state=absent
     - name: Add user 'nate' with group 'wheel'
       user: name=nate groups=wheel append=yes password={{ password }}
     - name: Copy public keys for user 'nate'
