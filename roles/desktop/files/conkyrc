@@ -1,0 +1,33 @@
+# Florian Bruhin <me@the-compiler.org>
+
+update_interval 1
+update_interval_on_battery 5
+total_run_times 0
+
+# Windowy options
+out_to_console yes
+out_to_x no
+
+background no
+
+
+# Use KiB/MiB/... instead of just bytes
+format_human_readable yes
+# Print used memory without buffers
+no_buffers yes
+# Display k, G, ... instead of kiB, GiB, ...
+short_units yes
+
+use_spacer none
+if_up_strictness address
+pad_percents 0
+
+TEXT
+^i(/home/nate/.local/share/icons/mem.xbm)${mem} \
+# Audio volume
+^i(/home/nate/.local/share/icons/volume.xbm)\
+${exec amixer get Master | egrep -o '[0-9]+%' | head -n 1} \
+# Weather!
+${exec cat /var/tmp/weather} | \
+# Date and time
+${time %a %Y-%m-%d} ${time %R}\
