@@ -1,9 +1,9 @@
 ---
-- name: enable en_US.UTF-8 locale
+- name: Enable en_US.UTF-8 locale
   locale_gen: name=en_US.UTF-8 state=present
 - name: Refresh public keys
   authorized_key: user=nate key=https://github.com/qalthos.keys
-- name: transfer dotfiles
+- name: Transfer dotfiles
   become: no
   copy: src={{ item }} dest=/home/nate/.{{ item }} force=yes backup=yes
   with_items:
@@ -17,6 +17,10 @@
       - zsh/
       - zshrc
       - zprofile
+- name: Set up scripts
+  become: no
+  copy: src={{ item }} dest=/home/nate/bin/ force=yes backup=yes
+  with_fileglob: bin/*
 
 # Set up personal environment
 - name: Install required environment tools
@@ -25,9 +29,3 @@
       state=installed update_cache=yes
 - name: Set shell to zsh
   user: name=nate shell=/usr/bin/zsh
-- name: Clone scripts
-  become: no
-  git:
-      repo=http://github.com/Qalthos/scripts.git
-      dest=/home/nate/bin
-      accept_hostkey=yes
