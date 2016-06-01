@@ -10,7 +10,6 @@
   become: yes
   roles:
     - media
-    - distcc
 
 - hosts: pitop
   remote_user: nate
@@ -23,4 +22,3 @@
   become: yes
   roles:
     - retro
-    - distcc

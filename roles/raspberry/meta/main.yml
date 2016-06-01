@@ -1,0 +1,3 @@
+---
+dependencies:
+    - { role: distcc, when: ansible_machine == 'armv6l' }
