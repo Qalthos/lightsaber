@@ -1,9 +1,11 @@
 ---
 - name: Install X
+  become: yes
   package:
       name: xorg,xorg-xinit,xterm,lightdm-gtk-greeter,accountsservice
       state: installed
 - name: Set up user avatar
+  become: yes
   copy:
       src: "{{ item.src }}"
       dest: "{{ item.dest }}"
@@ -12,10 +14,12 @@
       - { src: user_file, dest: /var/lib/AccountsService/users/nate }
 
 - name: Install desktop applications
+  become: yes
   package:
       name: herbstluftwm,dzen2,dmenu,conky,feh,lilyterm,xorg-xmodmap
       state: installed
 - name: Install themes
+  become: yes
   package:
       name: numix-themes,elementary-icon-theme
       state: installed
@@ -28,6 +32,7 @@
       - xmodmap
 
 - name: Make sure xf86-video-odroid-c1 is not present
+  become: yes
   package:
       name: xf86-video-odroid-c1
       state: absent

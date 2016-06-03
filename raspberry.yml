@@ -13,7 +13,6 @@
 
 - hosts: pitop
   remote_user: nate
-  become: yes
   roles:
     - desktop
 

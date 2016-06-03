@@ -1,10 +1,13 @@
 ---
 - name: Install general development tools
+  become: yes
   package: name=base-devel,hub,alsa-utils,rsync,pluma state=installed
 - name: Install Python development tools
+  become: yes
   package: name=python-virtualenvwrapper,python-pylint,vim-syntastic state=installed
 
 - name: Install general programs
+  become: yes
   package:
       name=firefox,thunderbird,liferea,audacious,hexchat,pidgin,eom,mpv,atril,engrampa
       state=installed
