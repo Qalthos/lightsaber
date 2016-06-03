@@ -13,12 +13,20 @@
 
 - name: Install desktop applications
   package:
-      name: herbstluftwm,dzen2,dmenu,conky,feh,lilyterm
+      name: herbstluftwm,dzen2,dmenu,conky,feh,lilyterm,xorg-xmodmap
       state: installed
 - name: Install themes
   package:
       name: numix-themes,elementary-icon-theme
       state: installed
+
+- name: Copy application configs
+  copy:
+      src: "{{ item }}"
+      dest: ~/.{{ item }}
+  with_items:
+      - xmodmap
+
 - name: Make sure xf86-video-odroid-c1 is not present
   package:
       name: xf86-video-odroid-c1

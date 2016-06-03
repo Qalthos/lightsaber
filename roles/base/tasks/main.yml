@@ -10,7 +10,6 @@
       - tmux.conf
       - vim/
       - vimrc
-      - xmodmap
       - zsh/
       - zshrc
       - zprofile
