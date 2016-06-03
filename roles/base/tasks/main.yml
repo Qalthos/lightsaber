@@ -1,10 +1,7 @@
 ---
-- name: Enable en_US.UTF-8 locale
-  locale_gen: name=en_US.UTF-8 state=present
 - name: Refresh public keys
   authorized_key: user=nate key=https://github.com/qalthos.keys
 - name: Transfer dotfiles
-  become: no
   copy: src={{ item }} dest=/home/nate/.{{ item }} force=yes backup=yes
   with_items:
       - gitconfig
@@ -18,14 +15,19 @@
       - zshrc
       - zprofile
 - name: Set up scripts
-  become: no
   copy: src={{ item }} dest=/home/nate/bin/ force=yes backup=yes
   with_fileglob: bin/*
 
+- name: Enable en_US.UTF-8 locale
+  become: yes
+  locale_gen: name=en_US.UTF-8 state=present
+
 # Set up personal environment
 - name: Install required environment tools
+  become: yes
   package:
       name=git,htop,tmux,vim,zsh,mlocate
       state=installed update_cache=yes
 - name: Set shell to zsh
+  become: yes
   user: name=nate shell=/usr/bin/zsh
