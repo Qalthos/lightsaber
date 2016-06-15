@@ -24,6 +24,7 @@
           dest=/etc/sudoers
           line='%wheel ALL=(ALL) ALL'
           regexp='(# )?%wheel ALL=\(ALL\) ALL'
+          validate='visudo -cf %s'
     - name: Remove 'alarm' user
       user: name=alarm state=absent
       when: ansible_machine[:3] == 'arm'
