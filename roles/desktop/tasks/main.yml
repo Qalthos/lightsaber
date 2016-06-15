@@ -16,7 +16,7 @@
 - name: Install desktop applications
   become: yes
   package:
-      name: herbstluftwm,dzen2,dmenu,conky,feh,lilyterm,xorg-xmodmap
+      name: herbstluftwm,dzen2,dmenu,conky,feh,lilyterm,xorg-xmodmap,pamixer
       state: installed
 - name: Install themes
   become: yes
