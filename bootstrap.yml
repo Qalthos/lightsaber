@@ -1,6 +1,5 @@
 ---
 - name: Install python2
-  hosts: alarmpi
   remote_user: root
   gather_facts: False
   tasks:
@@ -8,7 +7,6 @@
       raw: pacman -Sy --needed --noconfirm python2
 
 - name: Set up sudo & change hostname
-  hosts: alarmpi
   remote_user: root
   vars_prompt:
     - name: password
@@ -28,6 +26,7 @@
           regexp='(# )?%wheel ALL=\(ALL\) ALL'
     - name: Remove 'alarm' user
       user: name=alarm state=absent
+      when: ansible_machine[:3] == 'arm'
     - name: Add user 'nate' with group 'wheel'
       user: name=nate groups=wheel append=yes password={{ password }}
     - name: Copy public keys for user 'nate'
