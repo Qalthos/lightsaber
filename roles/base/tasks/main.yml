@@ -20,13 +20,14 @@
 - name: Enable en_US.UTF-8 locale
   become: yes
   locale_gen: name=en_US.UTF-8 state=present
+  when: ansible_os_family != 'RedHat'
 
 # Set up personal environment
 - name: Install required environment tools
   become: yes
   package:
       name=git,htop,tmux,vim,zsh,mlocate
-      state=installed update_cache=yes
+      state=installed
 - name: Set shell to zsh
   become: yes
   user: name=nate shell=/usr/bin/zsh

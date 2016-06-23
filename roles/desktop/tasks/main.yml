@@ -2,8 +2,9 @@
 - name: Install X
   become: yes
   package:
-      name: xorg,xorg-xinit,xterm,lightdm-gtk-greeter,accountsservice
+      name: xorg,xorg-xinit,xorg-xmodmap,xterm,lightdm-gtk-greeter,accountsservice
       state: installed
+  when: ansible_os_family == 'Archlinux'
 - name: Set up user avatar
   become: yes
   copy:
@@ -16,13 +17,14 @@
 - name: Install desktop applications
   become: yes
   package:
-      name: herbstluftwm,dzen2,dmenu,conky,feh,lilyterm,xorg-xmodmap,pamixer
+      name: herbstluftwm,dzen2,dmenu,conky,feh,lilyterm
       state: installed
 - name: Install themes
   become: yes
   package:
       name: numix-themes,elementary-icon-theme
       state: installed
+  when: ansible_os_family == 'Archlinux'
 
 - name: Copy application configs
   copy:

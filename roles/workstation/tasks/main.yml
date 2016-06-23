@@ -1,10 +1,14 @@
 ---
 - name: Install general development tools
   become: yes
-  package: name=base-devel,hub,alsa-utils,rsync,pluma state=installed
+  package: name=base-devel,hub,python-pylint,vim-syntastic state=installed
+  when: ansible_os_family == 'Archlinux'
+- name: Install general development tools
+  become: yes
+  package: name=alsa-utils,rsync,pluma state=installed
 - name: Install Python development tools
   become: yes
-  package: name=python-virtualenvwrapper,python-pylint,vim-syntastic state=installed
+  package: name=python-virtualenvwrapper state=installed
 
 - name: Install general programs
   become: yes
