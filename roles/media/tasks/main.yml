@@ -4,6 +4,11 @@
       name: mpd,kodi-rbp
       state: installed
 
+- name: Install retroarch
+  package:
+      name: libretro
+      state: installed
+
 - name: Add nfs mounts to fstab
   mount:
       src: 'locutus:/data/media/{{ item }}'
@@ -11,5 +16,6 @@
       fstype: nfs4
       state: mounted
   with_items:
+   - roms
    - music
    - videos

@@ -15,9 +15,3 @@
   remote_user: nate
   roles:
     - desktop
-
-- hosts: retro
-  remote_user: nate
-  become: yes
-  roles:
-    - retro
