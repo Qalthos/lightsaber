@@ -1,6 +1,7 @@
 ---
 - name: Install distcc
   package: name=distcc, state=installed
+  notify: Enable distccd
 - name: Setup makepkg.conf
   lineinfile:
       dest: /etc/makepkg.conf
@@ -16,5 +17,3 @@
       dest: /etc/conf.d/distccd
       regexp: '^DISTCC_ARGS'
       line: 'DISTCC_ARGS="--user nobody --allow 192.168.1.0/24"'
-- name: Enable & start distccd
-  service: name=distccd state=started enabled=yes
