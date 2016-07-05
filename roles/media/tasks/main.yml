@@ -1,4 +1,10 @@
 ---
+- name: Increase GPU memory split
+  lineinfile:
+      regexp: 'gpu_mem=*'
+      line: 'gpu_mem=192'
+      dest: /boot/config.txt
+
 - name: Install media players
   package:
       name: mpd,kodi-rbp
