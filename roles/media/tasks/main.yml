@@ -9,6 +9,11 @@
   package:
       name: mpd,kodi-rbp
       state: installed
+- name: Set up Raspberry hardware decode
+  package:
+      name: omxplayer-git,xorg-xrefresh,xorg-xset
+      state: installed
+  when: ansible_machine[:3] == 'arm'
 
 - name: Install retroarch
   package:
