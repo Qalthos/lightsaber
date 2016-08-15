@@ -14,6 +14,11 @@
       name: omxplayer-git,xorg-xrefresh,xorg-xset
       state: installed
   when: ansible_machine[:3] == 'arm'
+- name: Attach Kodi to MariaDB library
+  become_user: kodi
+  copy:
+      src: advancedsettings.xml
+      dest: ~/.kodi/userdata
 
 - name: Install retroarch
   package:
@@ -28,5 +33,3 @@
       state: mounted
   with_items:
    - roms
-   - music
-   - videos
