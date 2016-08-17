@@ -1,7 +1,8 @@
 ---
 - name: Install distcc
-  package: name=distcc, state=installed
+  package: name=distcc state=installed
   notify: Enable distccd
+
 - name: Setup makepkg.conf
   lineinfile:
       dest: /etc/makepkg.conf
@@ -11,7 +12,7 @@
   with_items:
       - { regexp: '^BUILDENV=\(([ !\w]*) (?:!)?distcc ([ !\w]*)\)', line: 'BUILDENV=(\1 distcc \2)' }
       - { regexp: '^(#)?DISTCC_HOSTS', line: "DISTCC_HOSTS=\"{{ ' '.join(groups['media']) }}\"" }
-      - { regexp: '^(#)?MAKEFLAGS', line: 'MAKEFLAGS="-j4"' }
+      - { regexp: '^(#)?MAKEFLAGS', line: "MAKEFLAGS=\"-j{{ groups['media']|length }}\"" }
 - name: Set distcc arguments
   lineinfile:
       dest: /etc/conf.d/distccd
