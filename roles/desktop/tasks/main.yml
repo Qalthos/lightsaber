@@ -26,12 +26,17 @@
       state: installed
   when: ansible_os_family == 'Archlinux'
 
-- name: Copy application configs
+- name: Copy xmodmap settings
   copy:
-      src: "{{ item }}"
-      dest: ~/.{{ item }}
-  with_items:
-      - xmodmap
+      src: xmodmap
+      dest: ~/.xmodmap
+- name: Copy application .configs
+  debug:
+      msg: "{{ item }}"
+      #dest: ~/.config/{{ item }}
+      #backup: yes
+  with_fileglob:
+      - config/*
 
 - name: Make sure xf86-video-odroid-c1 is not present
   become: yes
