@@ -33,7 +33,7 @@
 - name: Copy application .configs
   debug:
       msg: "{{ item }}"
-      #dest: ~/.config/{{ item }}
+      #dest: ~/.config/
       #backup: yes
   with_fileglob:
       - config/*
@@ -41,7 +41,7 @@
 - name: Copy helper scripts
   copy:
       src: "{{ item }}"
-      dest: ~/bin/{{ item }}
+      dest: ~/bin/
   with_fileglob:
       - bin/*
 
