@@ -1,10 +1,14 @@
 ---
 - name: Install useful packages
   package:
-      name=nfs-utils,ntp,dialog,wpa_supplicant
+      name=nfs-utils,dialog,wpa_supplicant
       state=installed update_cache=yes
 - name: Remove useless stuff
   package: name=heirloom-mailx state=absent recurse=yes
+
+- name: Set timezone to New York
+  timezone:
+      name: America/New_York
 
 - name: Disable WiFi dongle powersave
   lineinfile:
