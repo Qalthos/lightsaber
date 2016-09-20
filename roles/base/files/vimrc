@@ -20,7 +20,10 @@ set background=dark
 colorscheme Tomorrow-Night
 
 let g:syntastic_check_on_open=1
-let g:syntastic_python_pylint_post_args='--disable=E501,E221,W291,W391,E302,E251,E203,W293,E231,E303,E201,E225,E261,E241,missing-docstring,wrong-import-position --max-line-length=160'
+let g:syntastic_python_pylint_post_args='--disable=W291,W391,W293,
+\E501,E221,E302,E251,E203,E231,E303,E201,E225,E261,E241,
+\missing-docstring,unused-argument,wrong-import-position
+\ --max-line-length=160'
 
 augroup BadWhitespace
   autocmd!
