@@ -1,0 +1,45 @@
+#!/usr/bin/env python
+import sys
+import requests
+
+API_KEY = "replace me"
+BASE_URL = 'http://api.openweathermap.org/data/2.5/weather?{}&units=metric&appid={}'
+# Icon Key:
+# 01    clear
+# 02    few clouds
+# 03    clouds
+# 04    broken clouds
+# 09    rain shower
+# 10    light rain
+# 11    thunderstorm
+# 13    snow
+# 50    mist
+# source: http://openweathermap.org/weather-conditions
+icon_dir = "/home/nate/.local/share/icons"
+icon_map = {
+    '01': 'sunny.xbm',
+    '02': 'partly_cloudy.xbm',
+    '03': 'cloudy.xbm',
+    '04': 'mostly_cloudy.xbm',
+    '09': 'rain.xbm',
+    '10': 'light_rain.xbm',
+    '11': 'thunder.xbm',
+    '13': 'snow.xbm',
+    '50': 'fog.xbm',
+}
+
+if __name__ == '__main__':
+    if len(sys.argv) == 2:
+        location = 'zip={},us'.format(sys.argv[1])
+    else:
+        location = 'id=5116815'
+    condition = requests.get(BASE_URL.format(location, API_KEY)).json()
+
+    if condition['cod'] == '404':
+        print(condition['message'])
+    else:
+        icon = condition['weather'][0]['icon']
+        icon = icon_map.get(icon[:-1], icon)
+        temperature = int(condition['main']['temp'])
+
+        print('^i({}/{}){} C'.format(icon_dir, icon, temperature))
