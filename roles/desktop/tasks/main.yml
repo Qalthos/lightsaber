@@ -38,6 +38,13 @@
   with_fileglob:
       - config/*
 
+- name: Copy helper scripts
+  copy:
+      src: "{{ item }}"
+      dest: ~/bin/{{ item }}
+  with_fileglob:
+      - bin/*
+
 - name: Make sure xf86-video-odroid-c1 is not present
   become: yes
   package:
