@@ -30,13 +30,18 @@
   copy:
       src: xmodmap
       dest: ~/.xmodmap
-- name: Copy application .configs
-  debug:
-      msg: "{{ item }}"
-      #dest: ~/.config/
-      #backup: yes
+- name: Copy herbstluftwm .configs
+  copy:
+      src: "{{ item }}"
+      dest: ~/.config/herbstluftwm
   with_fileglob:
-      - config/*
+      - config/herbstluftwm/*
+- name: Copy lilyterm .configs
+  copy:
+      src: "{{ item }}"
+      dest: ~/.config/lilyterm
+  with_fileglob:
+      - config/lilyterm/*
 
 - name: Copy helper scripts
   copy:
