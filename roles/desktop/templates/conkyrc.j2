@@ -27,13 +27,14 @@ conky.text = [[
 # Phone battery
 #${if_match "${exec adb get-state}" == "device"}\
 #^i(/home/nate/.local/share/icons/usb.xbm)\
-
 #${endif}\
+{% if ansible_hostname in groups['laptop'] %}\
 # Test for chaging status
 ${if_match "${exec cat /sys/class/power_supply/AC/online}" == "1"}\
 ^i(/home/nate/.local/share/icons/ac-charging.xbm)${else}\
 ^i(/home/nate/.local/share/icons/battery-low.xbm)${endif}\
 ${template9 0} ${template9 1} \
+{% endif %}\
 # Audio volume
 ^i(/home/nate/.local/share/icons/volume.xbm)\
 ${exec amixer get Master | egrep -o '[0-9]+%' | head -n 1} \

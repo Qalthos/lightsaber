@@ -30,12 +30,18 @@
   copy:
       src: xmodmap
       dest: ~/.xmodmap
+
 - name: Copy herbstluftwm .configs
   copy:
       src: "{{ item }}"
       dest: ~/.config/herbstluftwm
   with_fileglob:
       - config/herbstluftwm/*
+- name: Dzen conkyrc template
+  template:
+      src: conkyrc.j2
+      dest: ~/.config/herbstluftwm/conkyrc
+
 - name: Copy lilyterm .configs
   copy:
       src: "{{ item }}"
