@@ -1,13 +1,19 @@
 ---
 - name: Install python2
-  remote_user: root
+  remote_user: alarm
+  become: yes
+  become_method: su
   gather_facts: False
+  hosts: alarmpi
   tasks:
     - name: Install python2
       raw: pacman -Sy --needed --noconfirm python2
 
 - name: Set up sudo & change hostname
-  remote_user: root
+  remote_user: alarm
+  become: yes
+  become_method: su
+  hosts: alarmpi
   vars_prompt:
     - name: password
       prompt: "New user password"
@@ -25,9 +31,6 @@
           line='%wheel ALL=(ALL) ALL'
           regexp='(# )?%wheel ALL=\(ALL\) ALL'
           validate='visudo -cf %s'
-    - name: Remove 'alarm' user
-      user: name=alarm state=absent
-      when: ansible_machine[:3] == 'arm'
     - name: Add user 'nate' with group 'wheel'
       user: name=nate groups=wheel append=yes password={{ password }}
     - name: Copy public keys for user 'nate'

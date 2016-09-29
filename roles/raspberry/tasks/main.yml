@@ -1,4 +1,6 @@
 ---
+- name: Remove 'alarm' user
+  user: name=alarm state=absent
 - name: Install useful packages
   package:
       name=nfs-utils,dialog,wpa_supplicant
