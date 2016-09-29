@@ -19,7 +19,7 @@ conky.config = {
     if_up_strictness = 'address',
     pad_percents = 0,
 
-    template9 = '${if_match ${battery_percent BAT\1} >= 75}${else}${if_match ${battery_percent BAT\1} >= 25}${else}${endif}${endif}${battery_percent BAT\1}%',
+    template9 = '${if_match ${battery_percent BAT\\1} >= 75}${else}${if_match ${battery_percent BAT\\1} >= 25}${else}${endif}${endif}${battery_percent BAT\\1}%',
 };
 
 conky.text = [[
