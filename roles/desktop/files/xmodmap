@@ -1,5 +1,7 @@
 keycode 66 = Control_L
 keycode 107 = Menu
+keycode 135 = Multi_key
+keycode 108 = ISO_Level3_Shift
 
 clear Lock
 add Control = Control_L
