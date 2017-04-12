@@ -49,6 +49,11 @@
   with_fileglob:
       - config/lilyterm/*
 
+- name: Copy gtk .configs
+  copy:
+      src: config/gtk-3.0/settings.ini
+      dest: ~/.config/gtk-3.0
+
 - name: Copy helper scripts
   copy:
       src: "{{ item }}"
