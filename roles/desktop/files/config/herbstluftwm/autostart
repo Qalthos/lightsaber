@@ -24,7 +24,7 @@ hc keybind $Mod-Shift-c close
 hc keybind $Mod-Control-Shift-i spawn xcalib -invert -alter
 
 # run lots of things
-hc keybind $Mod-Shift-b spawn fbsetbg -a -r ~/documents/Dropbox/Pictures/walls/SFW
+hc keybind $Mod-Shift-b spawn fbsetbg -a -r ~/documents/Dropbox/Pictures/walls/1920
 hc keybind $Mod-F2 spawn rofi -show run
 hc keybind $Mod-F3 spawn lilyterm
 hc keybind $Mod-F4 spawn xkill
@@ -45,7 +45,7 @@ hc keybind XF86AudioMute spawn pamixer -t
 
 # tags
 TAG_NAMES=( '1' '2' '3' '4' '5' '6' 'mail' 'irc' 'chat' )
-hc rename default "${TAG_NAMES[0]}" || true
+hc rename default "${TAG_NAMES[0]}" 2> /dev/null || true
 for i in ${!TAG_NAMES[@]} ; do
     hc add "${TAG_NAMES[$i]}"
 done
