@@ -25,8 +25,7 @@ hc keybind $Mod-Control-Shift-i spawn xcalib -invert -alter
 
 # run lots of things
 hc keybind $Mod-Shift-b spawn fbsetbg -a -r ~/documents/Dropbox/Pictures/walls/SFW
-hc keybind $Mod-F2 spawn ~/bin/dmenu-frecency
-hc keybind $Mod-Shift-F2 spawn dmenu_run
+hc keybind $Mod-F2 spawn rofi -show run
 hc keybind $Mod-F3 spawn lilyterm
 hc keybind $Mod-F4 spawn xkill
 hc keybind $Mod-F5 spawn lilyterm -s -e bpython
