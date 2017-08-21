@@ -22,7 +22,7 @@
 - name: Install themes
   become: yes
   package:
-      name: numix-themes,elementary-icon-theme,ttf-symbola
+      name: numix-gtk-theme,elementary-icon-theme,ttf-symbola
       state: installed
   when: ansible_os_family == 'Archlinux'
 
