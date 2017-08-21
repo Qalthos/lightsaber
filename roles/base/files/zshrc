@@ -57,7 +57,6 @@ PIP_REQUIRE_VIRTUALENV=1
 case $DISTRO in
     "Arch")
         eval "$(hub alias -s)"
-        export VIRTUALENV_PYTHON=python2
         eval "$(fasd --init auto)"
         alias j="fasd_cd -d"
         alias v="f -e vim"
