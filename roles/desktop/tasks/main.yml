@@ -26,10 +26,14 @@
       state: installed
   when: ansible_os_family == 'Archlinux'
 
-- name: Copy xmodmap settings
+- name: Copy base dotfiles
   copy:
-      src: xmodmap
-      dest: ~/.xmodmap
+      src: "{{ item }}"
+      dest: "~/.{{ item }}"
+  with_items:
+      - gtkrc-2.0
+      - xmodmap
+      - xscreensaver
 
 - name: Copy herbstluftwm .configs
   copy:

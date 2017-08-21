@@ -1,0 +1,17 @@
+style "panel"
+{
+        bg[NORMAL]               = "#000000"
+        fg[NORMAL]               = "#FFFFFF"
+}
+gtk-theme-name = "Numix"
+gtk-icon-theme-name = "elementary"
+gtk-font-name = "Sans 8"
+
+widget "*PanelWidget*" style "panel"
+widget "*PanelApplet*" style "panel"
+class "*Panel*" style "panel"
+widget_class "*Mail*" style "panel"
+class "*notif*" style "panel"
+class "*Notif*" style "panel"
+class "*Tray*" style "panel"
+class "*tray*" style "panel"
