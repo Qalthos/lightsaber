@@ -28,7 +28,7 @@ icon_map = {
     '50': 'fog.xbm',
 }
 
-if __name__ == '__main__':
+def weather():
     if len(sys.argv) == 2:
         location = 'zip={},us'.format(sys.argv[1])
     else:
@@ -43,3 +43,6 @@ if __name__ == '__main__':
         temperature = int(condition['main']['temp'])
 
         print('^i({}/{}){} C'.format(icon_dir, icon, temperature))
+
+if __name__ == '__main__':
+    weather()
