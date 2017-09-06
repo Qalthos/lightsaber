@@ -41,17 +41,19 @@
       dest: ~/.config/herbstluftwm
   with_fileglob:
       - config/herbstluftwm/*
+
 - name: Dzen conkyrc template
   template:
       src: conkyrc.j2
       dest: ~/.config/herbstluftwm/conkyrc
 
 - name: Copy lilyterm .configs
-  copy:
-      src: "{{ item }}"
-      dest: ~/.config/lilyterm
-  with_fileglob:
-      - config/lilyterm/*
+  template:
+      src: lilyterm.j2
+      dest: "~/.config/lilyterm/{{ item.filename }}.conf"
+  with_items:
+      - { filename: default, font_size: 9 }
+      - { filename: embiggen, font_size: 22 }
 
 - name: Copy gtk .configs
   copy:
