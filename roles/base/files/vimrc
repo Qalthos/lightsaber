@@ -1,22 +1,21 @@
+set nocompatible
 set shiftwidth=4
 set tabstop=4
 set autoindent
 set smartindent
 set expandtab
+set textwidth=100
 
 " Unmap <F1>
 :map <F1> <Esc>
 :imap <F1> <Esc>
 
-:filetype on
-:syntax on
-
-:filetype indent on
+filetype indent on
+syntax on
 set foldmethod=syntax
 
 " colorscheme
 set background=dark
-"colorscheme vividchalk
 colorscheme Tomorrow-Night
 
 let g:syntastic_check_on_open=1
@@ -32,7 +31,6 @@ augroup BadWhitespace
   autocmd BufRead,BufNewFile *.py match BadWhitespace /*\t\*/
   autocmd BufRead,BufNewFile *.py match BadWhitespace /\s\+$/
 augroup END
-set textwidth=80
 highlight BadWhitespace ctermbg=red guibg=red
 
 " Automatic python folding
