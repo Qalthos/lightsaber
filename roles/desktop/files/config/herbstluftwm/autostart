@@ -157,11 +157,13 @@ for monitor in $(herbstclient list_monitors | cut -d: -f1) ; do
     # start it on each monitor
     $panel $monitor &
 done
-# Autostart some programs
-pgrep xscreensaver || xscreensaver -nosplash &
-pgrep dropbox || dropboxd || dropbox start &
-pgrep nm-applet || nm-applet &
-pgrep redshift || redshift &
-pgrep dunst || dunst &
-# Fix for Java AWT applets on non-reparenting WMs.
+# Set environment variables
 hc setenv _JAVA_AWT_WM_NONREPARENTING 1
+
+# Autostart some programs
+compton -b
+dropbox
+dunst &
+nm-applet &
+xscreensaver -nosplash &
+pgrep redshift || redshift &
