@@ -10,7 +10,7 @@ hc emit_hook reload
 
 #xsetroot -solid '#5A8E3A'
 WALL_DIR=~/documents/Dropbox/Pictures/walls/1920
-fbsetbg -a -r $WALLDIR
+fbsetbg -a -r $WALL_DIR
 
 # remove all existing keybindings
 hc keyunbind --all
