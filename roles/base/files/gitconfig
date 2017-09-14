@@ -9,3 +9,5 @@
 	algorithm = patience
 [core]
 	autocrlf = input
+[help]
+	autocorrect = 1
