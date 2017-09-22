@@ -47,6 +47,7 @@ if [ $OSTYPE != 'cygwin' ]; then
     source ~/.zsh/keyboard
 fi
 
+# User specific aliases and functions
 export PATH=$PATH:~/bin
 source distro_check.sh
 
