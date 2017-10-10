@@ -8,9 +8,8 @@ function hc() {
 
 hc emit_hook reload
 
-#xsetroot -solid '#5A8E3A'
-WALL_DIR=~/documents/Dropbox/Pictures/walls/1920
-fbsetbg -a -r $WALL_DIR
+# Set background image
+nitrogen --random --set-centered
 
 # remove all existing keybindings
 hc keyunbind --all
@@ -25,7 +24,7 @@ hc keybind $Mod-Shift-c close
 hc keybind $Mod-Control-Shift-i spawn xcalib -invert -alter
 
 # run lots of things
-hc keybind $Mod-Shift-b spawn fbsetbg -a -r $WALL_DIR
+hc keybind $Mod-Shift-b spawn nitrogen --random --set-centered
 hc keybind $Mod-F2 spawn rofi -show run
 hc keybind $Mod-F3 spawn lilyterm
 hc keybind $Mod-F4 spawn xkill

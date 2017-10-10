@@ -17,7 +17,7 @@
 - name: Install desktop applications
   become: yes
   package:
-      name: herbstluftwm,dzen2,rofi,conky,feh,lilyterm
+      name: herbstluftwm,dzen2,rofi,conky,nitrogen,lilyterm
       state: installed
 - name: Install themes
   become: yes
@@ -51,6 +51,11 @@
   copy:
       src: config/lilyterm/default.conf
       dest: ~/.config/lilyterm/
+
+- name: Copy nitrogen config
+  copy:
+      src: config/nitrogen/nitrogen.cfg
+      dest: ~/.config/nitrogen
 
 - name: Copy gtk .configs
   copy:
