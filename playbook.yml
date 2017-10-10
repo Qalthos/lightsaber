@@ -1,7 +1,7 @@
 ---
-- include: base.yml
+- import_playbook: base.yml
 
-- include: raspberry.yml
+- import_playbook: raspberry.yml
 
 - hosts: workstation
   remote_user: nate

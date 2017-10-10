@@ -35,32 +35,17 @@
       - xmodmap
       - xscreensaver
 
-- name: Copy herbstluftwm .configs
+- name: Copy .config directory
   copy:
-      src: "{{ item }}"
-      dest: ~/.config/herbstluftwm
-  with_fileglob:
-      - config/herbstluftwm/*
+      src: config/{{ item.path }}
+      dest: ~/.config/{{ item.path }}
+  with_filetree: config/
+  when: item.state == 'file'
 
 - name: Dzen conkyrc template
   template:
       src: conkyrc.j2
       dest: ~/.config/herbstluftwm/conkyrc
-
-- name: Copy lilyterm .config
-  copy:
-      src: config/lilyterm/default.conf
-      dest: ~/.config/lilyterm/
-
-- name: Copy nitrogen config
-  copy:
-      src: config/nitrogen/nitrogen.cfg
-      dest: ~/.config/nitrogen
-
-- name: Copy gtk .configs
-  copy:
-      src: config/gtk-3.0/settings.ini
-      dest: ~/.config/gtk-3.0
 
 - name: Copy helper scripts
   copy:
