@@ -1,15 +1,6 @@
-Host *
-  ForwardAgent yes
-  SendEnv LANG LC_*
-  UseRoaming no
-
 #######################################
 #########   Apartment hosts   #########
 #######################################
-
-Host 192.168.1.*
-  StrictHostKeyChecking no
-  UserKnownHostsFile=/dev/null
 
 Host locutus
   Hostname linkybook.com
@@ -18,3 +9,14 @@ Host tron
   Hostname 131countess.churchofgoard.com
   Port 12131
   User nate
+
+Host 192.168.1.*
+  StrictHostKeyChecking no
+  UserKnownHostsFile /dev/null
+
+#######################################
+
+Host *
+  ForwardAgent yes
+  SendEnv LANG LC_*
+  UseRoaming no
