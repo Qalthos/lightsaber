@@ -69,12 +69,12 @@ herbstclient --idle 2>/dev/null | {
         esac
     done
 } | dzen2 -h 16 -fn 'DejaVu Sans Mono:size=8' -ta l -sa l \
-          -x $x -y $y -w $(($width-500)) \
+          -x $x -y $y -w $(($width-350)) \
           -fg "$dzen_fg" -bg "$dzen_bg" &
 pids+=($!)
 
 dzen2 -h 16 -fn 'DejaVu Sans Mono:size=8' -ta l -sa l \
-      -x $(($x+$width-500)) -y $y -w 425 \
+      -x $(($x+$width-350)) -y $y -w 350 \
       -fg "$dzen_fg" -bg "$dzen_bg" < $CONKY_PIPE &
 pids+=($!)
 
