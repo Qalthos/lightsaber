@@ -79,9 +79,7 @@ dzen2 -h 16 -fn 'DejaVu Sans Mono:size=8' -ta l -sa l \
 pids+=($!)
 
 if [ $1 == 0 ]; then
-    stalonetray --grow-gravity E --icon-gravity NE --kludges=force_icons_size\
-                --icon-size 16 --geometry 1x1+$(($x+$width-16))+$y \
-                --background '#222222' &
+    stalonetray &
     pids+=($!)
 fi
 
