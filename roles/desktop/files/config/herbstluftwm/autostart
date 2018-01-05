@@ -166,3 +166,4 @@ dunst &
 nm-applet &
 xscreensaver -nosplash &
 pgrep redshift || redshift &
+pgrep 'polkit-' || /usr/lib/mate-polkit/polkit-mate-authentication-agent-1 &
