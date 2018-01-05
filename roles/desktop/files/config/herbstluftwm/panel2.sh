@@ -14,7 +14,6 @@ trap 'herbstclient emit_hook quit_panel' TERM
 herbstclient pad $monitor 16
 herbstclient emit_hook quit_panel
 
-
 dzen_fg="#ffffff"
 dzen_bg="#1c1c1c"
 normal_fg=""
@@ -78,12 +77,12 @@ dzen2 -h 16 -fn 'DejaVu Sans Mono:size=8' -ta l -sa l \
       -fg "$dzen_fg" -bg "$dzen_bg" < $CONKY_PIPE &
 pids+=($!)
 
-if [ $1 == 0 ]; then
+if [ $monitor == 0 ]; then
+    sleep .25
     stalonetray &
     pids+=($!)
 fi
 
 herbstclient --wait '^(quit_panel|reload).*'
-kill -TERM "${pids[@]}" >/dev/null 2>&1
-rm -f $CONKY_PIPE
+kill -TERM ${pids[*]}
 exit 0
