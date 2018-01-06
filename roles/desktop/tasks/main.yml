@@ -5,6 +5,23 @@
       name: xorg,xorg-xinit,xorg-xmodmap,xterm,lightdm-gtk-greeter,accountsservice
       state: installed
   when: ansible_os_family == 'Archlinux'
+
+- name: Install copr repos
+  become: yes
+  yum_repository:
+      name: "{{ item.owner }}-{{ item.repo }}"
+      description: Copr repo for {{ item.repo }} owned by {{ item.owner }}
+      baseurl: https://copr-be.cloud.fedoraproject.org/results/{{ item.owner }}/{{ item.repo }}/fedora-$releasever-$basearch/
+      gpgkey: https://copr-be.cloud.fedoraproject.org/results/{{ item.owner }}/{{ item.repo }}/pubkey.gpg
+      gpgcheck: yes
+      file: _copr_{{ item.owner }}-{{ item.repo }}.repo
+  with_items:
+    - {owner: yaroslav, repo: i3desktop}
+    - {owner: numix, repo: numix}
+    - {owner: notkild, repo: pamixer}
+    - {owner: dirkdavidis, repo: papirus-icon-theme}
+  when: ansible_distribution == 'Fedora'
+
 - name: Set up user avatar
   become: yes
   copy:
@@ -14,17 +31,11 @@
       - { src: avatar.png, dest: /var/lib/AccountsService/icons/nate }
       - { src: user_file, dest: /var/lib/AccountsService/users/nate }
 
-- name: Install desktop applications
+- name: Install desktop applications & themes
   become: yes
   package:
-      name: herbstluftwm,dzen2,rofi,conky,nitrogen,lilyterm,dunst
+      name: herbstluftwm,compton,dzen2,rofi,conky,nitrogen,lilyterm,dunst,numix-gtk-theme,papirus-icon-theme
       state: installed
-- name: Install themes
-  become: yes
-  package:
-      name: numix-gtk-theme,elementary-icon-theme,ttf-symbola
-      state: installed
-  when: ansible_os_family == 'Archlinux'
 
 - name: Copy base dotfiles
   copy:
