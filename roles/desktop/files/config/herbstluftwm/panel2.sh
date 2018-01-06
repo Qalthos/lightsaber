@@ -28,11 +28,13 @@ used_fg="#afdf87"
 used_bg=
 
 CONKY_PIPE=/tmp/conky-pipe
-if [ ! -p $CONKY_PIPE ]; then
-    if [ -e $CONKY_PIPE ]; then
-        rm -r $CONKY_PIPE
+if [ $monitor == 0 ]; then
+    if [ ! -p $CONKY_PIPE ]; then
+        if [ -e $CONKY_PIPE ]; then
+            rm -r $CONKY_PIPE
+        fi
+        mkfifo -m 600 $CONKY_PIPE
     fi
-    mkfifo -m 600 $CONKY_PIPE
     conky -c "$panelfolder/conkyrc" > $CONKY_PIPE &
     pids+=($!)
 fi
