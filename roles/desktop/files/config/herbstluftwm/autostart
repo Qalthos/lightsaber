@@ -31,10 +31,10 @@ hc keybind $Mod-F4 spawn xkill
 hc keybind $Mod-F5 spawn lilyterm -s -e bpython
 
 hc keybind Mod4-l spawn xscreensaver-command -lock
-hc keybind Mod4-o spawn nemo
+hc keybind Mod4-o spawn thunar
 
 hc keybind XF86Screensaver spawn xscreensaver-command -lock
-hc keybind XF86Open spawn nemo
+hc keybind XF86Open spawn thunar
 
 hc keybind XF86Display spawn ~/bin/rescreen
 hc keybind XF86MonBrightnessDown spawn xbacklight -dec 5
@@ -161,7 +161,7 @@ hc setenv _JAVA_AWT_WM_NONREPARENTING 1
 
 # Autostart some programs
 compton -b
-dropbox & 2> /dev/null
+dropbox 2> /dev/null >&2
 nm-applet &
 pgrep dunst || dunst &
 pgrep redshift || redshift &

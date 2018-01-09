@@ -14,7 +14,7 @@
       baseurl: https://copr-be.cloud.fedoraproject.org/results/{{ item.owner }}/{{ item.repo }}/fedora-$releasever-$basearch/
       gpgkey: https://copr-be.cloud.fedoraproject.org/results/{{ item.owner }}/{{ item.repo }}/pubkey.gpg
       gpgcheck: yes
-      file: _copr_{{ item.owner }}-{{ item.repo }}.repo
+      file: _copr_{{ item.owner }}-{{ item.repo }}
   with_items:
     - {owner: yaroslav, repo: i3desktop}
     - {owner: numix, repo: numix}
@@ -34,7 +34,7 @@
 - name: Install desktop applications & themes
   become: yes
   package:
-      name: herbstluftwm,compton,dzen2,rofi,conky,nitrogen,lilyterm,dunst,numix-gtk-theme,papirus-icon-theme
+      name: herbstluftwm,compton,dzen2,rofi,conky,nitrogen,lilyterm,thunar,dunst,numix-gtk-theme,papirus-icon-theme
       state: installed
 
 - name: Copy base dotfiles
