@@ -51,7 +51,7 @@ battery() {
         state[$bat_id]=$(cat $file/status)
         if [[ -e $file/energy_full_design ]]; then
             ((max[$bat_id] = $(cat $file/energy_full_design)))
-            ((pct[$bat_id] = 1.0 * $(cat $file/energy_now) / max[$bat_id]))
+            ((pct[$bat_id] = $(cat $file/capacity) / 100.0))
             ((max_all += max[$bat_id]))
         else
             # Battery is not being detected properly
