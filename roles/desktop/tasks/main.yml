@@ -47,6 +47,13 @@
       - xmodmap
       - xscreensaver
 
+- name: Create .config directory tree
+  file:
+      path: ~/.config/{{ item.path }}
+      state: directory
+  with_filetree: config/
+  when: item.state == 'directory'
+
 - name: Copy .config directory
   copy:
       src: config/{{ item.path }}
