@@ -161,7 +161,7 @@ hc setenv _JAVA_AWT_WM_NONREPARENTING 1
 
 # Autostart some programs
 compton -b
-dropbox 2> /dev/null >&2
+dropbox 2> /dev/null >&2 &
 nm-applet &
 pgrep dunst || dunst &
 pgrep redshift || redshift &
