@@ -1,5 +1,5 @@
 # XScreenSaver Preferences File
-# Written by xscreensaver-demo 5.38 for nate on Thu Jan  4 15:49:11 2018.
+# Written by xscreensaver-demo 5.38 for nate on Tue Mar 20 13:24:34 2018.
 # https://www.jwz.org/xscreensaver/
 
 timeout:	0:10:00
@@ -176,7 +176,7 @@ programs:								      \
 -				thornbird -root				    \n\
 -				twang -root				    \n\
 - GL: 				antspotlight -root			    \n\
-				apple2 -root -mode text			    \n\
+				apple2 -root -text			    \n\
 - GL: 				atunnel -root				    \n\
 -				barcode -root				    \n\
 - GL: 				blinkbox -root				    \n\
