@@ -17,7 +17,9 @@ parse_git_branch () {
         gitver=$(git branch 2>/dev/null| sed -n '/^\*/s/^\* //p')
         numfil=$(git status -s -uno | wc -l)
         untracked=$(git status -s | egrep "^\?" | wc -l)
-        echo -e "(±:${gitver}:${numfil}:${untracked})"
+        stashes=$(git stash list | wc -l)
+        stashes=${${stashes#0}:+"|$stashes"}
+        echo -e "(±:$gitver:$numfil:$untracked$stashes)"
     elif hg status -q >/dev/null 2>&1; then
         hgver=$(hg branch 2>/dev/null)
         numfil=$(hg status | wc -l)
