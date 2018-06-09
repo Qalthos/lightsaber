@@ -1,13 +1,23 @@
 ---
-- name: Install X
-  become: yes
+- name: Install X on Arch
   package:
-      name: xorg,xorg-xinit,xorg-xmodmap,xterm,lightdm-gtk-greeter,accountsservice
+      name: xorg-xinit,xorg-xmodmap,lightdm-gtk-greeter,otf-fira-mono
       state: installed
+  become: yes
   when: ansible_os_family == 'Archlinux'
 
-- name: Install copr repos
+- name: Install X on Red Hat
+  package:
+      name: lightdm-gtk,mozilla-fira-mono-fonts
+      state: installed
   become: yes
+  when: ansible_os_family == 'RedHat'
+
+- name: Install common X
+  package: xterm,accountsservice
+  become: yes
+
+- name: Install copr repos
   yum_repository:
       name: "{{ item.owner }}-{{ item.repo }}"
       description: Copr repo for {{ item.repo }} owned by {{ item.owner }}
@@ -15,7 +25,8 @@
       gpgkey: https://copr-be.cloud.fedoraproject.org/results/{{ item.owner }}/{{ item.repo }}/pubkey.gpg
       gpgcheck: yes
       file: _copr_{{ item.owner }}-{{ item.repo }}
-  with_items:
+  become: yes
+  loop:
     - {owner: yaroslav, repo: i3desktop}
     - {owner: numix, repo: numix}
     - {owner: notkild, repo: pamixer}
@@ -23,25 +34,25 @@
   when: ansible_distribution == 'Fedora'
 
 - name: Set up user avatar
-  become: yes
   copy:
       src: "{{ item.src }}"
       dest: "{{ item.dest }}"
-  with_items:
+  become: yes
+  loop:
       - { src: avatar.png, dest: /var/lib/AccountsService/icons/nate }
       - { src: user_file, dest: /var/lib/AccountsService/users/nate }
 
 - name: Install desktop applications & themes
-  become: yes
   package:
-      name: herbstluftwm,compton,dzen2,rofi,conky,nitrogen,lilyterm,thunar,dunst,numix-gtk-theme,papirus-icon-theme
+      name: herbstluftwm,compton,dzen2,rofi,conky,nitrogen,qterminal,thunar,dunst,numix-gtk-theme,papirus-icon-theme
       state: installed
+  become: yes
 
 - name: Copy base dotfiles
   copy:
       src: "{{ item }}"
       dest: "~/.{{ item }}"
-  with_items:
+  loop:
       - gtkrc-2.0
       - stalonetrayrc
       - xmodmap
@@ -51,14 +62,14 @@
   file:
       path: ~/.config/{{ item.path }}
       state: directory
-  with_filetree: config/
+  loop: "{{ query('filetree', 'config/' }}"
   when: item.state == 'directory'
 
 - name: Copy .config directory
   copy:
       src: config/{{ item.path }}
       dest: ~/.config/{{ item.path }}
-  with_filetree: config/
+  loop: "{{ query('filetree', 'config/' }}"
   when: item.state == 'file'
 
 - name: Dzen conkyrc template
@@ -70,8 +81,7 @@
   copy:
       src: "{{ item }}"
       dest: ~/bin/
-  with_fileglob:
-      - bin/*
+  loop: "{{ query('fileglob', 'bin/*') }}"
 
 - name: Make sure xf86-video-odroid-c1 is not present
   become: yes

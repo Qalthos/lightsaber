@@ -1,7 +1,7 @@
 style "panel"
 {
-        bg[NORMAL]               = "#000000"
-        fg[NORMAL]               = "#FFFFFF"
+    bg[NORMAL] = "#000000"
+    fg[NORMAL] = "#FFFFFF"
 }
 gtk-theme-name = "Numix"
 gtk-icon-theme-name = "elementary"
