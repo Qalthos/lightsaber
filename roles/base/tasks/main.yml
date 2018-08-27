@@ -1,9 +1,10 @@
 ---
 - name: Refresh public keys
   authorized_key: user=nate key=https://github.com/qalthos.keys
+
 - name: Transfer dotfiles
   copy: src={{ item }} dest=/home/nate/.{{ item }} force=yes backup=yes
-  with_items:
+  loop:
       - gitconfig
       - profile
       - ssh/
@@ -13,9 +14,10 @@
       - zsh/
       - zshrc
       - zprofile
+
 - name: Set up scripts
   copy: src={{ item }} dest=/home/nate/bin/ force=yes backup=yes
-  with_fileglob: bin/*
+  loop: "{{ query('fileglob', 'bin/*') }}"
 
 - name: Enable en_US.UTF-8 locale
   become: yes
@@ -28,6 +30,7 @@
   package:
       name=git,htop,tmux,vim,zsh,mlocate
       state=installed
+
 - name: Set shell to zsh
   become: yes
   user: name=nate shell=/usr/bin/zsh
