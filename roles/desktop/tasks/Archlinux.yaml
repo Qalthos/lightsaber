@@ -1,0 +1,6 @@
+---
+- name: Install X on Arch
+  package:
+      name: xorg-xinit,xorg-xmodmap,lightdm-gtk-greeter,otf-fira-mono
+      state: installed
+  become: yes

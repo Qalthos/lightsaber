@@ -1,0 +1,22 @@
+---
+- name: Install X on Red Hat
+  package:
+      name: lightdm-gtk,mozilla-fira-mono-fonts
+      state: installed
+  become: yes
+
+- name: Install copr repos
+  yum_repository:
+      name: "{{ item.owner }}-{{ item.repo }}"
+      description: Copr repo for {{ item.repo }} owned by {{ item.owner }}
+      baseurl: https://copr-be.cloud.fedoraproject.org/results/{{ item.owner }}/{{ item.repo }}/fedora-$releasever-$basearch/
+      gpgkey: https://copr-be.cloud.fedoraproject.org/results/{{ item.owner }}/{{ item.repo }}/pubkey.gpg
+      gpgcheck: yes
+      file: _copr_{{ item.owner }}-{{ item.repo }}
+  become: yes
+  loop:
+    - {owner: yaroslav, repo: i3desktop}
+    - {owner: numix, repo: numix}
+    - {owner: notkild, repo: pamixer}
+    - {owner: dirkdavidis, repo: papirus-icon-theme}
+  when: ansible_distribution == 'Fedora'

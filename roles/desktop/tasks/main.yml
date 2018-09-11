@@ -1,37 +1,11 @@
 ---
-- name: Install X on Arch
-  package:
-      name: xorg-xinit,xorg-xmodmap,lightdm-gtk-greeter,otf-fira-mono
-      state: installed
-  become: yes
-  when: ansible_os_family == 'Archlinux'
-
-- name: Install X on Red Hat
-  package:
-      name: lightdm-gtk,mozilla-fira-mono-fonts
-      state: installed
-  become: yes
-  when: ansible_os_family == 'RedHat'
+- name: Distro-specific tasks
+  include: "{{ ansible_os_family }}.yaml"
 
 - name: Install common X
-  package: xterm,accountsservice
+  package:
+      name: xterm,accountsservice
   become: yes
-
-- name: Install copr repos
-  yum_repository:
-      name: "{{ item.owner }}-{{ item.repo }}"
-      description: Copr repo for {{ item.repo }} owned by {{ item.owner }}
-      baseurl: https://copr-be.cloud.fedoraproject.org/results/{{ item.owner }}/{{ item.repo }}/fedora-$releasever-$basearch/
-      gpgkey: https://copr-be.cloud.fedoraproject.org/results/{{ item.owner }}/{{ item.repo }}/pubkey.gpg
-      gpgcheck: yes
-      file: _copr_{{ item.owner }}-{{ item.repo }}
-  become: yes
-  loop:
-    - {owner: yaroslav, repo: i3desktop}
-    - {owner: numix, repo: numix}
-    - {owner: notkild, repo: pamixer}
-    - {owner: dirkdavidis, repo: papirus-icon-theme}
-  when: ansible_distribution == 'Fedora'
 
 - name: Set up user avatar
   copy:
@@ -62,14 +36,14 @@
   file:
       path: ~/.config/{{ item.path }}
       state: directory
-  loop: "{{ query('filetree', 'config/' }}"
+  loop: "{{ query('filetree', 'config/') }}"
   when: item.state == 'directory'
 
 - name: Copy .config directory
   copy:
       src: config/{{ item.path }}
       dest: ~/.config/{{ item.path }}
-  loop: "{{ query('filetree', 'config/' }}"
+  loop: "{{ query('filetree', 'config/') }}"
   when: item.state == 'file'
 
 - name: Dzen conkyrc template
