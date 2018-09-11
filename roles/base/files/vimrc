@@ -4,7 +4,7 @@ set tabstop=4
 set autoindent
 set smartindent
 set expandtab
-set textwidth=100
+set textwidth=160
 
 " Unmap <F1>
 :map <F1> <Esc>
@@ -15,8 +15,7 @@ syntax on
 set foldmethod=syntax
 
 " colorscheme
-set background=dark
-colorscheme Tomorrow-Night
+colorscheme Tomorrow-Night-Bright
 
 let g:syntastic_check_on_open=1
 let g:syntastic_python_checkers=['pycodestyle', 'pylint']
