@@ -52,8 +52,13 @@ herbstclient --idle 2>/dev/null | {
                 '!') cstart="^fg($urgent_fg)^bg($urgent_bg)" ;;
                 *)   cstart=''                               ;;
             esac
-            dzenstring="${cstart}^ca(1,herbstclient use ${tag:1}) ${tag:1} "
-            dzenstring+="^ca()^fg()^bg()"
+            tagname=${tag:1}
+            if [[ "$tagname" =~ ^(slack|mail|irc|chat)$ ]]; then
+                tagname="^i(/home/nate/.local/share/icons/$tagname.xbm)"
+            else
+                tagname=" $tagname "
+            fi
+            dzenstring="${cstart}^ca(1,herbstclient use ${tag:1})$tagname^ca()^fg()^bg()"
             echo -n "$dzenstring"
         done
         echo "| $windowtitle"

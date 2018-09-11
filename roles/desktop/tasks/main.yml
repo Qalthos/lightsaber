@@ -46,6 +46,12 @@
   loop: "{{ query('filetree', 'config/') }}"
   when: item.state == 'file'
 
+- name: Copy panel xbm icons
+  copy:
+      src: "{{ item }}"
+      dest: ~/.local/share/icons/
+  loop: "{{ query('fileglob', 'local/share/icons/*') }}"
+
 - name: Dzen conkyrc template
   template:
       src: conkyrc.j2
