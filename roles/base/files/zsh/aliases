@@ -5,5 +5,8 @@ alias chx="chmod +x"
 alias q="touch /tmp/q && less +F -R /tmp/q"
 alias vdiff="vimdiff -c 'set diffopt+=iwhite'"
 
+#==Ansible=====
+alias ansible-test="time ~/workspace/ansible/ansible/test/runner/ansible-test"
+
 #==My Boxen====
 alias tower="rdesktop fourecks -f -b -P -x m -z -a 16 -g 100%"

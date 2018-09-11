@@ -28,11 +28,12 @@ icon_map = {
     '50': 'fog.xbm',
 }
 
+
 def weather():
     if len(sys.argv) == 2:
         location = 'zip={},us'.format(sys.argv[1])
     else:
-        location = 'id=5116815'
+        location = 'id=5137454'
     condition = requests.get(BASE_URL.format(location, API_KEY)).json()
 
     if condition['cod'] == '404':
@@ -42,7 +43,17 @@ def weather():
         icon = icon_map.get(icon[:-1], icon)
         temperature = int(condition['main']['temp'])
 
-        print('^i({}/{}){} C'.format(icon_dir, icon, temperature))
+        text = '^i({}/{}){} C'.format(icon_dir, icon, temperature)
+
+        humid = condition['main']['humidity']
+        wind = condition['wind']['speed']
+        tooltip = r'Humidity: {}%\nWind Speed: {}mph'.format(humid, wind)
+
+        dzen = "dzen2 -fn 'DejaVu Sans Mono:size=12' -ta l -sa l -l 1 " \
+            "-e 'onstart=uncollapse;button1=exit;button3=exit' " \
+            "-p 10 -x -300 -y 20 -w 200"
+        print('^ca(1, echo "{}" | {}){}^ca()'.format(tooltip, dzen, text))
+
 
 if __name__ == '__main__':
     weather()

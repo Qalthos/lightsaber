@@ -44,7 +44,7 @@ hc keybind XF86AudioLowerVolume spawn pamixer -d 5
 hc keybind XF86AudioMute spawn pamixer -t
 
 # tags
-TAG_NAMES=( '1' '2' '3' '4' '5' '6' 'mail' 'irc' 'chat' )
+TAG_NAMES=( '1' '2' '3' '4' 'slack' '6' 'mail' 'irc' 'chat' )
 hc rename default "${TAG_NAMES[0]}" 2> /dev/null || true
 for i in ${!TAG_NAMES[@]} ; do
     hc add "${TAG_NAMES[$i]}"
@@ -125,20 +125,21 @@ hc set mouse_recenter_gap 0
 hc unrule -F
 hc rule focus=off # normally do not focus new clients
 # give focus to most common terminals
-hc rule class~'(.*[Rr]xvt.*|.*[Tt]erm.*|Konsole)' focus=on
-hc rule class~'(Bpython2?(-gtk)?)' focus=on
+hc rule class~'(.*[Rr]xvt.*|.*[Tt]erm.*|Konsole|kitty)' focus=on
 hc rule windowtype~'_NET_WM_WINDOW_TYPE_(DIALOG|UTILITY|SPLASH)' pseudotile=on
 hc rule windowtype='_NET_WM_WINDOW_TYPE_DIALOG' focus=on
 hc rule windowtype~'_NET_WM_WINDOW_TYPE_(NOTIFICATION|DOCK)' manage=off
 hc rule class=Firefox tag=1
 hc rule class=Steam tag=3
+hc rule class=Slack tag=slack
 hc rule class=Hexchat tag=irc
 hc rule class=Thunderbird tag=mail
 hc load chat '(split horizontal:0.150000:0
     (clients grid:0)
     (split horizontal:0.250000:0 (clients vertical:0) (clients vertical:0)))'
-hc rule class=Pidgin tag=chat index=10
-hc rule class~'(Gpodder|Audacious)' tag=chat index=11
+hc rule class=Pidgin windowrole=buddy_list tag=chat index=0
+hc rule class=Pidgin windowrole=conversation tag=chat index=10
+hc rule class=Audacious tag=chat index=11
 
 # unlock, just to be sure
 hc unlock
