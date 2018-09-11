@@ -26,9 +26,9 @@ hc keybind $Mod-Control-Shift-i spawn xcalib -invert -alter
 # run lots of things
 hc keybind $Mod-Shift-b spawn nitrogen --random --set-centered
 hc keybind $Mod-F2 spawn rofi -show run
-hc keybind $Mod-F3 spawn lilyterm -s
+hc keybind $Mod-F3 spawn kitty
 hc keybind $Mod-F4 spawn xkill
-hc keybind $Mod-F5 spawn lilyterm -s -e bpython
+hc keybind $Mod-F5 spawn kitty bpython
 
 hc keybind Mod4-l spawn xscreensaver-command -lock
 hc keybind Mod4-o spawn thunar

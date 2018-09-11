@@ -18,7 +18,7 @@
 
 - name: Install desktop applications & themes
   package:
-      name: herbstluftwm,compton,dzen2,rofi,conky,nitrogen,qterminal,thunar,dunst,numix-gtk-theme,papirus-icon-theme
+      name: herbstluftwm,compton,dzen2,rofi,conky,nitrogen,kitty,thunar,dunst,numix-gtk-theme,papirus-icon-theme
       state: installed
   become: yes
 
