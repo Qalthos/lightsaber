@@ -28,8 +28,8 @@
 - name: Install required environment tools
   become: yes
   package:
-      name=git,htop,tmux,vim,zsh,mlocate
-      state=installed
+      name: git,htop,tmux,vim,zsh,mlocate
+      state: present
 
 - name: Set shell to zsh
   become: yes
