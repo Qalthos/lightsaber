@@ -16,7 +16,5 @@
   become: yes
   loop:
     - {owner: yaroslav, repo: i3desktop}
-    - {owner: numix, repo: numix}
-    - {owner: notkild, repo: pamixer}
     - {owner: dirkdavidis, repo: papirus-icon-theme}
   when: ansible_distribution == 'Fedora'
