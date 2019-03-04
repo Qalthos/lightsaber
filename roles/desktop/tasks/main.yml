@@ -4,68 +4,68 @@
 
 - name: Install common X
   package:
-      name: xterm,accountsservice
+    name: xterm,accountsservice
   become: yes
 
 - name: Set up user avatar
   copy:
-      src: "{{ item.src }}"
-      dest: "{{ item.dest }}"
+    src: "{{ item.src }}"
+    dest: "{{ item.dest }}"
   become: yes
   loop:
-      - { src: avatar.png, dest: /var/lib/AccountsService/icons/nate }
-      - { src: user_file, dest: /var/lib/AccountsService/users/nate }
+    - { src: avatar.png, dest: /var/lib/AccountsService/icons/nate }
+    - { src: user_file, dest: /var/lib/AccountsService/users/nate }
 
 - name: Install desktop applications & themes
   package:
-      name: herbstluftwm,compton,dzen2,rofi,conky,nitrogen,kitty,thunar,dunst,numix-gtk-theme,papirus-icon-theme
-      state: installed
+    name: herbstluftwm,compton,dzen2,rofi,conky,nitrogen,kitty,thunar,dunst,numix-gtk-theme,papirus-icon-theme
+    state: installed
   become: yes
 
 - name: Copy base dotfiles
   copy:
-      src: "{{ item }}"
-      dest: "~/.{{ item }}"
+    src: "{{ item }}"
+    dest: "~/.{{ item }}"
   loop:
-      - gtkrc-2.0
-      - stalonetrayrc
-      - xmodmap
-      - xscreensaver
+    - gtkrc-2.0
+    - stalonetrayrc
+    - xmodmap
+    - xscreensaver
 
 - name: Create .config directory tree
   file:
-      path: ~/.config/{{ item.path }}
-      state: directory
+    path: ~/.config/{{ item.path }}
+    state: directory
   loop: "{{ query('filetree', 'config/') }}"
   when: item.state == 'directory'
 
 - name: Copy .config directory
   copy:
-      src: config/{{ item.path }}
-      dest: ~/.config/{{ item.path }}
+    src: config/{{ item.path }}
+    dest: ~/.config/{{ item.path }}
   loop: "{{ query('filetree', 'config/') }}"
   when: item.state == 'file'
 
 - name: Copy panel xbm icons
   copy:
-      src: "{{ item }}"
-      dest: ~/.local/share/icons/
+    src: "{{ item }}"
+    dest: ~/.local/share/icons/
   loop: "{{ query('fileglob', 'local/share/icons/*') }}"
 
 - name: Dzen conkyrc template
   template:
-      src: conkyrc.j2
-      dest: ~/.config/herbstluftwm/conkyrc
+    src: conkyrc.j2
+    dest: ~/.config/herbstluftwm/conkyrc
 
 - name: Copy helper scripts
   copy:
-      src: "{{ item }}"
-      dest: ~/bin/
+    src: "{{ item }}"
+    dest: ~/bin/
   loop: "{{ query('fileglob', 'bin/*') }}"
 
 - name: Make sure xf86-video-odroid-c1 is not present
   become: yes
   package:
-      name: xf86-video-odroid-c1
-      state: absent
+    name: xf86-video-odroid-c1
+    state: absent
   when: ansible_machine[:3] == 'arm'

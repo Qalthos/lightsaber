@@ -1,9 +1,15 @@
 ---
 - name: Refresh public keys
-  authorized_key: user=nate key=https://github.com/qalthos.keys
+  authorized_key:
+    user: nate
+    key: https://github.com/qalthos.keys
 
 - name: Transfer dotfiles
-  copy: src={{ item }} dest=/home/nate/.{{ item }} force=yes backup=yes
+  copy:
+    src: "{{ item }}"
+    dest: /home/nate/.{{ item }}
+    force: yes
+    backup: yes
   loop:
       - gitconfig
       - profile
@@ -16,21 +22,29 @@
       - zprofile
 
 - name: Set up scripts
-  copy: src={{ item }} dest=/home/nate/bin/ force=yes backup=yes
+  copy:
+    src: "{{ item }}"
+    dest: /home/nate/bin/
+    force: yes
+    backup: yes
   loop: "{{ query('fileglob', 'bin/*') }}"
 
 - name: Enable en_US.UTF-8 locale
   become: yes
-  locale_gen: name=en_US.UTF-8 state=present
+  locale_gen:
+    name: en_US.UTF-8
+    state: present
   when: ansible_os_family != 'RedHat'
 
 # Set up personal environment
 - name: Install required environment tools
   become: yes
   package:
-      name: git,htop,tmux,vim,zsh,mlocate
-      state: present
+    name: git,htop,tmux,vim,zsh,mlocate
+    state: present
 
 - name: Set shell to zsh
   become: yes
-  user: name=nate shell=/usr/bin/zsh
+  user:
+    name: nate
+    shell: /usr/bin/zsh
