@@ -1,14 +1,4 @@
 ---
-- name: Install python2
-  remote_user: alarm
-  become: yes
-  become_method: su
-  gather_facts: False
-  hosts: alarmpi
-  tasks:
-    - name: Install python2
-      raw: pacman -Sy --needed --noconfirm python2
-
 - name: Set up sudo & change hostname
   remote_user: alarm
   become: yes
