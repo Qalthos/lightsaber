@@ -1,14 +1,24 @@
 set nocompatible
-set shiftwidth=4
-set tabstop=4
 set autoindent
 set smartindent
-set expandtab
 set textwidth=160
+
+au BufNewFile,BufRead *.py,*.rst set tabstop=4 shiftwidth=4 expandtab
+au BufNewFile,BufRead *.css,*.html,*.js,*.yaml,*.yml set tabstop=2 shiftwidth=2 expandtab
 
 " Unmap <F1>
 :map <F1> <Esc>
 :imap <F1> <Esc>
+
+"python with virtualenv support
+py << EOF
+import os
+import sys
+if 'VIRTUAL_ENV' in os.environ:
+  project_base_dir = os.environ['VIRTUAL_ENV']
+  activate_this = os.path.join(project_base_dir, 'bin/activate_this.py')
+  execfile(activate_this, dict(__file__=activate_this))
+EOF
 
 filetype indent on
 syntax on
@@ -28,10 +38,8 @@ let g:syntastic_python_pylint_post_args='--disable=W291,W391,W293,
 
 augroup BadWhitespace
   autocmd!
-  autocmd BufRead,BufNewFile *.rst match BadWhitespace /*\t\*/
-  autocmd BufRead,BufNewFile *.rst match BadWhitespace /\s\+$/
-  autocmd BufRead,BufNewFile *.py match BadWhitespace /*\t\*/
-  autocmd BufRead,BufNewFile *.py match BadWhitespace /\s\+$/
+  autocmd BufRead,BufNewFile *.py,*.rst match BadWhitespace /*\t\*/
+  autocmd BufRead,BufNewFile *.py,*.rst match BadWhitespace /\s\+$/
 augroup END
 highlight BadWhitespace ctermbg=red guibg=red
 
