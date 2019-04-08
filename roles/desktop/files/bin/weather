@@ -1,5 +1,7 @@
 #!/usr/bin/env python
 import sys
+
+import dbus
 import requests
 
 API_KEY = "replace me"
@@ -15,8 +17,8 @@ BASE_URL = 'http://api.openweathermap.org/data/2.5/weather?{}&units=metric&appid
 # 13    snow
 # 50    mist
 # source: http://openweathermap.org/weather-conditions
-icon_dir = "/home/nate/.local/share/icons"
-icon_map = {
+ICON_DIR = "/home/nate/.local/share/icons"
+ICON_MAP = {
     '01': 'sunny.xbm',
     '02': 'partly_cloudy.xbm',
     '03': 'cloudy.xbm',
@@ -29,9 +31,30 @@ icon_map = {
 }
 
 
-def weather():
+def get_location():
+    geoclue2 = 'org.freedesktop.GeoClue2'
+    bus = dbus.SystemBus()
+
+    manager = bus.get_object(geoclue2, '/org/freedesktop/GeoClue2/Manager')
+
+    client = bus.get_object(geoclue2, manager.GetClient(dbus_interface='org.freedesktop.GeoClue2.Manager'))
+    # Pretend to be redshift... I know /that/ works, and it doesn't seem to check?
+    client.Set('org.freedesktop.GeoClue2.Client', 'DesktopId', 'redshift', dbus_interface='org.freedesktop.DBus.Properties')
+    client.Start(dbus_interface='org.freedesktop.GeoClue2.Client')
+
+    location = bus.get_object(geoclue2, client.Get('org.freedesktop.GeoClue2.Client', 'Location', dbus_interface='org.freedesktop.DBus.Properties'))
+
+    lat = location.Get('org.freedesktop.GeoClue2.Location', 'Latitude', dbus_interface='org.freedesktop.DBus.Properties')
+    lon = location.Get('org.freedesktop.GeoClue2.Location', 'Longitude', dbus_interface='org.freedesktop.DBus.Properties')
+
+    return lat, lon
+
+
+def weather(coords=None):
     if len(sys.argv) == 2:
         location = 'zip={},us'.format(sys.argv[1])
+    elif coords:
+        location = 'lat={}&lon={}'.format(*coords)
     else:
         location = 'id=5137454'
     condition = requests.get(BASE_URL.format(location, API_KEY)).json()
@@ -40,10 +63,10 @@ def weather():
         print(condition['message'])
     else:
         icon = condition['weather'][0]['icon']
-        icon = icon_map.get(icon[:-1], icon)
+        icon = ICON_MAP.get(icon[:-1], icon)
         temperature = int(condition['main']['temp'])
 
-        text = '^i({}/{}){} C'.format(icon_dir, icon, temperature)
+        text = '^i({}/{}){} C'.format(ICON_DIR, icon, temperature)
 
         humid = condition['main']['humidity']
         wind = condition['wind']['speed']
@@ -56,4 +79,5 @@ def weather():
 
 
 if __name__ == '__main__':
-    weather()
+    coords = get_location()
+    weather(coords)
