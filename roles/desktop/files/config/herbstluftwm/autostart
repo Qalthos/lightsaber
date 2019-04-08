@@ -25,7 +25,7 @@ hc keybind $Mod-Control-Shift-i spawn xcalib -invert -alter
 
 # run lots of things
 hc keybind $Mod-Shift-b spawn nitrogen --random --set-centered
-hc keybind $Mod-F2 spawn rofi -show run
+hc keybind $Mod-F2 spawn rofi -combi-modi drun,run -show combi -modi combi
 hc keybind $Mod-F3 spawn kitty
 hc keybind $Mod-F4 spawn xkill
 hc keybind $Mod-F5 spawn kitty bpython
@@ -165,6 +165,7 @@ compton -b
 dropbox 2> /dev/null >&2 &
 nm-applet &
 pgrep dunst || dunst &
+pgrep agent || /usr/lib????/geoclue-2.0/demos/agent &
 pgrep redshift || redshift &
 pgrep 'polkit-' || /usr/lib/mate-polkit/polkit-mate-authentication-agent-1 &
 pgrep xscreensaver || xscreensaver -nosplash &

@@ -20,10 +20,6 @@ parse_git_branch () {
         stashes=$(git stash list | wc -l)
         stashes=${${stashes#0}:+"|$stashes"}
         echo -e "(±:$gitver:$numfil:$untracked$stashes)"
-    elif hg status -q >/dev/null 2>&1; then
-        hgver=$(hg branch 2>/dev/null)
-        numfil=$(hg status | wc -l)
-        echo -e "(☿:${hgver}:${numfil})"
     else
         return 0
     fi
@@ -33,10 +29,6 @@ branch_color () {
     color=$c_red
     if git rev-parse --git-dir >/dev/null 2>&1; then
         if git status -uno | grep "nothing to commit" 2>&1 > /dev/null; then
-            color=$c_green
-        fi
-    elif hg status -q >/dev/null 2>&1; then
-        if expr $(hg status | wc -l) = 0 2>&1 > /dev/null; then
             color=$c_green
         fi
     else
