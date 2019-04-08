@@ -18,7 +18,7 @@
 
 - name: Install desktop applications & themes
   package:
-    name: herbstluftwm,compton,dzen2,rofi,conky,nitrogen,kitty,thunar,dunst,numix-gtk-theme,papirus-icon-theme
+    name: herbstluftwm,compton,dzen2,rofi,conky,nitrogen,kitty,thunar,dunst,numix-gtk-theme,papirus-icon-theme,redshift,geoclue2,stalonetray
     state: installed
   become: yes
 
@@ -31,6 +31,8 @@
     - stalonetrayrc
     - xmodmap
     - xscreensaver
+  tags:
+    - dotfiles
 
 - name: Create .config directory tree
   file:
@@ -45,6 +47,8 @@
     dest: ~/.config/{{ item.path }}
   loop: "{{ query('filetree', 'config/') }}"
   when: item.state == 'file'
+  tags:
+    - dotfiles
 
 - name: Copy panel xbm icons
   copy:
@@ -56,6 +60,8 @@
   template:
     src: conkyrc.j2
     dest: ~/.config/herbstluftwm/conkyrc
+  tags:
+    - dotfiles
 
 - name: Copy helper scripts
   copy:

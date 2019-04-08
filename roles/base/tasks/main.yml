@@ -10,6 +10,8 @@
     dest: /home/nate/.{{ item }}
     force: yes
     backup: yes
+  tags:
+    - dotfiles
   loop:
       - gitconfig
       - profile
@@ -40,7 +42,7 @@
 - name: Install required environment tools
   become: yes
   package:
-    name: git,htop,tmux,vim,zsh,mlocate
+    name: git,htop,tmux,vim,zsh
     state: present
 
 - name: Set shell to zsh
