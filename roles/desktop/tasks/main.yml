@@ -4,7 +4,7 @@
 
 - name: Install common X
   package:
-    name: xterm,accountsservice
+    name: xterm,accountsservice,xscreensaver
   become: yes
 
 - name: Set up user avatar
