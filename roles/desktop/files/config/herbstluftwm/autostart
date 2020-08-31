@@ -165,7 +165,6 @@ compton -b
 dropbox 2> /dev/null >&2 &
 nm-applet &
 pgrep dunst || dunst &
-pgrep agent || /usr/lib????/geoclue-2.0/demos/agent &
-pgrep redshift || redshift &
+pgrep geoclue || /usr/lib????/geoclue-2.0/demos/agent &
 pgrep 'polkit-' || /usr/lib/mate-polkit/polkit-mate-authentication-agent-1 &
 pgrep xscreensaver || xscreensaver -nosplash &

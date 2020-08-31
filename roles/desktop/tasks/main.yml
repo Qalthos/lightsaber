@@ -22,6 +22,15 @@
     state: installed
   become: yes
 
+- name: Manage systemd user services
+  systemd:
+    user: yes
+    enabled: yes
+    state: started
+    name: "{{ item }}"
+  loop:
+    - redshift.service
+
 - name: Copy base dotfiles
   copy:
     src: "{{ item }}"
