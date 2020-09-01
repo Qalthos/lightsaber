@@ -1,5 +1,5 @@
 gtk-theme-name="Numix"
-gtk-icon-theme-name="elementary"
+gtk-icon-theme-name="Papirus-Dark"
 gtk-font-name="Sans 8"
 gtk-cursor-theme-name="elementary"
 gtk-cursor-theme-size=0
@@ -12,3 +12,4 @@ gtk-enable-input-feedback-sounds=1
 gtk-xft-antialias=1
 gtk-xft-hinting=1
 gtk-xft-hintstyle="hintfull"
+gtk-xft-rgba="rgb"

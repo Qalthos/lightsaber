@@ -5,7 +5,7 @@ import dbus
 import requests
 
 API_KEY = "replace me"
-BASE_URL = 'http://api.openweathermap.org/data/2.5/weather?{}&units=metric&appid={}'
+BASE_URL = 'https://api.openweathermap.org/data/2.5/weather?{}&units=metric&appid={}'
 # Icon Key:
 # 01    clear
 # 02    few clouds

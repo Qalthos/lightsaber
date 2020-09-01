@@ -17,4 +17,5 @@
   loop:
     - {owner: yaroslav, repo: i3desktop}
     - {owner: dirkdavidis, repo: papirus-icon-theme}
+    - {owner: oleastre, repo: kitty-terminal}
   when: ansible_distribution == 'Fedora'

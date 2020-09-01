@@ -1,5 +1,5 @@
 # XScreenSaver Preferences File
-# Written by xscreensaver-demo 5.42 for nate on Sun Feb 17 12:41:07 2019.
+# Written by xscreensaver-demo 5.44 for nate on Fri Aug 21 16:04:05 2020.
 # https://www.jwz.org/xscreensaver/
 
 timeout:	0:10:00
@@ -40,7 +40,7 @@ selected:	-1
 textMode:	program
 textLiteral:	XScreenSaver
 textFile:	
-textProgram:	fortune portal portal2
+textProgram:	fortune portal
 textURL:	https://en.wikipedia.org/w/index.php?title=Special:NewPages&feed=rss
 
 programs:								      \
@@ -95,10 +95,12 @@ programs:								      \
 -				xjack -root				    \n\
 -				xlyap -root				    \n\
 - GL: 				atlantis -root				    \n\
-				bsod -root -no-android -no-nvidia -atari      \
-				  -no-macx -no-os390 -no-vms -no-hvx	      \
-				  -no-blitdamage -no-atm -no-hppalinux	      \
-				  -no-solaris -no-sco -no-hpux -no-tru64    \n\
+				bsod -root -no-amiga -no-nvidia		      \
+				  -no-vmware -atari -no-macx -no-os390	      \
+				  -no-encom -no-hvx -no-blitdamage	      \
+				  -no-atm -no-dvd -no-tivo -no-vms	      \
+				  -no-hppalinux -no-solaris -no-sco	      \
+				  -no-hpux -no-tru64			    \n\
 - GL: 				bubble3d -root				    \n\
 - GL: 				cage -root				    \n\
 -				crystal -root				    \n\
@@ -176,7 +178,7 @@ programs:								      \
 -				thornbird -root				    \n\
 -				twang -root				    \n\
 - GL: 				antspotlight -root			    \n\
-				apple2 -root -text			    \n\
+				apple2 -root -mode text			    \n\
 - GL: 				atunnel -root				    \n\
 -				barcode -root				    \n\
 - GL: 				blinkbox -root				    \n\
@@ -280,9 +282,14 @@ programs:								      \
 - GL: 				peepers -root				    \n\
 - GL: 				razzledazzle -root			    \n\
 -				filmleader -root			    \n\
--				glitchpeg -root			    \n\
+-				glitchpeg -root				    \n\
 -				vfeedback -root				    \n\
 - GL: 				handsy -root				    \n\
+- GL: 				deepstars -root				    \n\
+- GL: 				gravitywell -root			    \n\
+-				scooter -root				    \n\
+- GL: 				etruscanvenus -root			    \n\
+- GL: 				gibson -root				    \n\
 
 
 pointerPollTime:    0:00:05

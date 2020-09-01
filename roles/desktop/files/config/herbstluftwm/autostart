@@ -33,9 +33,6 @@ hc keybind $Mod-F5 spawn kitty bpython
 hc keybind Mod4-l spawn xscreensaver-command -lock
 hc keybind Mod4-o spawn thunar
 
-hc keybind XF86Screensaver spawn xscreensaver-command -lock
-hc keybind XF86Open spawn thunar
-
 hc keybind XF86Display spawn ~/bin/rescreen
 hc keybind XF86MonBrightnessDown spawn xbacklight -dec 5
 hc keybind XF86MonBrightnessUp spawn xbacklight -inc 5
@@ -129,7 +126,7 @@ hc rule class~'(.*[Rr]xvt.*|.*[Tt]erm.*|Konsole|kitty)' focus=on
 hc rule windowtype~'_NET_WM_WINDOW_TYPE_(DIALOG|UTILITY|SPLASH)' pseudotile=on
 hc rule windowtype='_NET_WM_WINDOW_TYPE_DIALOG' focus=on
 hc rule windowtype~'_NET_WM_WINDOW_TYPE_(NOTIFICATION|DOCK)' manage=off
-hc rule class=Firefox tag=1
+hc rule class=firefox tag=1
 hc rule class=Steam tag=3
 hc rule class=Slack tag=slack
 hc rule class=Hexchat tag=irc
@@ -161,10 +158,9 @@ done
 hc setenv _JAVA_AWT_WM_NONREPARENTING 1
 
 # Autostart some programs
-compton -b
+picom -b
 dropbox 2> /dev/null >&2 &
 nm-applet &
 pgrep dunst || dunst &
-pgrep geoclue || /usr/lib????/geoclue-2.0/demos/agent &
 pgrep 'polkit-' || /usr/lib/mate-polkit/polkit-mate-authentication-agent-1 &
 pgrep xscreensaver || xscreensaver -nosplash &

@@ -4,28 +4,47 @@
 
 - name: Install common X
   package:
-    name: xterm,accountsservice,xscreensaver
-  become: yes
+    name:
+      - xterm
+      - accountsservice
+      - xscreensaver
+  become: true
 
 - name: Set up user avatar
   copy:
     src: "{{ item.src }}"
     dest: "{{ item.dest }}"
-  become: yes
+  become: true
   loop:
-    - { src: avatar.png, dest: /var/lib/AccountsService/icons/nate }
-    - { src: user_file, dest: /var/lib/AccountsService/users/nate }
+    - src: avatar.png
+      dest: /var/lib/AccountsService/icons/nate
+    - src: user_file
+      dest: /var/lib/AccountsService/users/nate
 
 - name: Install desktop applications & themes
   package:
-    name: herbstluftwm,compton,dzen2,rofi,conky,nitrogen,kitty,thunar,dunst,numix-gtk-theme,papirus-icon-theme,redshift,geoclue2,stalonetray
+    name:
+      - herbstluftwm
+      - picom
+      - dzen2
+      - rofi
+      - conky
+      - nitrogen
+      - kitty
+      - thunar
+      - dunst
+      - numix-gtk-theme
+      - papirus-icon-theme
+      - redshift
+      - geoclue
+      - stalonetray
     state: installed
-  become: yes
+  become: true
 
 - name: Manage systemd user services
   systemd:
-    user: yes
-    enabled: yes
+    user: true
+    enabled: true
     state: started
     name: "{{ item }}"
   loop:
@@ -79,7 +98,7 @@
   loop: "{{ query('fileglob', 'bin/*') }}"
 
 - name: Make sure xf86-video-odroid-c1 is not present
-  become: yes
+  become: true
   package:
     name: xf86-video-odroid-c1
     state: absent
