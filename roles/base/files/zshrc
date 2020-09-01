@@ -44,36 +44,33 @@ stty -ixon -ixoff
 export EDITOR=vim
 # But use emacs-style keys
 bindkey -e
-source /etc/profile
-source ~/.zsh/aliases
-source ~/.zsh/prompt
-if [ $OSTYPE != 'cygwin' ]; then
-    source ~/.zsh/keyboard
-fi
-export PIP_REQUIRE_VIRTUALENV=1
+#export PIP_REQUIRE_VIRTUALENV=1
 
 # User specific aliases and functions
-export PATH=$PATH:~/bin
+export PATH="$HOME/bin:$PATH"
 source distro_check.sh
 
 # Set up virtualenv & do distro-specific stuff
 WORKON_HOME=~/.local/virtualenvs-$DISTRO
 if [[ $DISTRO == 'Arch' ]]; then
     source virtualenvwrapper.sh
+elif [[ $DISTRO == 'Debian' ]]; then
+    source /etc/bash_completion.d/virtualenvwrapper
 fi
-case $DISTRO in
-    "Ubuntu" | "Debian")
-        source /etc/bash_completion.d/virtualenvwrapper
-        source /usr/share/autojump/autojump.zsh
-        ;;
-    *)
-        eval "$(hub alias -s)"
-        eval "$(fasd --init auto)"
-        alias j="fasd_cd -d"
-        alias v="f -e vim"
-        ;;
-esac
+
+eval "$(hub alias -s)"
+eval "$(fasd --init auto)"
+alias j="fasd_cd -d"
+alias v="f -e vim"
+
 echo $DISTRO
+
+source /etc/profile
+source ~/.zsh/aliases
+source ~/.zsh/prompt
+if [ $OSTYPE != 'cygwin' ]; then
+    source ~/.zsh/keyboard
+fi
 
 if hash fortune 2>/dev/null; then
     fortune -ac

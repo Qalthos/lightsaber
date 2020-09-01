@@ -1,13 +1,9 @@
 #######################################
-#########   Apartment hosts   #########
+###########   Local hosts   ###########
 #######################################
 
 Host locutus
   Hostname linkybook.com
-  User nate
-Host tron
-  Hostname 131countess.churchofgoard.com
-  Port 12131
   User nate
 
 Host 192.168.1.*

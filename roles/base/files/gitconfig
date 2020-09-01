@@ -1,6 +1,6 @@
 [user]
 	name = Nathaniel Case
-	email = Qalthos@gmail.com
+	email = this.is@nathanielca.se
 [color]
 	ui = true
 [push]
@@ -11,3 +11,7 @@
 	autocrlf = input
 [help]
 	autocorrect = 1
+[pull]
+	rebase = true
+[merge]
+	tool = vimdiff

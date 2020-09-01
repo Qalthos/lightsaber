@@ -11,15 +11,15 @@ au BufNewFile,BufRead *.css,*.html,*.js,*.yaml,*.yml set tabstop=2 shiftwidth=2 
 :imap <F1> <Esc>
 
 "python with virtualenv support
-py3 << EOF
-import os
-import sys
-if 'VIRTUAL_ENV' in os.environ:
-  project_base_dir = os.environ['VIRTUAL_ENV']
-  activate_this = os.path.join(project_base_dir, 'bin/activate_this.py')
-  with open(activate_this) as activate:
-    exec(activate.read(), {"__file__": activate_this})
-EOF
+"py3 << EOF
+"import os
+"import sys
+"if 'VIRTUAL_ENV' in os.environ:
+"  project_base_dir = os.environ['VIRTUAL_ENV']
+"  activate_this = os.path.join(project_base_dir, 'bin/activate_this.py')
+"  with open(activate_this) as activate:
+"    exec(activate.read(), {"__file__": activate_this})
+"EOF
 
 filetype indent on
 syntax on
@@ -37,16 +37,23 @@ if empty(glob('~/.vim/autoload/plug.vim'))
 endif
 
 call plug#begin('~/.vim/plugged')
-Plug 'tmhedberg/simpylfold'
+"Plug 'jmcantrell/vim-virtualenv'
 Plug 'konfekt/fastfold'
+Plug 'tmhedberg/simpylfold'
+Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
 call plug#end()
 
-" ALE
+" vim-airline theming
+let g:airline_theme='badwolf'
+
+" ALE options
 let b:ale_linters = {
-\  'python': ['pycodestyle', 'pylint', 'mypy', 'pytype'],
+\  'python': ['flake8', 'mypy', 'pycodestyle'],
 \}
-let g:ale_python_pycodestyle_options = '--ignore=E402
-\ --max-line-length=160'
+let g:ale_python_flake8_options = '--ignore=E402,W503,missing-docstring --max-line-length=120'
+let g:ale_python_mypy_options = '--strict --ignore-missing-imports'
+let g:ale_python_pycodestyle_options = '--ignore=E402,W503 --max-line-length=120'
 nmap <silent> <C-k> <Plug>(ale_previous_wrap)
 nmap <silent> <C-j> <Plug>(ale_next_wrap)
 
