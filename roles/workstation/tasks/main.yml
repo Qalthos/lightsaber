@@ -3,30 +3,34 @@
   package:
     name: alsa-utils,rsync,pluma
     state: installed
-  become: yes
+  become: true
 
 - name: Install ArchLinux-flavored development tools
   package:
-    name: base-devel,hub,python-pylint
+    name:
+      - base-devel
+      - hub
     state: installed
-  become: yes
+  become: true
   when: ansible_os_family == 'Archlinux'
-
-- name: Install Red Hat-flavored development tools
-  package:
-    name: pylint
-    state: installed
-  become: yes
-  when: ansible_os_family == 'RedHat'
 
 - name: Install Python development tools
   package:
     name: python-virtualenvwrapper
     state: installed
-  become: yes
+  become: true
 
 - name: Install general programs
-  become: yes
   package:
-    name: firefox,thunderbird,audacious,hexchat,pidgin,eom,mpv,atril,engrampa
+    name:
+      - firefox
+      - thunderbird
+      - audacious
+      - hexchat
+      - pidgin
+      - eom
+      - mpv
+      - atril
+      - engrampa
     state: installed
+  become: true
