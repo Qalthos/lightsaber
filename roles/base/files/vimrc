@@ -38,6 +38,7 @@ endif
 
 call plug#begin('~/.vim/plugged')
 "Plug 'jmcantrell/vim-virtualenv'
+Plug 'dense-analysis/ale'
 Plug 'konfekt/fastfold'
 Plug 'tmhedberg/simpylfold'
 Plug 'vim-airline/vim-airline'
@@ -51,9 +52,9 @@ let g:airline_theme='badwolf'
 let b:ale_linters = {
 \  'python': ['flake8', 'mypy', 'pycodestyle'],
 \}
-let g:ale_python_flake8_options = '--ignore=E402,W503,missing-docstring --max-line-length=120'
+let g:ale_python_flake8_options = '--ignore=D4,E402,W503 --max-line-length=120'
 let g:ale_python_mypy_options = '--strict --ignore-missing-imports'
-let g:ale_python_pycodestyle_options = '--ignore=E402,W503 --max-line-length=120'
+let g:ale_python_pycodestyle_options = '--ignore=D4,E402,W503 --max-line-length=120'
 nmap <silent> <C-k> <Plug>(ale_previous_wrap)
 nmap <silent> <C-j> <Plug>(ale_next_wrap)
 
