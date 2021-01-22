@@ -26,8 +26,8 @@ syntax on
 set foldmethod=syntax
 
 " colorscheme
-"colorscheme Tomorrow-Night-Bright
-colorscheme badwolf
+colorscheme Tomorrow-Night-Bright
+"colorscheme badwolf
 
 " vim-plug
 if empty(glob('~/.vim/autoload/plug.vim'))
@@ -50,11 +50,10 @@ let g:airline_theme='badwolf'
 
 " ALE options
 let b:ale_linters = {
-\  'python': ['flake8', 'mypy', 'pycodestyle'],
+\  'python': ['flake8', 'mypy'],
 \}
-let g:ale_python_flake8_options = '--ignore=D4,E402,W503 --max-line-length=120'
-let g:ale_python_mypy_options = '--strict --ignore-missing-imports'
-let g:ale_python_pycodestyle_options = '--ignore=D4,E402,W503 --max-line-length=120'
+let g:ale_python_flake8_options = '--ignore=D1,E402,W503 --max-line-length=120'
+let g:ale_python_mypy_options = '--ignore-missing-imports'
 nmap <silent> <C-k> <Plug>(ale_previous_wrap)
 nmap <silent> <C-j> <Plug>(ale_next_wrap)
 
