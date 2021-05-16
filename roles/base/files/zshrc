@@ -3,6 +3,7 @@
 # functions, options, key bindings, etc.
 
 autoload -U compinit
+fpath+=~/.zsh/zfunc
 compinit
 
 #allow tab completion in the middle of a word
@@ -41,29 +42,18 @@ stty -ixon -ixoff
 # autoload -U colors
 #colors
 
+export PIP_REQUIRE_VIRTUALENV=true
 export EDITOR=vim
 # But use emacs-style keys
 bindkey -e
-#export PIP_REQUIRE_VIRTUALENV=1
 
-# User specific aliases and functions
-export PATH="$HOME/bin:$PATH"
 source distro_check.sh
-
-# Set up virtualenv & do distro-specific stuff
-WORKON_HOME=~/.local/virtualenvs-$DISTRO
-if [[ $DISTRO == 'Arch' ]]; then
-    source virtualenvwrapper.sh
-elif [[ $DISTRO == 'Debian' ]]; then
-    source /etc/bash_completion.d/virtualenvwrapper
-fi
-
-eval "$(hub alias -s)"
-eval "$(fasd --init auto)"
-alias j="fasd_cd -d"
-alias v="f -e vim"
-
 echo $DISTRO
+
+eval "$(fasd --init auto)"
+eval "$(pyenv init -)"
+eval "$(hub alias -s)"
+
 
 source /etc/profile
 source ~/.zsh/aliases

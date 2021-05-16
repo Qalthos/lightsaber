@@ -3,10 +3,11 @@ alias ls="ls --color"
 alias cp="cp -v"
 alias chx="chmod +x"
 alias q="touch /tmp/q && less +F -R /tmp/q"
+alias vim="nvim"
+alias v="f -e vim"
 alias vdiff="vimdiff -c 'set diffopt+=iwhite'"
 
 #==Ansible=====
-alias ansible-test="time ~/workspace/ansible/ansible/test/runner/ansible-test"
-
-#==My Boxen====
-alias tower="rdesktop fourecks -f -b -P -x m -z -a 16 -g 100%"
+alias ansible-net="time ansible-test network-integration --inventory ~/.ansible/test-inventory"
+alias ansible-unit="ansible-test units --venv"
+alias ansible-sanity="ansible-test sanity --venv"
