@@ -1,8 +1,8 @@
 # XScreenSaver Preferences File
-# Written by xscreensaver-demo 5.44 for nate on Fri Aug 21 16:04:05 2020.
+# Written by xscreensaver-demo 6.00 for nate on Mon May 17 12:58:17 2021.
 # https://www.jwz.org/xscreensaver/
 
-timeout:	0:10:00
+timeout:	1:00:00
 cycle:		0:10:00
 lock:		True
 lockTimeout:	0:01:00
@@ -10,18 +10,13 @@ passwdTimeout:	0:00:30
 visualID:	default
 installColormap:    True
 verbose:	False
-timestamp:	True
 splash:		True
 splashDuration:	0:00:05
 demoCommand:	xscreensaver-demo
-prefsCommand:	xscreensaver-demo -prefs
 nice:		10
-memoryLimit:	0
 fade:		False
 unfade:		False
 fadeSeconds:	0:00:03
-fadeTicks:	20
-captureStderr:	True
 ignoreUninstalledPrograms:False
 font:		*-medium-r-*-140-*-m-*
 dpmsEnabled:	False
@@ -42,6 +37,7 @@ textLiteral:	XScreenSaver
 textFile:	
 textProgram:	fortune portal
 textURL:	https://en.wikipedia.org/w/index.php?title=Special:NewPages&feed=rss
+dialogTheme:	default
 
 programs:								      \
 -				maze -root				    \n\
@@ -95,12 +91,11 @@ programs:								      \
 -				xjack -root				    \n\
 -				xlyap -root				    \n\
 - GL: 				atlantis -root				    \n\
-				bsod -root -no-amiga -no-nvidia		      \
-				  -no-vmware -atari -no-macx -no-os390	      \
-				  -no-encom -no-hvx -no-blitdamage	      \
-				  -no-atm -no-dvd -no-tivo -no-vms	      \
-				  -no-hppalinux -no-solaris -no-sco	      \
-				  -no-hpux -no-tru64			    \n\
+				bsod -root -no-amiga -no-nvidia -no-macx      \
+				  -no-vmware -atari -no-os390 -no-hvx	      \
+				  -no-encom -no-blitdamage -no-atm	      \
+				  -no-dvd -no-tivo -no-vms -no-hppalinux      \
+				  -no-solaris -no-sco -no-hpux -no-tru64    \n\
 - GL: 				bubble3d -root				    \n\
 - GL: 				cage -root				    \n\
 -				crystal -root				    \n\
@@ -290,15 +285,12 @@ programs:								      \
 -				scooter -root				    \n\
 - GL: 				etruscanvenus -root			    \n\
 - GL: 				gibson -root				    \n\
+- GL: 				beats -root				    \n\
+- GL: 				covid19 -root				    \n\
+- GL: 				headroom -root				    \n\
+- GL: 				sphereeversion -root			    \n\
 
 
-pointerPollTime:    0:00:05
 pointerHysteresis:  10
-windowCreationTimeout:0:00:30
-initialDelay:	0:00:00
-GetViewPortIsFullOfLies:False
-procInterrupts:	True
-xinputExtensionDev: False
-overlayStderr:	True
 authWarningSlack:   20
 
