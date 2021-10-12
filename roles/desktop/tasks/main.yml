@@ -68,6 +68,8 @@
     state: directory
   loop: "{{ query('filetree', 'config/') }}"
   when: item.state == 'directory'
+  tags:
+    - dotfiles
 
 - name: Copy .config directory
   copy:

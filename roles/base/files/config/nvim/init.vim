@@ -1,8 +1,10 @@
-set nocompatible
+set runtimepath^=~/.vim+=~/.vim/after
+let &packpath = &runtimepath
 set autoindent
 set smartindent
 set textwidth=160
 
+" Set sensible tabbing defaults
 au BufNewFile,BufRead *.py,*.rst set tabstop=4 shiftwidth=4 expandtab
 au BufNewFile,BufRead *.css,*.html,*.js,*.yaml,*.yml set tabstop=2 shiftwidth=2 expandtab
 
@@ -10,20 +12,20 @@ au BufNewFile,BufRead *.css,*.html,*.js,*.yaml,*.yml set tabstop=2 shiftwidth=2 
 :map <F1> <Esc>
 :imap <F1> <Esc>
 
-filetype indent on
+filetype plugin indent on
 syntax on
 set foldmethod=syntax
 
 " vim-plug
-if empty(glob('~/.vim/autoload/plug.vim'))
+if empty(glob('~/.config/nvim/autoload/plug.vim'))
   silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
     \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
   autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
 endif
 
-call plug#begin('~/.vim/plugged')
-Plug 'dense-analysis/ale'
+call plug#begin()
 Plug 'konfekt/fastfold'
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'sheerun/vim-polyglot'
 Plug 'tmhedberg/simpylfold'
 Plug 'vim-airline/vim-airline'
@@ -34,19 +36,3 @@ call plug#end()
 colorscheme Tomorrow-Night-Bright
 "colorscheme badwolf
 let g:airline_theme='badwolf'
-
-" ALE options
-let b:ale_linters = {
-\  'python': ['flake8', 'mypy'],
-\}
-let g:ale_python_flake8_options = '--ignore=D1,E402,W503 --max-line-length=120'
-let g:ale_python_mypy_options = '--ignore-missing-imports'
-nmap <silent> <C-k> <Plug>(ale_previous_wrap)
-nmap <silent> <C-j> <Plug>(ale_next_wrap)
-
-augroup BadWhitespace
-  autocmd!
-  autocmd BufRead,BufNewFile *.py,*.rst match BadWhitespace /*\t\*/
-  autocmd BufRead,BufNewFile *.py,*.rst match BadWhitespace /\s\+$/
-augroup END
-highlight BadWhitespace ctermbg=red guibg=red

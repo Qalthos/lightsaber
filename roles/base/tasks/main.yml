@@ -23,6 +23,24 @@
       - zshrc
       - zprofile
 
+- name: Create .config directory tree
+  file:
+    path: ~/.config/{{ item.path }}
+    state: directory
+  loop: "{{ query('filetree', 'config/') }}"
+  when: item.state == 'directory'
+  tags:
+    - dotfiles
+
+- name: Copy .config directory
+  copy:
+    src: config/{{ item.path }}
+    dest: ~/.config/{{ item.path }}
+  loop: "{{ query('filetree', 'config/') }}"
+  when: item.state == 'file'
+  tags:
+    - dotfiles
+
 - name: Set up scripts
   copy:
     src: "{{ item }}"
