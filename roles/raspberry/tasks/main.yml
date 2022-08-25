@@ -1,34 +1,53 @@
 ---
 - name: Remove 'alarm' user
-  user: name=alarm state=absent
+  ansible.builtin.user:
+    name: alarm
+    state: absent
+
 - name: Install useful packages
-  package:
-      name=nfs-utils,dialog,wpa_supplicant
-      state=installed update_cache=yes
+  ansible.builtin.package:
+    name:
+      - nfs-utils
+      - dialog
+      - wpa_supplicant
+    state: installed
+    update_cache: true
+
 - name: Remove useless stuff
-  package: name=heirloom-mailx state=absent recurse=yes
+  ansible.builtin.package:
+    name: heirloom-mailx
+    state: absent
+    recurse: true
 
 - name: Set timezone to New York
   timezone:
-      name: America/New_York
+    name: America/New_York
 
 - name: Disable WiFi dongle powersave
-  lineinfile:
-      dest=/etc/modprobe.d/8192cu.conf create=yes
-      line='options 8192cu rtw_power_mgnt=0 rtw_ips_mode=1'
-      regexp='^options 8192cu'
+  ansible.builtin.lineinfile:
+    dest: /etc/modprobe.d/8192cu.conf
+    mode: u=rw,g=r,o=r
+    create: true
+    line: 'options 8192cu rtw_power_mgnt=0 rtw_ips_mode=1'
+    regexp: '^options 8192cu'
+
 - name: Switch to US NTP pool
-  lineinfile:
-      dest=/etc/ntp.conf backrefs=yes
-      line='server \1.us.pool.ntp.org\2'
-      regexp='server (\d)(?:.us)?.pool.ntp.org(|.)?'
+  ansible.builtin.lineinfile:
+    dest: /etc/ntp.conf
+    mode: u=rw,g=r,o=r
+    backrefs: true
+    line: 'server \1.us.pool.ntp.org\2'
+    regexp: 'server (\d)(?:.us)?.pool.ntp.org(|.)?'
 
 - name: Alter SSH config
-  lineinfile:
-      dest: /etc/ssh/sshd_config
-      line: "{{ item.command }} {{item.value }}"
-      regexp: "^#?{{ item.command }} .*"
+  ansible.builtin.lineinfile:
+    dest: /etc/ssh/sshd_config
+    mode: u=rw,g=r,o=r
+    line: "{{ item.command }} {{ item.value }}"
+    regexp: "^#?{{ item.command }} .*"
   notify: Restart sshd
   with_items:
-      - { command: PermitRootLogin, value: 'no' }
-      - { command: PasswordAuthentication, value: 'yes' }
+    - command: PermitRootLogin
+      value: 'no'
+    - command: PasswordAuthentication
+      value: 'yes'

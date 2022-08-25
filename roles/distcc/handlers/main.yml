@@ -1,6 +1,0 @@
----
-- name: Enable distccd
-  service:
-      name: distccd
-      state: enabled
-      enabled: yes

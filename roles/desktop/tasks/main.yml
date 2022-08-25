@@ -1,9 +1,41 @@
 ---
-- name: Distro-specific tasks
-  include: "{{ ansible_os_family }}.yaml"
+- name: Install X on Arch
+  ansible.builtin.package:
+    name:
+      - xorg-xinit
+      - xorg-xmodmap
+      - lightdm-gtk-greeter
+      - ttf-fira-code
+    state: installed
+  become: true
+  when: ansible_os_family == "ArchLinux"
+
+- name: Install X on Red Hat
+  ansible.builtin.package:
+    name:
+      - lightdm-gtk
+      - mozilla-fira-mono-fonts
+    state: installed
+  become: true
+  when: ansible_os_family == "RedHat"
+
+- name: Install copr repos
+  ansible.builtin.yum_repository:
+    name: "{{ item.owner }}-{{ item.repo }}"
+    description: Copr repo for {{ item.repo }} owned by {{ item.owner }}
+    baseurl: https://copr-be.cloud.fedoraproject.org/results/{{ item.owner }}/{{ item.repo }}/fedora-$releasever-$basearch/
+    gpgkey: https://copr-be.cloud.fedoraproject.org/results/{{ item.owner }}/{{ item.repo }}/pubkey.gpg
+    gpgcheck: true
+    file: _copr_{{ item.owner }}-{{ item.repo }}
+  become: true
+  loop:
+    - {owner: yaroslav, repo: i3desktop}
+    - {owner: dirkdavidis, repo: papirus-icon-theme}
+    - {owner: oleastre, repo: kitty-terminal}
+  when: ansible_distribution == 'Fedora'
 
 - name: Install common X
-  package:
+  ansible.builtin.package:
     name:
       - xterm
       - accountsservice
@@ -11,18 +43,19 @@
   become: true
 
 - name: Set up user avatar
-  copy:
+  ansible.builtin.copy:
     src: "{{ item.src }}"
     dest: "{{ item.dest }}"
+    mode: u=rw,g=r,o=r
   become: true
   loop:
     - src: avatar.png
-      dest: /var/lib/AccountsService/icons/nate
+      dest: "/var/lib/AccountsService/icons/{{ ansible_user }}"
     - src: user_file
-      dest: /var/lib/AccountsService/users/nate
+      dest: "/var/lib/AccountsService/users/{{ ansible_user }}"
 
 - name: Install desktop applications & themes
-  package:
+  ansible.builtin.package:
     name:
       - herbstluftwm
       - picom
@@ -42,7 +75,7 @@
   become: true
 
 - name: Manage systemd user services
-  systemd:
+  ansible.builtin.systemd:
     user: true
     enabled: true
     state: started
@@ -51,9 +84,10 @@
     - redshift.service
 
 - name: Copy base dotfiles
-  copy:
+  ansible.builtin.copy:
     src: "{{ item }}"
     dest: "~/.{{ item }}"
+    mode: u=rw,g=r,o=r
   loop:
     - gtkrc-2.0
     - stalonetrayrc
@@ -63,8 +97,9 @@
     - dotfiles
 
 - name: Create .config directory tree
-  file:
+  ansible.builtin.file:
     path: ~/.config/{{ item.path }}
+    mode: u=rwx,g=rx,o=rx
     state: directory
   loop: "{{ query('filetree', 'config/') }}"
   when: item.state == 'directory'
@@ -72,36 +107,40 @@
     - dotfiles
 
 - name: Copy .config directory
-  copy:
+  ansible.builtin.copy:
     src: config/{{ item.path }}
     dest: ~/.config/{{ item.path }}
+    mode: u=rw,g=r,o=r
   loop: "{{ query('filetree', 'config/') }}"
   when: item.state == 'file'
   tags:
     - dotfiles
 
 - name: Copy panel xbm icons
-  copy:
+  ansible.builtin.copy:
     src: "{{ item }}"
     dest: ~/.local/share/icons/
+    mode: u=rw,g=r,o=r
   loop: "{{ query('fileglob', 'local/share/icons/*') }}"
 
 - name: Dzen conkyrc template
-  template:
+  ansible.builtin.template:
     src: conkyrc.j2
     dest: ~/.config/herbstluftwm/conkyrc
+    mode: u=rw,g=r,o=r
   tags:
     - dotfiles
 
 - name: Copy helper scripts
-  copy:
+  ansible.builtin.copy:
     src: "{{ item }}"
     dest: ~/bin/
+    mode: u=rw,g=r,o=r
   loop: "{{ query('fileglob', 'bin/*') }}"
 
 - name: Make sure xf86-video-odroid-c1 is not present
   become: true
-  package:
+  ansible.builtin.package:
     name: xf86-video-odroid-c1
     state: absent
   when: ansible_machine[:3] == 'arm'

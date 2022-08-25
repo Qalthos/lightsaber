@@ -1,23 +1,36 @@
 ---
-- name: Install low-battery udev rule
-  copy:
-      src: 99-lowbatt.rule
-      dest: /etc/udev/rules.d
-
-- name: Install xbacklight
-  package:
-    name: xbacklight
-  become: true
-
 - name: Install bluetooth & applet
-  package:
+  ansible.builtin.package:
     name: blueberry
   become: true
 
 - name: Set up network bond
-  shell: "{{ item }}"
-  loop:
-    - nmcli con add type bond con-name dock-bond ifname bond0 mode active-backup primary enp11s0u1 +bond.options "fail_over_mac=none,miimon=100,primary_reselect=always,updelay=200"
-    - nmcli connection add type ethernet ifname enp11s0u1 master bond0 con-name "Dock Ethernet"
-    - nmcli connection add type wifi ifname wlp61s0 master bond0 ssid "Casa del Caso" con-name "Home"
-    - nmcli connection modify Home wifi-sec.key-mgmt wpa-psk
+  community.general.nmcli:
+    type: bond
+    conn_name: "dock-bond"
+    ifname: bond0
+    mode: "active-backup"
+    primary: "{{ ethernet }}"
+    miimon: 100
+    updelay: 200
+    downdelay: 0
+
+- name: Assign Ethernet to bond
+  community.general.nmcli:
+    type: ethernet
+    conn_name: "Dock Ethernet"
+    ifname: "{{ ethernet }}"
+    master: bond0
+
+- name: Assign WiFi to bond
+  community.general.nmcli:
+    type: wifi
+    conn_name: "{{ wifi_name }}"
+    ifname: "{{ wifi }}"
+    master: bond0
+    ssid: "{{ wifi_name }}"
+    wifi:
+      hidden: true
+    wifi_sec:
+      key-mgmt: wpa-psk
+      psk: "{{ wifi_psk }}"

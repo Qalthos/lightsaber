@@ -1,33 +1,22 @@
 ---
-- name: Install general development tools
-  package:
-    name: alsa-utils,rsync,pluma
-    state: installed
-  become: true
-
 - name: Install ArchLinux-flavored development tools
-  package:
+  ansible.builtin.package:
     name:
       - base-devel
       - hub
+      - github-cli
     state: installed
   become: true
   when: ansible_os_family == 'Archlinux'
 
-- name: Install Python development tools
-  package:
-    name: python-virtualenvwrapper
-    state: installed
-  become: true
-
 - name: Install general programs
-  package:
+  ansible.builtin.package:
     name:
+      - rsync
+      - pluma
       - firefox
       - thunderbird
       - audacious
-      - hexchat
-      - pidgin
       - eom
       - mpv
       - atril

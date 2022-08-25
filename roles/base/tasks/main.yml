@@ -1,31 +1,30 @@
 ---
 - name: Refresh public keys
-  authorized_key:
-    user: nate
+  ansible.posix.authorized_key:
+    user: "{{ ansible_user }}"
     key: https://github.com/qalthos.keys
 
 - name: Transfer dotfiles
-  copy:
+  ansible.builtin.copy:
     src: "{{ item }}"
     dest: /home/nate/.{{ item }}
-    force: yes
-    backup: yes
+    mode: u=rw,g=r,o=r
+    force: true
+    backup: true
   tags:
     - dotfiles
   loop:
-      - gitconfig
-      - profile
-      - ssh/
-      - tmux.conf
-      - vim/
-      - vimrc
-      - zsh/
-      - zshrc
-      - zprofile
+    - gitconfig
+    - profile
+    - ssh/
+    - zsh/
+    - zshrc
+    - zprofile
 
 - name: Create .config directory tree
-  file:
+  ansible.builtin.file:
     path: ~/.config/{{ item.path }}
+    mode: u=rwx,g=rx,o=rx
     state: directory
   loop: "{{ query('filetree', 'config/') }}"
   when: item.state == 'directory'
@@ -33,7 +32,8 @@
     - dotfiles
 
 - name: Copy .config directory
-  copy:
+  ansible.builtin.copy:
+    mode: u=rw,g=r,o=r
     src: config/{{ item.path }}
     dest: ~/.config/{{ item.path }}
   loop: "{{ query('filetree', 'config/') }}"
@@ -42,29 +42,29 @@
     - dotfiles
 
 - name: Set up scripts
-  copy:
+  ansible.builtin.copy:
     src: "{{ item }}"
-    dest: /home/nate/bin/
-    force: yes
-    backup: yes
+    dest: "/home/{{ ansible_user }}/bin/"
+    mode: u=rw,g=r,o=r
+    force: true
+    backup: true
   loop: "{{ query('fileglob', 'bin/*') }}"
 
 - name: Enable en_US.UTF-8 locale
-  become: yes
-  locale_gen:
+  become: true
+  community.general.locale_gen:
     name: en_US.UTF-8
     state: present
   when: ansible_os_family != 'RedHat'
 
-# Set up personal environment
 - name: Install required environment tools
-  become: yes
-  package:
+  become: true
+  ansible.builtin.package:
     name: git,htop,tmux,vim,zsh
     state: present
 
 - name: Set shell to zsh
-  become: yes
-  user:
-    name: nate
+  become: true
+  ansible.builtin.user:
+    name: "{{ ansible_user }}"
     shell: /usr/bin/zsh

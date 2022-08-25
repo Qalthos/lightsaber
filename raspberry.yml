@@ -1,17 +1,6 @@
 ---
-- hosts: raspberry
-  remote_user: nate
-  become: yes
+- name: Provision Raspberry pi hosts
+  hosts: raspberry
+  become: true
   roles:
     - raspberry
-
-- hosts: media
-  remote_user: nate
-  become: yes
-  roles:
-    - media
-
-- hosts: pitop
-  remote_user: nate
-  roles:
-    - desktop

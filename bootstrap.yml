@@ -3,48 +3,52 @@
   hosts: alarmpi
   remote_user: alarm
 
-  become: yes
+  become: true
   become_method: su
 
+  vars:
+    new_user: kate
   vars_prompt:
     - name: hostname
       prompt: "New hostname for device"
     - name: password
       prompt: "New user password"
-      private: yes
+      private: true
       encrypt: sha512_crypt
-      confirm: yes
+      confirm: true
 
   tasks:
     - name: Install sudo
-      pacman:
+      community.general.pacman:
         name: sudo
         state: installed
 
     - name: Allow group 'wheel' to use sudo
-      lineinfile:
-        dest: /etc/sudoers
-        line: '%wheel ALL=(ALL) ALL'
-        regexp: '(# )?%wheel ALL=\(ALL\) ALL'
-        validate: 'visudo -cf %s'
+      community.general.sudoers:
+        name: allow-wheel
+        group: wheel
+        commands: ALL
+        validation: required
 
-    - name: Add user 'nate' with group 'wheel'
-      user:
-        name: nate
+    - name: Add user '{{ new_user }}' with group 'wheel'
+      ansible.builtin.user:
+        name: "{{ new_user }}"
         groups: wheel
-        append: yes
+        append: true
         password: "{{ password }}"
 
-    - name: Copy public keys for user 'nate'
-      authorized_key:
-        user: nate
+    - name: Copy public keys for user '{{ new_user }}'
+      ansible.builtin.authorized_key:
+        user: "{{ new_user }}"
         key: https://github.com/qalthos.keys
 
     - name: Update hostname
-      hostname:
+      ansible.builtin.hostname:
         name: "{{ hostname }}"
 
     - name: Disable root password
-      user:
+      ansible.builtin.user:
         name: root
         password: !
+
+# vim: filetype=yaml.ansible
