@@ -7,7 +7,7 @@
 - name: Transfer dotfiles
   ansible.builtin.copy:
     src: "{{ item }}"
-    dest: /home/nate/.{{ item }}
+    dest: /home/kate/.{{ item }}
     mode: u=rw,g=r,o=r
     force: true
     backup: true
@@ -45,9 +45,7 @@
   ansible.builtin.copy:
     src: "{{ item }}"
     dest: "/home/{{ ansible_user }}/bin/"
-    mode: u=rw,g=r,o=r
-    force: true
-    backup: true
+    mode: u=rwx,g=r,o=r
   loop: "{{ query('fileglob', 'bin/*') }}"
 
 - name: Enable en_US.UTF-8 locale

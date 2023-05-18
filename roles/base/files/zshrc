@@ -50,10 +50,14 @@ bindkey -e
 source distro_check.sh
 echo $DISTRO
 
+# pyenv
+export PYENV_ROOT="$HOME/.pyenv"
+export PATH="$PYENV_ROOT/bin:$PATH"
+eval "$(pyenv init --path)"
+
 eval "$(fasd --init auto)"
 eval "$(pyenv init -)"
 eval "$(hub alias -s)"
-
 
 source /etc/profile
 source ~/.zsh/aliases

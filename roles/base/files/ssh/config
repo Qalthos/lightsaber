@@ -4,13 +4,13 @@
 
 Host locutus
   Hostname linkybook.com
-  User nate
 
 Host mercury enviro*
   User pi
 
-Host ace
-  User ncase
+Host ace ace.linkybook
+  Hostname ace.linkybook
+  User kcase
 
 Host 192.168.1.*
   StrictHostKeyChecking no

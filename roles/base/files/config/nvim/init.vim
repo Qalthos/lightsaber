@@ -32,6 +32,10 @@ Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 call plug#end()
 
+let g:coc_filetype_map = {
+  \ 'yaml.ansible': 'ansible',
+  \ }
+
 " colorschemes
 colorscheme Tomorrow-Night-Bright
 "colorscheme badwolf
