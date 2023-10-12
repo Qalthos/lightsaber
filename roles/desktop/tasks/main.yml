@@ -1,11 +1,19 @@
 ---
-- name: Install X on Arch
+- name: Install desktop on Arch
   ansible.builtin.package:
     name:
-      - xorg-xinit
-      - xorg-xmodmap
-      - lightdm-gtk-greeter
+      - kanshi
+      - kitty
+      - mako
+      - nemo
+      - numix-gtk-theme
+      - otf-font-awesome
+      - papirus-icon-theme
+      - sddm
+      - sway
       - ttf-fira-code
+      - waybar
+      - wofi
     state: installed
   become: true
   when: ansible_os_family == "ArchLinux"
@@ -34,14 +42,6 @@
     - {owner: oleastre, repo: kitty-terminal}
   when: ansible_distribution == 'Fedora'
 
-- name: Install common X
-  ansible.builtin.package:
-    name:
-      - xterm
-      - accountsservice
-      - xscreensaver
-  become: true
-
 - name: Set up user avatar
   ansible.builtin.copy:
     src: "{{ item.src }}"
@@ -53,48 +53,6 @@
       dest: "/var/lib/AccountsService/icons/{{ ansible_user }}"
     - src: user_file
       dest: "/var/lib/AccountsService/users/{{ ansible_user }}"
-
-- name: Install desktop applications & themes
-  ansible.builtin.package:
-    name:
-      - herbstluftwm
-      - picom
-      - dzen2
-      - rofi
-      - conky
-      - nitrogen
-      - kitty
-      - thunar
-      - dunst
-      - numix-gtk-theme
-      - papirus-icon-theme
-      - redshift
-      - geoclue
-      - stalonetray
-    state: installed
-  become: true
-
-- name: Manage systemd user services
-  ansible.builtin.systemd:
-    user: true
-    enabled: true
-    state: started
-    name: "{{ item }}"
-  loop:
-    - redshift.service
-
-- name: Copy base dotfiles
-  ansible.builtin.copy:
-    src: "{{ item }}"
-    dest: "~/.{{ item }}"
-    mode: u=rw,g=r,o=r
-  loop:
-    - gtkrc-2.0
-    - stalonetrayrc
-    - xmodmap
-    - xscreensaver
-  tags:
-    - dotfiles
 
 - name: Create .config directory tree
   ansible.builtin.file:
@@ -113,21 +71,6 @@
     mode: u=rw,g=r,o=r
   loop: "{{ query('filetree', 'config/') }}"
   when: item.state == 'file'
-  tags:
-    - dotfiles
-
-- name: Copy panel xbm icons
-  ansible.builtin.copy:
-    src: "{{ item }}"
-    dest: ~/.local/share/icons/
-    mode: u=rw,g=r,o=r
-  loop: "{{ query('fileglob', 'local/share/icons/*') }}"
-
-- name: Dzen conkyrc template
-  ansible.builtin.template:
-    src: conkyrc.j2
-    dest: ~/.config/herbstluftwm/conkyrc
-    mode: u=rw,g=r,o=r
   tags:
     - dotfiles
 

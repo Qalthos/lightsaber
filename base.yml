@@ -3,5 +3,3 @@
   hosts: all
   roles:
     - base
-
-# vim: filetype=yaml.ansible

@@ -1,83 +1,101 @@
-#!/usr/bin/env python
-import sys
+#!/home/kate/.pyenv/versions/toolbox/bin/python
+from datetime import datetime
+import json
 
-import dbus
 import requests
 
-API_KEY = "replace me"
-BASE_URL = 'https://api.openweathermap.org/data/2.5/weather?{}&units=metric&appid={}'
-# Icon Key:
-# 01    clear
-# 02    few clouds
-# 03    clouds
-# 04    broken clouds
-# 09    rain shower
-# 10    light rain
-# 11    thunderstorm
-# 13    snow
-# 50    mist
-# source: http://openweathermap.org/weather-conditions
-ICON_DIR = "/home/nate/.local/share/icons"
+
 ICON_MAP = {
-    '01': 'sunny.xbm',
-    '02': 'partly_cloudy.xbm',
-    '03': 'cloudy.xbm',
-    '04': 'mostly_cloudy.xbm',
-    '09': 'rain.xbm',
-    '10': 'light_rain.xbm',
-    '11': 'thunder.xbm',
-    '13': 'snow.xbm',
-    '50': 'fog.xbm',
+    '113': '☀️',
+    '116': '⛅️',
+    '119': '☁️',
+    '122': '☁️',
+    '143': '🌫',
+    '176': '🌦',
+    '179': '🌧',
+    '182': '🌧',
+    '185': '🌧',
+    '200': '⛈',
+    '227': '🌨',
+    '230': '❄️',
+    '248': '🌫',
+    '260': '🌫',
+    '263': '🌦',
+    '266': '🌦',
+    '281': '🌧',
+    '284': '🌧',
+    '293': '🌦',
+    '296': '🌦',
+    '299': '🌧',
+    '302': '🌧',
+    '305': '🌧',
+    '308': '🌧',
+    '311': '🌧',
+    '314': '🌧',
+    '317': '🌧',
+    '320': '🌨',
+    '323': '🌨',
+    '326': '🌨',
+    '329': '❄️',
+    '332': '❄️',
+    '335': '❄️',
+    '338': '❄️',
+    '350': '🌧',
+    '353': '🌦',
+    '356': '🌧',
+    '359': '🌧',
+    '362': '🌧',
+    '365': '🌧',
+    '368': '🌨',
+    '371': '❄️',
+    '374': '🌧',
+    '377': '🌧',
+    '386': '⛈',
+    '389': '🌩',
+    '392': '⛈',
+    '395': '❄️'
 }
 
 
-def get_location():
-    geoclue2 = 'org.freedesktop.GeoClue2'
-    bus = dbus.SystemBus()
-
-    manager = bus.get_object(geoclue2, '/org/freedesktop/GeoClue2/Manager')
-
-    client = bus.get_object(geoclue2, manager.GetClient(dbus_interface='org.freedesktop.GeoClue2.Manager'))
-    # Pretend to be redshift... I know /that/ works, and it doesn't seem to check?
-    client.Set('org.freedesktop.GeoClue2.Client', 'DesktopId', 'redshift', dbus_interface='org.freedesktop.DBus.Properties')
-    client.Start(dbus_interface='org.freedesktop.GeoClue2.Client')
-
-    location = bus.get_object(geoclue2, client.Get('org.freedesktop.GeoClue2.Client', 'Location', dbus_interface='org.freedesktop.DBus.Properties'))
-
-    lat = location.Get('org.freedesktop.GeoClue2.Location', 'Latitude', dbus_interface='org.freedesktop.DBus.Properties')
-    lon = location.Get('org.freedesktop.GeoClue2.Location', 'Longitude', dbus_interface='org.freedesktop.DBus.Properties')
-
-    return lat, lon
+def desc(status: dict) -> str:
+    return status["weatherDesc"][0]["value"]
 
 
-def weather(coords=None):
-    if len(sys.argv) == 2:
-        location = 'zip={},us'.format(sys.argv[1])
-    elif coords:
-        location = 'lat={}&lon={}'.format(*coords)
-    else:
-        location = 'id=5137454'
-    condition = requests.get(BASE_URL.format(location, API_KEY)).json()
+def weather() -> str:
+    weather = requests.get("https://wttr.in", params={"format": "j1"}).json()
+    condition = weather["current_condition"][0]
 
-    if condition['cod'] == '404':
-        print(condition['message'])
-    else:
-        icon = condition['weather'][0]['icon']
-        icon = ICON_MAP.get(icon[:-1], icon)
-        temperature = int(condition['main']['temp'])
+    data = {}
+    icon = condition["weatherCode"]
+    icon = ICON_MAP.get(icon, icon)
 
-        text = '^i({}/{}){} C'.format(ICON_DIR, icon, temperature)
+    data["text"] = f"{icon} {condition['temp_C']} C"
 
-        humid = condition['main']['humidity']
-        wind = condition['wind']['speed']
-        tooltip = r'Humidity: {}%\nWind Speed: {}mph'.format(humid, wind)
+    humid = condition["humidity"]
+    wind = condition["windspeedMiles"]
+    detail = f"{desc(condition)}\nHumidity: {humid}%\nWind Speed: {wind}mph\n"
 
-        dzen = "dzen2 -fn 'DejaVu Sans Mono:size=12' -ta l -sa l -l 1 " \
-            "-e 'onstart=uncollapse;button1=exit;button3=exit' " \
-            "-p 10 -x -300 -y 20 -w 200"
-        print('^ca(1, echo "{}" | {}){}^ca()'.format(tooltip, dzen, text))
+    forecast = []
+    for i, day in enumerate(weather["weather"]):
+        if i == 0:
+            forecast.append("<b>Today</b>")
+        elif i == 1:
+            forecast.append("<b>Tomorrow</b>")
+        else:
+            forecast.append(f"<b>{day['date']}</b>")
+
+        for hour in day["hourly"]:
+            hour_int = int(hour['time']) // 100
+            if i == 0 and hour_int <= datetime.now().hour:
+                continue
+
+            icon = hour["weatherCode"]
+            icon = ICON_MAP.get(icon, icon)
+            forecast.append(f"{hour_int:02d} {icon} {hour['tempC']} {desc(hour)}")
+    data["tooltip"] = "\n".join([detail] + forecast)
+
+    return json.dumps(data)
 
 
 if __name__ == '__main__':
-    coords = get_location()
-    weather(coords)
+    print(weather())

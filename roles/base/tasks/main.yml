@@ -7,7 +7,7 @@
 - name: Transfer dotfiles
   ansible.builtin.copy:
     src: "{{ item }}"
-    dest: /home/kate/.{{ item }}
+    dest: /home/{{ ansible_user }}/.{{ item }}
     mode: u=rw,g=r,o=r
     force: true
     backup: true
@@ -44,7 +44,7 @@
 - name: Set up scripts
   ansible.builtin.copy:
     src: "{{ item }}"
-    dest: "/home/{{ ansible_user }}/bin/"
+    dest: "/home/{{ ansible_user }}/.local/bin/"
     mode: u=rwx,g=r,o=r
   loop: "{{ query('fileglob', 'bin/*') }}"
 

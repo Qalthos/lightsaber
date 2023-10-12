@@ -4,6 +4,6 @@
 - import_playbook: raspberry.yml
 
 - hosts: workstation
-  remote_user: nate
+  remote_user: kate
   roles:
     - workstation
