@@ -1,0 +1,6 @@
+timeout 300 "wlpom --off *" resume "wlopm --on *"
+timeout 310 "swaylock"
+
+before-sleep "playerctl -a pause; swaylock"
+lock "swaylock"
+idlehint 120
