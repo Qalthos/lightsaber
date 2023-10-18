@@ -102,6 +102,8 @@ input "type:keyboard" {
 
     # Exit sway (logs you out of your Wayland session)
     bindsym $mod+Ctrl+q exec swaynag -t warning -m 'You pressed the exit shortcut. Do you really want to exit sway? This will end your Wayland session.' -b 'Yes, exit sway' 'swaymsg exit'
+
+    bindsym $mod+Shift+grave exec makoctl restore
 #
 # Special buttons
 #
@@ -253,8 +255,8 @@ bar {
 }
 
 exec_always swaybg -i $(find ~/media/pictures/walls/{1920,3840,4320} -type f | shuf -n1)
-exec --no-startup-id kanshi
-exec --no-startup-id nm-applet --indicator
-exec --no-startup-id /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
+exec kanshi
+exec nm-applet --indicator
+exec /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
 
 include /etc/sway/config.d/*
