@@ -43,17 +43,12 @@ stty -ixon -ixoff
 #colors
 
 export PIP_REQUIRE_VIRTUALENV=true
-export EDITOR=vim
+export EDITOR=nvim
 # But use emacs-style keys
 bindkey -e
 
 source distro_check.sh
 echo $DISTRO
-
-# pyenv
-export PYENV_ROOT="$HOME/.pyenv"
-export PATH="$PYENV_ROOT/bin:$PATH"
-eval "$(pyenv init --path)"
 
 eval "$(fasd --init auto)"
 eval "$(pyenv init -)"
@@ -67,5 +62,5 @@ if [ $OSTYPE != 'cygwin' ]; then
 fi
 
 if hash fortune 2>/dev/null; then
-    fortune -ac
+    fortune -c
 fi
