@@ -4,7 +4,7 @@
 " other plugin before putting this into your config.
 inoremap <silent><expr> <TAB>
       \ coc#pum#visible() ? coc#pum#next(1) :
-      \ CheckBackspace() ? "\<TAB>" :
+      \ check_back_space() ? "\<TAB>" :
       \ coc#refresh()
 inoremap <expr><S-TAB> coc#pum#visible() ? coc#pum#prev(1) : "\<C-h>"
 
@@ -13,7 +13,7 @@ inoremap <expr><S-TAB> coc#pum#visible() ? coc#pum#prev(1) : "\<C-h>"
 inoremap <silent><expr> <cr> coc#pum#visible() ? coc#pum#confirm()
                               \: "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
 
-function! CheckBackspace() abort
+function! s:check_back_space() abort
   let col = col('.') - 1
   return !col || getline('.')[col - 1]  =~# '\s'
 endfunction
@@ -36,10 +36,10 @@ nmap <silent> gi <Plug>(coc-implementation)
 nmap <silent> gr <Plug>(coc-references)
 
 " gh - get hint on whatever's under the cursor
-nnoremap <silent> K :call ShowDocumentation()<CR>
-nnoremap <silent> gh :call ShowDocumentation()<CR>
+nnoremap <silent> K :call <SID>show_documentation()<CR>
+nnoremap <silent> gh :call <SID>show_documentation()<CR>
 
-function! ShowDocumentation()
+function! s:show_documentation()
   if &filetype == 'vim'
     execute 'h '.expand('<cword>')
   else

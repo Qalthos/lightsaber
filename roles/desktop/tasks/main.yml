@@ -44,15 +44,10 @@
 
 - name: Set up user avatar
   ansible.builtin.copy:
-    src: "{{ item.src }}"
-    dest: "{{ item.dest }}"
+    src: avatar.png
+    dest: "/var/lib/AccountsService/icons/{{ ansible_user }}"
     mode: u=rw,g=r,o=r
   become: true
-  loop:
-    - src: avatar.png
-      dest: "/var/lib/AccountsService/icons/{{ ansible_user }}"
-    - src: user_file
-      dest: "/var/lib/AccountsService/users/{{ ansible_user }}"
 
 - name: Create .config directory tree
   ansible.builtin.file:
@@ -78,7 +73,7 @@
   ansible.builtin.copy:
     src: "{{ item }}"
     dest: ~/bin/
-    mode: u=rw,g=r,o=r
+    mode: preserve
   loop: "{{ query('fileglob', 'bin/*') }}"
 
 - name: Make sure xf86-video-odroid-c1 is not present

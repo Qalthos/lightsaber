@@ -15,11 +15,13 @@
 	rebase = true
 [merge]
 	tool = vimdiff
+[mergetool "vimdiff"]
+	cmd = nvim -d $LOCAL $REMOTE $MERGED -c '$wincmd w' -c '$wincmd J'
 [hub]
 	protocol = https
 [credential "https://github.com"]
-	helper = 
 	helper = !/usr/bin/gh auth git-credential
 [credential "https://gist.github.com"]
-	helper = 
-	helper = !/usr/bin/gh auth git-credential	
+	helper = !/usr/bin/gh auth git-credential
+[init]
+	defaultBranch = main
