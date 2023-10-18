@@ -20,7 +20,7 @@
     recurse: true
 
 - name: Set timezone to New York
-  timezone:
+  community.general.timezone:
     name: America/New_York
 
 - name: Disable WiFi dongle powersave
@@ -28,8 +28,8 @@
     dest: /etc/modprobe.d/8192cu.conf
     mode: u=rw,g=r,o=r
     create: true
-    line: 'options 8192cu rtw_power_mgnt=0 rtw_ips_mode=1'
-    regexp: '^options 8192cu'
+    line: "options 8192cu rtw_power_mgnt=0 rtw_ips_mode=1"
+    regexp: "^options 8192cu"
 
 - name: Switch to US NTP pool
   ansible.builtin.lineinfile:
@@ -48,6 +48,6 @@
   notify: Restart sshd
   with_items:
     - command: PermitRootLogin
-      value: 'no'
+      value: "no"
     - command: PasswordAuthentication
-      value: 'yes'
+      value: "yes"

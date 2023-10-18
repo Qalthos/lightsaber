@@ -24,22 +24,22 @@ syn keyword htmlTagName contained wbr bdi
 
 " HTML 5 arguments
 " Core Attributes
-syn keyword htmlArg contained accesskey class contenteditable contextmenu dir 
+syn keyword htmlArg contained accesskey class contenteditable contextmenu dir
 syn keyword htmlArg contained draggable hidden id lang spellcheck style tabindex title
 " Event-handler Attributes
-syn keyword htmlArg contained onabort onblur oncanplay oncanplaythrough onchange 
-syn keyword htmlArg contained onclick oncontextmenu ondblclick ondrag ondragend ondragenter ondragleave ondragover 
-syn keyword htmlArg contained ondragstart ondrop ondurationchange onemptied onended onerror onfocus onformchange 
-syn keyword htmlArg contained onforminput oninput oninvalid onkeydown onkeypress onkeyup onload onloadeddata 
+syn keyword htmlArg contained onabort onblur oncanplay oncanplaythrough onchange
+syn keyword htmlArg contained onclick oncontextmenu ondblclick ondrag ondragend ondragenter ondragleave ondragover
+syn keyword htmlArg contained ondragstart ondrop ondurationchange onemptied onended onerror onfocus onformchange
+syn keyword htmlArg contained onforminput oninput oninvalid onkeydown onkeypress onkeyup onload onloadeddata
 syn keyword htmlArg contained onloadedmetadata onloadstart onmousedown onmousemove onmouseout onmouseover onmouseup
-syn keyword htmlArg contained onmousewheel onpause onplay onplaying onprogress onratechange onreadystatechange 
-syn keyword htmlArg contained onscroll onseeked onseeking onselect onshow onstalled onsubmit onsuspend ontimeupdate 
+syn keyword htmlArg contained onmousewheel onpause onplay onplaying onprogress onratechange onreadystatechange
+syn keyword htmlArg contained onscroll onseeked onseeking onselect onshow onstalled onsubmit onsuspend ontimeupdate
 syn keyword htmlArg contained onvolumechange onwaiting
 " XML Attributes
 syn keyword htmlArg contained xml:lang xml:space xml:base
 " new features
 " <body>
-syn keyword htmlArg contained onafterprint onbeforeprint onbeforeunload onblur onerror onfocus onhashchange onload 
+syn keyword htmlArg contained onafterprint onbeforeprint onbeforeunload onblur onerror onfocus onhashchange onload
 syn keyword htmlArg contained onmessage onoffline ononline onpopstate onredo onresize onstorage onundo onunload
 " <video>, <audio>, <source>, <track>
 syn keyword htmlArg contained autoplay preload controls loop poster media kind charset srclang track

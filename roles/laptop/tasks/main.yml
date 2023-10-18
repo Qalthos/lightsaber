@@ -9,6 +9,7 @@
     type: bond
     conn_name: "dock-bond"
     ifname: bond0
+    state: present
     mode: "active-backup"
     primary: "{{ ethernet }}"
     miimon: 100
@@ -21,6 +22,7 @@
     conn_name: "Dock Ethernet"
     ifname: "{{ ethernet }}"
     master: bond0
+    state: present
 
 - name: Assign WiFi to bond
   community.general.nmcli:
@@ -28,6 +30,7 @@
     conn_name: "{{ wifi_name }}"
     ifname: "{{ wifi }}"
     master: bond0
+    state: present
     ssid: "{{ wifi_name }}"
     wifi:
       hidden: true

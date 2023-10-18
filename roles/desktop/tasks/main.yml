@@ -37,9 +37,9 @@
     file: _copr_{{ item.owner }}-{{ item.repo }}
   become: true
   loop:
-    - {owner: yaroslav, repo: i3desktop}
-    - {owner: dirkdavidis, repo: papirus-icon-theme}
-    - {owner: oleastre, repo: kitty-terminal}
+    - { owner: yaroslav, repo: i3desktop }
+    - { owner: dirkdavidis, repo: papirus-icon-theme }
+    - { owner: oleastre, repo: kitty-terminal }
   when: ansible_distribution == 'Fedora'
 
 - name: Set up user avatar

@@ -4,7 +4,7 @@
   remote_user: alarm
 
   become: true
-  become_method: su
+  become_method: ansible.builtin.su
 
   vars:
     new_user: kate
@@ -30,7 +30,7 @@
         commands: ALL
         validation: required
 
-    - name: Add user '{{ new_user }}' with group 'wheel'
+    - name: Add 'wheel' to groups of '{{ new_user }}'
       ansible.builtin.user:
         name: "{{ new_user }}"
         groups: wheel
@@ -38,7 +38,7 @@
         password: "{{ password }}"
 
     - name: Copy public keys for user '{{ new_user }}'
-      ansible.builtin.authorized_key:
+      ansible.posix.authorized_key:
         user: "{{ new_user }}"
         key: https://github.com/qalthos.keys
 
@@ -50,5 +50,3 @@
       ansible.builtin.user:
         name: root
         password: !
-
-# vim: filetype=yaml.ansible

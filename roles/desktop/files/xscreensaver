@@ -27,14 +27,14 @@ dpmsOff:	4:00:00
 grabDesktopImages:  True
 grabVideoFrames:    False
 chooseRandomImages: False
-imageDirectory:	
+imageDirectory:
 
 mode:		random
 selected:	-1
 
 textMode:	program
 textLiteral:	XScreenSaver
-textFile:	
+textFile:
 textProgram:	fortune portal
 textURL:	https://en.wikipedia.org/w/index.php?title=Special:NewPages&feed=rss
 dialogTheme:	default
@@ -293,4 +293,3 @@ programs:								      \
 
 pointerHysteresis:  10
 authWarningSlack:   20
-

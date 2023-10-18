@@ -1,9 +1,12 @@
 ---
-- import_playbook: base.yml
+- name: Run base role on all hosts
+  import_playbook: base.yml
 
-- import_playbook: raspberry.yml
+- name: Handle Raspberry Pi hosts
+  import_playbook: raspberry.yml
 
-- hosts: workstation
+- name: Provision workstations
+  hosts: workstation
   remote_user: kate
   roles:
     - workstation

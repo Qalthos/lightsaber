@@ -1,3 +1,0 @@
----
-- name: Reload udev
-  ansible.builtin.command: udevadm control --reload
