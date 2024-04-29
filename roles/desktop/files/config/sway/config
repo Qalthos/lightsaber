@@ -28,7 +28,7 @@ assign [class="Cinny"] workspace 2
 assign [app_id="Element"] workspace 2
 assign [class="Slack"] workspace 2
 assign [class="discord"] workspace 3
-assign [class="thunderbird"] workspace 9
+assign [app_id="org.mozilla.Thunderbird"] workspace 9
 
 ### Output configuration
 #
@@ -91,6 +91,10 @@ input "type:keyboard" {
     # Kill focused window
     bindsym $mod+Shift+w kill
 
+    # Screenshots
+    bindsym Shift+Print exec "slurp -ro | grim -g -"
+    bindsym Ctrl+Print exec "slurp | grim -g -"
+
     # Drag floating windows by holding down $mod and left mouse button.
     # Resize them with right mouse button + $mod.
     # Despite the name, also works for non-floating windows.
@@ -105,8 +109,7 @@ input "type:keyboard" {
     bindsym $mod+Ctrl+q exec swaynag -t warning -m 'You pressed the exit shortcut. Do you really want to exit sway? This will end your Wayland session.' -b 'Yes, exit sway' 'swaymsg exit'
 
     bindsym $mod+Shift+grave exec swaync-client -t -sw
-    bindsym Shift+Print exec grim
-    bindsym Ctrl+Print exec slurp | grim -g -
+
 #
 # Special buttons
 #
@@ -257,11 +260,13 @@ bar {
     swaybar_command waybar
 }
 
-exec_always swaybg -i $(find ~/media/pictures/walls/{1920,3840,7680} -type f | shuf -n1)
-exec kanshi
-exec swaync
 exec nm-applet --indicator
+exec wl-paste -t text --watch clipman store
+exec swaync
 exec /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
 exec Applications/pcloud
+
+exec kanshi
+exec_always swaybg -m fill -i $(find ~/media/pictures/walls/{1920,3840,7680} -type f | shuf -n1)
 
 include /etc/sway/config.d/*

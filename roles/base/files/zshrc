@@ -2,6 +2,15 @@
 # It should contain commands to set up aliases,
 # functions, options, key bindings, etc.
 
+# asdf
+source "$HOME/.local/asdf/asdf.sh"
+# direnv
+eval "$(direnv hook zsh)"
+
+fpath=(${ASDF_DIR}/completions $fpath)
+fpath+=~/.zsh/zfunc
+autoload -Uz compinit && compinit
+
 #allow tab completion in the middle of a word
 setopt COMPLETE_IN_WORD
 
@@ -16,6 +25,7 @@ HISTSIZE=100000
 SAVEHIST=100000
 setopt APPEND_HISTORY
 setopt histignorealldups
+setopt hist_ignore_space
 ## for sharing history between zsh processes
 #setopt INC_APPEND_HISTORY
 #setopt SHARE_HISTORY
@@ -47,13 +57,6 @@ source distro_check.sh
 echo $DISTRO
 
 eval "$(fasd --init auto)"
-source "$HOME/.local/asdf/asdf.sh"
-source "${XDG_CONFIG_HOME:-$HOME/.config}/asdf-direnv/zshrc"
-
-# Completions
-fpath+=~/.zsh/zfunc
-fpath=(${ASDF_DIR}/completions $fpath)
-autoload -Uz compinit && compinit
 
 source /etc/profile
 source ~/.zsh/aliases
