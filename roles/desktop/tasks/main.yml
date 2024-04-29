@@ -4,7 +4,7 @@
     name:
       - kanshi
       - kitty
-      - mako
+      - swaync
       - nemo
       - numix-gtk-theme
       - otf-font-awesome
@@ -18,7 +18,7 @@
   become: true
   when: ansible_os_family == "ArchLinux"
 
-- name: Install X on Red Hat
+- name: Install desktop on Red Hat
   ansible.builtin.package:
     name:
       - lightdm-gtk
@@ -72,7 +72,7 @@
 - name: Copy helper scripts
   ansible.builtin.copy:
     src: "{{ item }}"
-    dest: ~/bin/
+    dest: ~/.local/bin/
     mode: preserve
   loop: "{{ query('fileglob', 'bin/*') }}"
 

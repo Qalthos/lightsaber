@@ -3,7 +3,6 @@
   ansible.builtin.package:
     name:
       - base-devel
-      - hub
       - github-cli
     state: installed
   become: true
@@ -13,13 +12,13 @@
   ansible.builtin.package:
     name:
       - rsync
-      - pluma
       - firefox
       - thunderbird
       - audacious
       - imv
       - mpv
-      - atril
       - engrampa
+      - xed
+      - xreader
     state: installed
   become: true

@@ -1,8 +1,7 @@
-#!/home/kate/.pyenv/versions/toolbox/bin/python
+#!/usr/bin/env python
 from datetime import datetime
+from urllib.request import urlopen
 import json
-
-import requests
 
 
 ICON_MAP = {
@@ -62,8 +61,9 @@ def desc(status: dict) -> str:
 
 
 def weather() -> str:
-    weather = requests.get("https://wttr.in", params={"format": "j1"}).json()
-    condition = weather["current_condition"][0]
+    response = urlopen("https://wttr.in?format=j1")
+    w_data = json.loads(response.read())
+    condition = w_data["current_condition"][0]
 
     data = {}
     icon = condition["weatherCode"]
@@ -76,7 +76,7 @@ def weather() -> str:
     detail = f"{desc(condition)}\nHumidity: {humid}%\nWind Speed: {wind}mph\n"
 
     forecast = []
-    for i, day in enumerate(weather["weather"]):
+    for i, day in enumerate(w_data["weather"]):
         if i == 0:
             forecast.append("<b>Today</b>")
         elif i == 1:

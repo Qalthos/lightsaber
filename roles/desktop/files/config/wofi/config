@@ -1,6 +1,6 @@
-show=drun
+show=drun,run
 
 allow_images=true
 allow_markup=true
-matching=fuzzy
+#matching=fuzzy
 insensitive=true

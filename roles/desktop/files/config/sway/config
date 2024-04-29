@@ -24,11 +24,11 @@ default_border pixel 2
 
 ### Workspaces
 assign [class="firefox"] workspace 1
-assign [class="discord"] workspace 4
-assign [class="Cinny"] workspace 5
-assign [app_id="Element"] workspace 5
-assign [class="Slack"] workspace 5
-assign [class="thunderbird"] workspace 6
+assign [class="Cinny"] workspace 2
+assign [app_id="Element"] workspace 2
+assign [class="Slack"] workspace 2
+assign [class="discord"] workspace 3
+assign [class="thunderbird"] workspace 9
 
 ### Output configuration
 #
@@ -86,6 +86,7 @@ input "type:keyboard" {
 
     # Start a terminal
     bindsym $mod+F3 exec $term
+    bindsym $mod+Shift+F3 exec $term -e fish
 
     # Kill focused window
     bindsym $mod+Shift+w kill
@@ -103,7 +104,9 @@ input "type:keyboard" {
     # Exit sway (logs you out of your Wayland session)
     bindsym $mod+Ctrl+q exec swaynag -t warning -m 'You pressed the exit shortcut. Do you really want to exit sway? This will end your Wayland session.' -b 'Yes, exit sway' 'swaymsg exit'
 
-    bindsym $mod+Shift+grave exec makoctl restore
+    bindsym $mod+Shift+grave exec swaync-client -t -sw
+    bindsym Shift+Print exec grim
+    bindsym Ctrl+Print exec slurp | grim -g -
 #
 # Special buttons
 #
@@ -116,7 +119,7 @@ input "type:keyboard" {
     bindsym --locked XF86AudioLowerVolume exec pactl set-sink-volume @DEFAULT_SINK@ -5%
     bindsym --locked XF86AudioRaiseVolume exec pactl set-sink-volume @DEFAULT_SINK@ +5%
     bindsym --locked XF86AudioMicMute exec pactl set-source-mute @DEFAULT_SOURCE@ toggle
-    bindsym $mod+Shift+b exec swaybg -i $(find ~/media/pictures/walls/{1920,3840,4320} -type f | shuf -n1)
+    bindsym $mod+Shift+b exec swaybg -i $(find ~/media/pictures/walls/{1920,3840,7680} -type f | shuf -n1)
     bindsym $mod+o exec caja
 #
 # Moving around:
@@ -254,9 +257,11 @@ bar {
     swaybar_command waybar
 }
 
-exec_always swaybg -i $(find ~/media/pictures/walls/{1920,3840,4320} -type f | shuf -n1)
+exec_always swaybg -i $(find ~/media/pictures/walls/{1920,3840,7680} -type f | shuf -n1)
 exec kanshi
+exec swaync
 exec nm-applet --indicator
 exec /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
+exec Applications/pcloud
 
 include /etc/sway/config.d/*

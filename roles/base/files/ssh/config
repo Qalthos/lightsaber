@@ -18,6 +18,13 @@ Host 192.168.1.*
 
 #######################################
 
+Host rsync.net
+  Hostname de3624.rsync.net
+  User de3624
+  IdentityFile ~/.ssh/id_rsync.net
+
+#######################################
+
 Host *
   ForwardAgent yes
   SendEnv LANG LC_*
