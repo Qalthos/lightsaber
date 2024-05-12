@@ -64,7 +64,3 @@ source ~/.zsh/prompt
 if [ $OSTYPE != 'cygwin' ]; then
     source ~/.zsh/keyboard
 fi
-
-if hash fortune 2>/dev/null; then
-    fortune -c
-fi
