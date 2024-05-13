@@ -47,6 +47,7 @@
     dest: "/home/{{ ansible_user }}/.local/bin/"
     mode: u=rwx,g=r,o=r
   loop: "{{ query('fileglob', 'bin/*') }}"
+  when: ansible_pkg_mgr != "atomic_container"
 
 - name: Enable en_US.UTF-8 locale
   become: true
@@ -60,6 +61,7 @@
   ansible.builtin.package:
     name: git,htop,tmux,vim,zsh
     state: present
+  when: ansible_pkg_mgr != "atomic_container"
 
 - name: Set shell to zsh
   become: true

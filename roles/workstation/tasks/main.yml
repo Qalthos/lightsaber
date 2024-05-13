@@ -20,6 +20,7 @@
       - xreader
     state: installed
   become: true
+  when: ansible_pkg_mgr != "atomic_container"
 
 - name: Install flatpaks
   community.general.flatpak:
