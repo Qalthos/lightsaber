@@ -1,5 +1,5 @@
 ---
-- name: Install ArchLinux-flavored development tools
+- name: Install Arch Linux-flavored development tools
   ansible.builtin.package:
     name:
       - base-devel
@@ -13,6 +13,7 @@
     name:
       - rsync
       - firefox
+      - flatpak
       - imv
       - mpv
       - engrampa
@@ -21,6 +22,14 @@
     state: installed
   become: true
   when: ansible_pkg_mgr != "atomic_container"
+
+- name: Add the flathub flatpak repository remote to the user installation
+  community.general.flatpak_remote:
+    name: flathub
+    state: present
+    flatpakrepo_url: https://dl.flathub.org/repo/flathub.flatpakrepo
+    method: user
+
 
 - name: Install flatpaks
   community.general.flatpak:

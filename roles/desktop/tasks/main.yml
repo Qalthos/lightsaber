@@ -6,7 +6,6 @@
       - kitty
       - swaync
       - nemo
-      - numix-gtk-theme
       - otf-font-awesome
       - papirus-icon-theme
       - sddm
@@ -16,7 +15,7 @@
       - rofi
     state: installed
   become: true
-  when: ansible_os_family == "ArchLinux"
+  when: ansible_os_family == "Archlinux"
 
 - name: Install desktop on Red Hat
   ansible.builtin.package:
