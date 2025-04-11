@@ -25,3 +25,7 @@
 	helper = !/usr/bin/gh auth git-credential
 [init]
 	defaultBranch = main
+[alias]
+	problems = grep -E \"noqa|type: ignore\"
+[commit]
+	verbose = true
