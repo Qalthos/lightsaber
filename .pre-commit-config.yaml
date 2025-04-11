@@ -2,14 +2,14 @@
 repos:
   - repo: https://github.com/pre-commit/mirrors-prettier
     # keep it before yamllint
-    rev: "v3.0.3"
+    rev: "v4.0.0-alpha.8"
     hooks:
       - id: prettier
         additional_dependencies:
           - prettier
 
   - repo: https://github.com/pre-commit/pre-commit-hooks.git
-    rev: v4.5.0
+    rev: v5.0.0
     hooks:
       - id: end-of-file-fixer
       - id: trailing-whitespace
@@ -19,7 +19,7 @@ repos:
       - id: check-merge-conflict
 
   - repo: https://github.com/adrienverge/yamllint.git
-    rev: v1.32.0
+    rev: v1.37.0
     hooks:
       - id: yamllint
         files: \.(yaml|yml)$
@@ -27,6 +27,6 @@ repos:
         entry: yamllint --strict
 
   - repo: https://github.com/ansible/ansible-lint
-    rev: v6.21.0
+    rev: v25.2.1
     hooks:
       - id: ansible-lint
