@@ -1,71 +1,81 @@
 #!/usr/bin/env python
-from datetime import datetime
-from urllib.request import urlopen
+from __future__ import annotations
+
 import json
+import sys
+
+from datetime import datetime
+from typing import TypedDict
+from urllib.request import urlopen
 
 
 ICON_MAP = {
-    '113': '☀️',
-    '116': '⛅️',
-    '119': '☁️',
-    '122': '☁️',
-    '143': '🌫',
-    '176': '🌦',
-    '179': '🌧',
-    '182': '🌧',
-    '185': '🌧',
-    '200': '⛈',
-    '227': '🌨',
-    '230': '❄️',
-    '248': '🌫',
-    '260': '🌫',
-    '263': '🌦',
-    '266': '🌦',
-    '281': '🌧',
-    '284': '🌧',
-    '293': '🌦',
-    '296': '🌦',
-    '299': '🌧',
-    '302': '🌧',
-    '305': '🌧',
-    '308': '🌧',
-    '311': '🌧',
-    '314': '🌧',
-    '317': '🌧',
-    '320': '🌨',
-    '323': '🌨',
-    '326': '🌨',
-    '329': '❄️',
-    '332': '❄️',
-    '335': '❄️',
-    '338': '❄️',
-    '350': '🌧',
-    '353': '🌦',
-    '356': '🌧',
-    '359': '🌧',
-    '362': '🌧',
-    '365': '🌧',
-    '368': '🌨',
-    '371': '❄️',
-    '374': '🌧',
-    '377': '🌧',
-    '386': '⛈',
-    '389': '🌩',
-    '392': '⛈',
-    '395': '❄️'
+    "113": "☀️",
+    "116": "⛅️",
+    "119": "☁️",
+    "122": "☁️",
+    "143": "🌫",
+    "176": "🌦",
+    "179": "🌧",
+    "182": "🌧",
+    "185": "🌧",
+    "200": "⛈",
+    "227": "🌨",
+    "230": "❄️",
+    "248": "🌫",
+    "260": "🌫",
+    "263": "🌦",
+    "266": "🌦",
+    "281": "🌧",
+    "284": "🌧",
+    "293": "🌦",
+    "296": "🌦",
+    "299": "🌧",
+    "302": "🌧",
+    "305": "🌧",
+    "308": "🌧",
+    "311": "🌧",
+    "314": "🌧",
+    "317": "🌧",
+    "320": "🌨",
+    "323": "🌨",
+    "326": "🌨",
+    "329": "❄️",
+    "332": "❄️",
+    "335": "❄️",
+    "338": "❄️",
+    "350": "🌧",
+    "353": "🌦",
+    "356": "🌧",
+    "359": "🌧",
+    "362": "🌧",
+    "365": "🌧",
+    "368": "🌨",
+    "371": "❄️",
+    "374": "🌧",
+    "377": "🌧",
+    "386": "⛈",
+    "389": "🌩",
+    "392": "⛈",
+    "395": "❄️",
 }
 
 
-def desc(status: dict) -> str:
+def desc(status: WeatherDesc) -> str:
     return status["weatherDesc"][0]["value"]
 
 
-def weather() -> str:
-    response = urlopen("https://wttr.in?format=j1")
+def weather(location: str) -> str:
+    url = f"https://wttr.in/{location}?format=j1"
+    response = urlopen(url)
     w_data = json.loads(response.read())
+
+    location_data = w_data["nearest_area"][0]
+    location = f"{location_data['areaName'][0]['value']}, {location_data['region'][0]['value']}"
+
     condition = w_data["current_condition"][0]
 
-    data = {}
+    data: dict[str, str] = {}
     icon = condition["weatherCode"]
     icon = ICON_MAP.get(icon, icon)
 
@@ -73,9 +83,11 @@ def weather() -> str:
 
     humid = condition["humidity"]
     wind = condition["windspeedMiles"]
-    detail = f"{desc(condition)}\nHumidity: {humid}%\nWind Speed: {wind}mph\n"
+    detail = (
+        f"{location}\n{desc(condition)}\nHumidity: {humid}%\nWind Speed: {wind}mph\n"
+    )
 
-    forecast = []
+    forecast: list[str] = []
     for i, day in enumerate(w_data["weather"]):
         if i == 0:
             forecast.append("<b>Today</b>")
@@ -85,17 +97,26 @@ def weather() -> str:
             forecast.append(f"<b>{day['date']}</b>")
 
         for hour in day["hourly"]:
-            hour_int = int(hour['time']) // 100
+            hour_int = int(hour["time"]) // 100
             if i == 0 and hour_int <= datetime.now().hour:
                 continue
 
             icon = hour["weatherCode"]
             icon = ICON_MAP.get(icon, icon)
-            forecast.append(f"{hour_int:02d} {icon} {hour['tempC']} {desc(hour)}")
-    data["tooltip"] = "\n".join([detail] + forecast)
+            forecast.append(f"{hour_int:02d} {icon} {hour['tempC']}C {desc(hour)}")
+    data["tooltip"] = "\n".join([detail, *forecast])
 
     return json.dumps(data)
 
 
-if __name__ == '__main__':
-    print(weather())
+if __name__ == "__main__":
+    try:
+        location = sys.argv[1]
+    except IndexError:
+        location = ""
+
+    print(weather(location))
+
+
+class WeatherDesc(TypedDict):
+    weatherDesc: list[dict[str, str]]

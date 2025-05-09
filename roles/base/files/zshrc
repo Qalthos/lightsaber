@@ -2,12 +2,11 @@
 # It should contain commands to set up aliases,
 # functions, options, key bindings, etc.
 
-# asdf
-source "$HOME/.local/asdf/asdf.sh"
+# mise
+eval "$(mise activate)"
 # direnv
 eval "$(direnv hook zsh)"
 
-fpath=(${ASDF_DIR}/completions $fpath)
 fpath+=~/.zsh/zfunc
 autoload -Uz compinit && compinit
 
@@ -53,14 +52,18 @@ export EDITOR=nvim
 # But use emacs-style keys
 bindkey -e
 
+source /etc/profile
 source distro_check.sh
 echo $DISTRO
 
 eval "$(fasd --init auto)"
 
-source /etc/profile
 source ~/.zsh/aliases
 source ~/.zsh/prompt
 if [ $OSTYPE != 'cygwin' ]; then
     source ~/.zsh/keyboard
+fi
+
+if hash fortune 2>/dev/null; then
+    fortune -c
 fi
