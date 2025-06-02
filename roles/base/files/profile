@@ -7,7 +7,7 @@
 # the default umask is set in /etc/profile
 #umask 022
 
-# Add pipx bin
+# Add local bin
 export PATH="$HOME/.local/bin:$PATH"
 
 # if running bash
@@ -33,4 +33,4 @@ else
 fi
 
 export SSH_AUTH_SOCK="${XDG_RUNTIME_DIR}/ssh-agent.socket"
-ssh-add ~/.ssh/id_ed25519.2024
+ssh-add ~/.ssh/id_ed25519
