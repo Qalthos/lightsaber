@@ -35,10 +35,17 @@ require("lazy").setup({
 })
 
 require('lualine').setup({
-  options = {
-    theme = "codedark"
-  },
+  options = { theme = "codedark" },
   sections = {
     lualine_x = { 'encoding', 'fileformat', 'filetype', 'lsp_status' },
   },
+})
+
+-- Autoupdate plugins
+local group = vim.api.nvim_create_augroup("autoupdate", { clear = true })
+vim.api.nvim_create_autocmd("VimEnter", {
+  group = group,
+  callback = function()
+    require("lazy").update({ show = false })
+  end,
 })
