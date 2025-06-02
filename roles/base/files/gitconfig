@@ -7,6 +7,7 @@
 	default = current
 [diff]
 	algorithm = patience
+	tool = nvimdiff
 [core]
 	autocrlf = input
 [help]
@@ -14,9 +15,7 @@
 [pull]
 	rebase = true
 [merge]
-	tool = vimdiff
-[mergetool "vimdiff"]
-	cmd = nvim -d $LOCAL $REMOTE $MERGED -c '$wincmd w' -c '$wincmd J'
+	tool = nvimdiff
 [hub]
 	protocol = https
 [credential "https://github.com"]

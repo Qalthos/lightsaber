@@ -65,7 +65,7 @@
       - mise
       - tmux
       - uv
-      - vim
+      - neovim
       - zsh
     state: present
   when: ansible_pkg_mgr != "atomic_container"
