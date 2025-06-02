@@ -2,19 +2,15 @@
 ###########   Local hosts   ###########
 #######################################
 
+# Host locutus
+#   Hostname linkybook.com
+
 Host ace ace.linkybook
   Hostname linkybook.com
   User kcase
 
-# Host locutus
-#   Hostname linkybook.com
-
 Host mercury enviro*
   User pi
-
-Host ace ace.linkybook
-  Hostname ace.linkybook
-  User kcase
 
 Host 192.168.1.*
   StrictHostKeyChecking no
