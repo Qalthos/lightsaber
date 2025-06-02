@@ -1,4 +1,4 @@
-vim.lsp.enable({ "ansible_ls", "json_ls", "lua_ls", "ruff", "pyright", "yaml_ls" })
+vim.lsp.enable({ "ansible_ls", "bash_ls", "json_ls", "lua_ls", "ruff", "pyrefly", "yaml_ls" })
 
 vim.api.nvim_create_autocmd('LspAttach', {
   callback = function(event)
@@ -25,6 +25,11 @@ vim.api.nvim_create_autocmd('LspAttach', {
     if client:supports_method("textDocument/formatting") then
       vim.keymap.set("n", "\\qf", vim.lsp.buf.format)
       vim.keymap.set("v", "\\qf", vim.lsp.buf.format)
+    end
+
+    -- LSP hints
+    if client:supports_method("textDocument/inlayHint") then
+      vim.lsp.inlay_hint.enable(true)
     end
 
     -- LSP actions
