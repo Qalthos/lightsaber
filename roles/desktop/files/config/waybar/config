@@ -7,7 +7,7 @@
     // Choose the order of the modules
     "modules-left": ["sway/workspaces", "sway/mode"],
     "modules-center": ["sway/window"],
-    "modules-right": ["tray", "backlight", "idle_inhibitor", "custom/notification", "battery", "pulseaudio", "custom/weather", "clock"],
+    "modules-right": ["tray", "backlight", "idle_inhibitor", "custom/notification", "battery", "pulseaudio", "custom/weather", "custom/arch", "custom/flatpak", "clock"],
     // Modules configuration
     "sway/workspaces": {
         "disable-scroll": true,
@@ -18,13 +18,13 @@
             "2": "",
             "3": "",
             "4": "",
-            "9": "",
-            "0": "",
+            "mail": "",
             "urgent": "",
-            // "focused": "",
-            "default": ""
+            "focused": "",
+            "default": "",
+            "high-priority-named": ["1", "2", "3", "4", "mail"]
         },
-        "persistent_workspaces": {
+        "persistent-workspaces": {
             "1": [],
         }
     },
@@ -145,18 +145,26 @@
             "car": "",
             "default": ["", "", ""]
         },
-        "on-click": "pavucontrol"
+        "on-click": "pavucontrol",
+        "on-click-right": "flatpak run org.pipewire.Helvum",
     },
-    "custom/weather": {
-        "format": "{}",
-        "return-type": "json",
-        "tooltip": true,
-        "interval": 300,
-        "exec": "weather"
+    "custom/arch": {
+        "format": "| {} A📦",
+        "exec": "check-updates | wc -l | sed 's/^0$//'",
+        "tooltip": false,
+        "hide-empty-text": true,
+        "interval": 3600,
+    },
+    "custom/flatpak": {
+        "format": "| {} F📦",
+        "exec": "flatpak remote-ls --updates | wc -l | sed 's/^0$//'",
+        "tooltip": false,
+        "hide-empty-text": true,
+        "interval": 3600,
     },
     "custom/notification": {
         "tooltip": false,
-        "format": "{icon} {}",
+        "format": "{icon} {text}",
         "format-icons": {
           "notification": "<span foreground='red'><sup></sup></span>",
           "none": "",
@@ -172,6 +180,13 @@
         "exec": "swaync-client -swb",
         "on-click": "swaync-client -t -sw",
         "on-click-right": "swaync-client -d -sw",
-        "escape": true
+        "escape": true,
+    },
+    "custom/weather": {
+        "format": "{}",
+        "return-type": "json",
+        "tooltip": true,
+        "interval": 300,
+        "exec": "weather",
     },
 }

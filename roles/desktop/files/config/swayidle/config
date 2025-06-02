@@ -1,5 +1,10 @@
-timeout 300 "wlopm --off '*'" resume "wlopm --on '*'"
-timeout 310 "swaylock"
+# Battery timeouts
+timeout 300 "on_bat && wlopm --off '*'" resume "wlopm --on '*'"
+timeout 310 "on_bat && swaylock"
+
+# AC timeouts
+timeout 600 "wlopm --off '*'" resume "wlopm --on '*'"
+timeout 610 "swaylock"
 
 before-sleep "playerctl -a pause; swaylock"
 lock "swaylock"
