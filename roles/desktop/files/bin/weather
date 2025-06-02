@@ -1,71 +1,103 @@
 #!/usr/bin/env python
-from datetime import datetime
-from urllib.request import urlopen
+from __future__ import annotations
+
 import json
+from datetime import datetime
+from http.client import HTTPResponse
+from typing import TypedDict, cast
+from urllib.request import urlopen, Request
+
+import gi
+
+gi.require_version("Geoclue", "2.0")
+from gi.repository import Geoclue
 
 
 ICON_MAP = {
-    '113': '☀️',
-    '116': '⛅️',
-    '119': '☁️',
-    '122': '☁️',
-    '143': '🌫',
-    '176': '🌦',
-    '179': '🌧',
-    '182': '🌧',
-    '185': '🌧',
-    '200': '⛈',
-    '227': '🌨',
-    '230': '❄️',
-    '248': '🌫',
-    '260': '🌫',
-    '263': '🌦',
-    '266': '🌦',
-    '281': '🌧',
-    '284': '🌧',
-    '293': '🌦',
-    '296': '🌦',
-    '299': '🌧',
-    '302': '🌧',
-    '305': '🌧',
-    '308': '🌧',
-    '311': '🌧',
-    '314': '🌧',
-    '317': '🌧',
-    '320': '🌨',
-    '323': '🌨',
-    '326': '🌨',
-    '329': '❄️',
-    '332': '❄️',
-    '335': '❄️',
-    '338': '❄️',
-    '350': '🌧',
-    '353': '🌦',
-    '356': '🌧',
-    '359': '🌧',
-    '362': '🌧',
-    '365': '🌧',
-    '368': '🌨',
-    '371': '❄️',
-    '374': '🌧',
-    '377': '🌧',
-    '386': '⛈',
-    '389': '🌩',
-    '392': '⛈',
-    '395': '❄️'
+    "113": "☀️",
+    "116": "⛅️",
+    "119": "☁️",
+    "122": "☁️",
+    "143": "🌫",
+    "176": "🌦",
+    "179": "🌧",
+    "182": "🌧",
+    "185": "🌧",
+    "200": "⛈",
+    "227": "🌨",
+    "230": "❄️",
+    "248": "🌫",
+    "260": "🌫",
+    "263": "🌦",
+    "266": "🌦",
+    "281": "🌧",
+    "284": "🌧",
+    "293": "🌦",
+    "296": "🌦",
+    "299": "🌧",
+    "302": "🌧",
+    "305": "🌧",
+    "308": "🌧",
+    "311": "🌧",
+    "314": "🌧",
+    "317": "🌧",
+    "320": "🌨",
+    "323": "🌨",
+    "326": "🌨",
+    "329": "❄️",
+    "332": "❄️",
+    "335": "❄️",
+    "338": "❄️",
+    "350": "🌧",
+    "353": "🌦",
+    "356": "🌧",
+    "359": "🌧",
+    "362": "🌧",
+    "365": "🌧",
+    "368": "🌨",
+    "371": "❄️",
+    "374": "🌧",
+    "377": "🌧",
+    "386": "⛈",
+    "389": "🌩",
+    "392": "⛈",
+    "395": "❄️",
 }
 
 
-def desc(status: dict) -> str:
+def fetch(url: str):  # pyright: ignore[reportAny]
+    # urllib default user agent is blocked
+    request = Request(url, headers={"User-Agent": "Mozilla"})
+    response = cast(HTTPResponse, urlopen(request))
+    return json.loads(response.read())  # pyright: ignore[reportAny]
+
+
+def get_location() -> LocationData:
+    clue = Geoclue.Simple.new_sync(
+        "something", Geoclue.AccuracyLevel.NEIGHBORHOOD, None,
+    )
+    location = clue.get_location()
+    return {
+        "latitude": location.get_property("latitude"),
+        "longitude": location.get_property("longitude"),
+    }
+
+
+def get_weather(location_str: str) -> WttrResponse:
+    return fetch(f"https://wttr.in/{location_str}?format=j1")  # pyright: ignore[reportAny]
+
+
+def desc(status: CurrentCondition | HourlyData) -> str:
     return status["weatherDesc"][0]["value"]
 
 
-def weather() -> str:
-    response = urlopen("https://wttr.in?format=j1")
-    w_data = json.loads(response.read())
-    condition = w_data["current_condition"][0]
+def parse_weather(weather_data: WttrResponse) -> str:
+    location_data = weather_data["nearest_area"][0]
+    location = f"{location_data['areaName'][0]['value']}, {location_data['region'][0]['value']}"
 
-    data = {}
+    condition = weather_data["current_condition"][0]
+
+    data: dict[str, str] = {}
     icon = condition["weatherCode"]
     icon = ICON_MAP.get(icon, icon)
 
@@ -73,10 +105,12 @@ def weather() -> str:
 
     humid = condition["humidity"]
     wind = condition["windspeedMiles"]
-    detail = f"{desc(condition)}\nHumidity: {humid}%\nWind Speed: {wind}mph\n"
+    detail = (
+        f"{location}\n{desc(condition)}\nHumidity: {humid}%\nWind Speed: {wind}mph\n"
+    )
 
-    forecast = []
-    for i, day in enumerate(w_data["weather"]):
+    forecast: list[str] = []
+    for i, day in enumerate(weather_data["weather"]):
         if i == 0:
             forecast.append("<b>Today</b>")
         elif i == 1:
@@ -85,17 +119,68 @@ def weather() -> str:
             forecast.append(f"<b>{day['date']}</b>")
 
         for hour in day["hourly"]:
-            hour_int = int(hour['time']) // 100
+            hour_int = int(hour["time"]) // 100
             if i == 0 and hour_int <= datetime.now().hour:
                 continue
 
             icon = hour["weatherCode"]
             icon = ICON_MAP.get(icon, icon)
-            forecast.append(f"{hour_int:02d} {icon} {hour['tempC']} {desc(hour)}")
-    data["tooltip"] = "\n".join([detail] + forecast)
+            forecast.append(f"{hour_int:02d} {icon} {hour['tempC']}C {desc(hour)}")
+    data["tooltip"] = "\n".join([detail, *forecast])
 
     return json.dumps(data)
 
 
-if __name__ == '__main__':
-    print(weather())
+def main() -> None:
+    location = get_location()
+    location_str = f"{location['latitude']},{location['longitude']}"
+
+    weather = get_weather(location_str)
+    weather_str = parse_weather(weather)
+
+    print(weather_str)
+
+
+if __name__ == "__main__":
+    main()
+
+
+# API Types
+class LocationData(TypedDict):
+    latitude: float
+    longitude: float
+
+
+class WttrResponse(TypedDict):
+    current_condition: list[CurrentCondition]
+    nearest_area: list[NearestArea]
+    weather: list[Weather]
+
+
+class SimpleValue(TypedDict):
+    value: str
+
+
+class CurrentCondition(TypedDict):
+    humidity: str
+    temp_C: str
+    weatherCode: str
+    weatherDesc: list[SimpleValue]
+    windspeedMiles: str
+
+
+class NearestArea(TypedDict):
+    areaName: list[SimpleValue]
+    region: list[SimpleValue]
+
+
+class HourlyData(TypedDict):
+    tempC: str
+    time: str
+    weatherCode: str
+    weatherDesc: list[SimpleValue]
+
+
+class Weather(TypedDict):
+    date: str
+    hourly: list[HourlyData]

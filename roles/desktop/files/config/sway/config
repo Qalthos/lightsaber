@@ -18,17 +18,20 @@ set $term kitty
 # Your preferred application launcher
 # Note: pass the final command to swaymsg so that the resulting window can be opened
 # on the original workspace that the command was run on.
-set $menu wofi
+set $menu rofi | xargs swaymsg exec
+# Your preferred file manager
+set $file thunar
 
 default_border pixel 2
 
 ### Workspaces
-assign [class="firefox"] workspace 1
-assign [class="Cinny"] workspace 2
-assign [app_id="Element"] workspace 2
 assign [class="Slack"] workspace 2
 assign [class="discord"] workspace 3
-assign [app_id="org.mozilla.Thunderbird"] workspace 9
+assign [app_id="com.discordapp.Discord"] workspace 3
+assign [app_id="org.mozilla.Thunderbird"] workspace mail
+
+### Window configuration
+for_window [class="Litra Controler"] floating enable
 
 ### Output configuration
 #
@@ -122,8 +125,8 @@ input "type:keyboard" {
     bindsym --locked XF86AudioLowerVolume exec pactl set-sink-volume @DEFAULT_SINK@ -5%
     bindsym --locked XF86AudioRaiseVolume exec pactl set-sink-volume @DEFAULT_SINK@ +5%
     bindsym --locked XF86AudioMicMute exec pactl set-source-mute @DEFAULT_SOURCE@ toggle
-    bindsym $mod+Shift+b exec swaybg -i $(find ~/media/pictures/walls/{1920,3840,7680} -type f | shuf -n1)
-    bindsym $mod+o exec caja
+    bindsym $mod+Shift+b exec waypaper --random
+    bindsym $mod+o exec $file
 #
 # Moving around:
 #
@@ -260,13 +263,14 @@ bar {
     swaybar_command waybar
 }
 
-exec nm-applet --indicator
 exec wl-paste -t text --watch clipman store
 exec swaync
 exec /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
-exec Applications/pcloud
 
-exec kanshi
-exec_always swaybg -m fill -i $(find ~/media/pictures/walls/{1920,3840,7680} -type f | shuf -n1)
+exec_always waypaper --restore
 
 include /etc/sway/config.d/*
+
+# Run .config/autostart applications
+# exec dex -ae sway
+exec_always systemctl --user start sway-session.target

@@ -59,7 +59,14 @@
 - name: Install required environment tools
   become: true
   ansible.builtin.package:
-    name: git,htop,tmux,vim,zsh
+    name:
+      - git
+      - htop
+      - mise
+      - tmux
+      - uv
+      - neovim
+      - zsh
     state: present
   when: ansible_pkg_mgr != "atomic_container"
 
