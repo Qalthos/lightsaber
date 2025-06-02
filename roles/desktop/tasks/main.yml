@@ -13,7 +13,7 @@
       - sway
       - ttf-fira-code
       - waybar
-      - wofi
+      - rofi
     state: installed
   become: true
   when: ansible_os_family == "ArchLinux"
