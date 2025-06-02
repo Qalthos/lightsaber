@@ -1,0 +1,4 @@
+configuration {
+	modes: "drun";
+}
+@theme "/usr/share/rofi/themes/fancy.rasi"

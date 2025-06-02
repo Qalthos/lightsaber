@@ -18,7 +18,7 @@ set $term kitty
 # Your preferred application launcher
 # Note: pass the final command to swaymsg so that the resulting window can be opened
 # on the original workspace that the command was run on.
-set $menu rofi | xargs swaymsg exec
+set $menu rofi -show drun | xargs swaymsg exec
 # Your preferred file manager
 set $file thunar
 
@@ -29,6 +29,7 @@ assign [class="Slack"] workspace 2
 assign [class="discord"] workspace 3
 assign [app_id="com.discordapp.Discord"] workspace 3
 assign [app_id="org.mozilla.Thunderbird"] workspace mail
+assign [class="steam"] workspace steam
 
 ### Window configuration
 for_window [class="Litra Controler"] floating enable
@@ -43,6 +44,8 @@ for_window [class="Litra Controler"] floating enable
 #   output HDMI-A-1 resolution 1920x1080 position 1920,0
 #
 # You can get the names of your outputs by running: swaymsg -t get_outputs
+output "BOE 0xBC9 Unknown" scale 1.5
+output "LG Electronics LG HDR WQHD+ 306NTSUB8630" resolution 3840x1600@60Hz
 
 ### Idle configuration
 #
@@ -75,6 +78,10 @@ bindsym $mod+Control+Shift+z exec systemctl hibernate
 #
 # You can get the names of your inputs by running: swaymsg -t get_inputs
 # Read `man 5 sway-input` for more information about this section.
+input "type:touchpad" {
+    click_method clickfinger
+    dwt disabled
+}
 input "type:keyboard" {
     xkb_options ctrl:nocaps
     xkb_numlock enabled
