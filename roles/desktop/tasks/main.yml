@@ -49,6 +49,19 @@
     mode: u=rw,g=r,o=r
   become: true
 
+- name: Create user directories
+  ansible.builtin.file:
+    path: "~/{{ item }}"
+    mode: u=rwX,g=rX,o=rX
+    state: directory
+  loop:
+    - files/desktop
+    - files/documents
+    - files/downloads
+    - media/music
+    - media/pictures
+    - media/videos
+
 - name: Create .config directory tree
   ansible.builtin.file:
     path: ~/.config/{{ item.path }}
