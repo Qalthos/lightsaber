@@ -28,8 +28,6 @@
       - com.discordapp.Discord
       - com.github.tchx84.Flatseal
       - hu.irl.cameractrls
-      - in.cinny.Cinny
-      - io.github.trigg.discover_overlay
       - org.atheme.audacious
       - org.keepassxc.KeePassXC
       - org.mozilla.Thunderbird
