@@ -1,4 +1,7 @@
 configuration {
-	modes: "drun";
+	modi: "drun,run,combi";
+	combi-modi: "drun,run";
+	show-icons: true;
+	sort: true;
 }
-@theme "/usr/share/rofi/themes/fancy.rasi"
+@theme "/usr/share/rofi/themes/arthur.rasi"

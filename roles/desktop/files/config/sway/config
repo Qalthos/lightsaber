@@ -21,6 +21,7 @@ set $term kitty
 set $menu rofi -show drun
 # Your preferred file manager
 set $file thunar
+set $record 'wf-recorder -F fps=30 -c gif -f "$(xdg-user-dir PICTURES)/screenshots/$(date -Iseconds).gif"'
 
 default_border pixel 2
 
@@ -29,10 +30,19 @@ assign [class="Slack"] workspace 2
 assign [class="discord"] workspace 3
 assign [app_id="com.discordapp.Discord"] workspace 3
 assign [app_id="org.mozilla.Thunderbird"] workspace mail
+# Steam
 assign [class="steam"] workspace steam
+assign [class="steam_app"] workspace game
+# FFXIV
+assign [title="Dalamud"] workspace error
+assign [class="XIVLauncher.Core"] workspace "X|V"
+assign [class="ffxiv_dx11.exe"] workspace "X|V"
+assign [class="winedbg.exe"] workspace error
 
 ### Window configuration
-for_window [class="Litra Controler"] floating enable
+for_window [app_id="com.core447.StreamController"] floating enable
+for_window [app_id="zenity"] floating enable
+for_window [class="Litra Controller"] floating enable
 
 ### Output configuration
 #
@@ -106,6 +116,9 @@ input "type:keyboard" {
     # Screenshots
     bindsym Shift+Print exec "slurp -ro | grim -g -"
     bindsym Ctrl+Print exec "slurp | grim -g -"
+    # Screen record
+    bindsym Shift+Mod1+Print exec $record -g "$(slurp)"
+    bindsym Ctrl+Mod1+Print exec $record -g "$(slurp -ro)"
 
     # Drag floating windows by holding down $mod and left mouse button.
     # Resize them with right mouse button + $mod.
