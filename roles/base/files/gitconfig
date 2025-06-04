@@ -1,6 +1,7 @@
 [user]
 	name = Kate Case
 	email = this.is@katherineca.se
+	signingkey = /home/kate/.ssh/id_ed25519.pub
 [color]
 	ui = true
 [push]
@@ -28,3 +29,7 @@
 	problems = grep -E \"noqa|type: ignore\"
 [commit]
 	verbose = true
+[advice]
+	forceDeleteBranch = false
+[gpg]
+	format = ssh

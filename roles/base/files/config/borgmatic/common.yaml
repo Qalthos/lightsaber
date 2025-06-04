@@ -11,7 +11,7 @@
 # List of source directories and files to back up. Globs and tildes
 # are expanded. Do not backslash spaces in path names.
 source_directories:
-    - /home
+  - /home
 
 # A required list of local or remote repositories with paths and
 # optional labels (which can be used with the --repository flag to
@@ -22,11 +22,7 @@ source_directories:
 # then add local repository paths in the systemd service file to the
 # ReadWritePaths list. Prior to borgmatic 1.7.10, repositories was a
 # list of plain path strings.
-repositories:
-    - path: ssh://locutus/srv/backup/{hostname}
-      label: locutus
-    - path: ssh://rsync.net/./borg/{hostname}
-      label: rsync.net
+# repositories:
 
 # Working directory for the "borg create" command. Tildes are
 # expanded. Useful for backing up using relative paths. See
