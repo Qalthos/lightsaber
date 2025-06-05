@@ -5,8 +5,8 @@
 # "{app_name}" will be replaced with "myapp" in the configuration
 # file.
 # constants:
-    # app_name: myapp
-    # user: myuser
+#     app_name: myapp
+#     user: myuser
 
 # List of source directories and files to back up. Globs and tildes
 # are expanded. Do not backslash spaces in path names.
@@ -78,34 +78,34 @@ one_file_system: true
 # contains leading punctuation, so it parses correctly. Note that only
 # one of "patterns" and "source_directories" may be used.
 # patterns:
-    # - R /
-    # - '- /home/*/.cache'
-    # - + /home/susan
-    # - '- /home/*'
+#     - R /
+#     - '- /home/*/.cache'
+#     - + /home/susan
+#     - '- /home/*'
 
 # Read include/exclude patterns from one or more separate named files,
 # one pattern per line. Note that Borg considers this option
 # experimental. See the output of "borg help patterns" for more
 # details.
 # patterns_from:
-    # - /etc/borgmatic/patterns
+#     - /etc/borgmatic/patterns
 
 # Any paths matching these patterns are excluded from backups. Globs
 # and tildes are expanded. Note that a glob pattern must either start
 # with a glob or be an absolute path. Do not backslash spaces in path
 # names. See the output of "borg help patterns" for more details.
 # exclude_patterns:
-    # - '*.pyc'
-    # - /home/*/.cache
-    # - '*/.vim*.tmp'
-    # - /etc/ssl
-    # - /home/user/path with spaces
+#     - '*.pyc'
+#     - /home/*/.cache
+#     - '*/.vim*.tmp'
+#     - /etc/ssl
+#     - /home/user/path with spaces
 
 # Read exclude patterns from one or more separate named files, one
 # pattern per line. See the output of "borg help patterns" for more
 # details.
 exclude_from:
-    - /home/kate/.exclude.borg
+  - /home/kate/.exclude.borg
 
 # Exclude directories that contain a CACHEDIR.TAG file. See
 # http://www.brynosaurus.com/cachedir/spec.html for details. Defaults
@@ -115,7 +115,7 @@ exclude_caches: true
 # Exclude directories that contain a file with the given filenames.
 # Defaults to not set.
 # exclude_if_present:
-    # - .nobackup
+#     - .nobackup
 
 # If true, the exclude_if_present filename is included in backups.
 # Defaults to false, meaning that the exclude_if_present filename is
@@ -229,10 +229,10 @@ compression: zstd
 # 100+) are treated as warnings. Exit codes other than 1 and 2 are
 # only present in Borg 1.4.0+.
 # borg_exit_codes:
-    # - code: 13
-      # treat_as: warning
-    # - code: 100
-      # treat_as: error
+#     - code: 13
+#       treat_as: warning
+#     - code: 100
+#       treat_as: error
 
 # Umask used for when executing Borg or calling hooks. Defaults to
 # 0077 for Borg or the umask that borgmatic is run with for hooks.
@@ -275,20 +275,20 @@ compression: zstd
 # options. Running borgmatic with "--verbosity 2" shows the exact Borg
 # command-line invocation.
 # extra_borg_options:
-    # Extra command-line options to pass to "borg init".
-    # init: --extra-option
+#     Extra command-line options to pass to "borg init".
+#     init: --extra-option
 
-    # Extra command-line options to pass to "borg create".
-    # create: --extra-option
+#     Extra command-line options to pass to "borg create".
+#     create: --extra-option
 
-    # Extra command-line options to pass to "borg prune".
-    # prune: --extra-option
+#     Extra command-line options to pass to "borg prune".
+#     prune: --extra-option
 
-    # Extra command-line options to pass to "borg compact".
-    # compact: --extra-option
+#     Extra command-line options to pass to "borg compact".
+#     compact: --extra-option
 
-    # Extra command-line options to pass to "borg check".
-    # check: --extra-option
+#     Extra command-line options to pass to "borg check".
+#     check: --extra-option
 
 # Keep all archives within this time interval. See "skip_actions" for
 # disabling pruning altogether.
@@ -326,60 +326,60 @@ keep_yearly: 2
 # (if "frequency" is set) or every time borgmatic runs checks (if
 # "frequency" is omitted).
 # checks:
-    # Name of consistency check to run: "repository",
-    # "archives", "data", "spot", and/or "extract".
-    # "repository" checks the consistency of the
-    # repository, "archives" checks all of the
-    # archives, "data" verifies the integrity of the
-    # data within the archives, "spot" checks that
-    # some percentage of source files are found in the
-    # most recent archive (with identical contents),
-    # and "extract" does an extraction dry-run of the
-    # most recent archive. Note that "data" implies
-    # "archives". See "skip_actions" for disabling
-    # checks altogether.
-    # - name: spot
+#     Name of consistency check to run: "repository",
+#     "archives", "data", "spot", and/or "extract".
+#     "repository" checks the consistency of the
+#     repository, "archives" checks all of the
+#     archives, "data" verifies the integrity of the
+#     data within the archives, "spot" checks that
+#     some percentage of source files are found in the
+#     most recent archive (with identical contents),
+#     and "extract" does an extraction dry-run of the
+#     most recent archive. Note that "data" implies
+#     "archives". See "skip_actions" for disabling
+#     checks altogether.
+#     - name: spot
 
-      # How frequently to run this type of consistency
-      # check (as a best effort). The value is a number
-      # followed by a unit of time. E.g., "2 weeks" to
-      # run this consistency check no more than every
-      # two weeks for a given repository or "1 month" to
-      # run it no more than monthly. Defaults to
-      # "always": running this check every time checks
-      # are run.
-      # frequency: 2 weeks
+#       How frequently to run this type of consistency
+#       check (as a best effort). The value is a number
+#       followed by a unit of time. E.g., "2 weeks" to
+#       run this consistency check no more than every
+#       two weeks for a given repository or "1 month" to
+#       run it no more than monthly. Defaults to
+#       "always": running this check every time checks
+#       are run.
+#       frequency: 2 weeks
 
-      # The percentage delta between the source
-      # directories file count and the most recent backup
-      # archive file count that is allowed before the
-      # entire consistency check fails. This can catch
-      # problems like incorrect excludes, inadvertent
-      # deletes, etc. Only applies to the "spot" check.
-      # count_tolerance_percentage: 10
+#       The percentage delta between the source
+#       directories file count and the most recent backup
+#       archive file count that is allowed before the
+#       entire consistency check fails. This can catch
+#       problems like incorrect excludes, inadvertent
+#       deletes, etc. Only applies to the "spot" check.
+#       count_tolerance_percentage: 10
 
-      # The percentage of total files in the source
-      # directories to randomly sample and compare to
-      # their corresponding files in the most recent
-      # backup archive. Only applies to the "spot" check.
-      # data_sample_percentage: 1
+#       The percentage of total files in the source
+#       directories to randomly sample and compare to
+#       their corresponding files in the most recent
+#       backup archive. Only applies to the "spot" check.
+#       data_sample_percentage: 1
 
-      # The percentage of total files in the source
-      # directories that can fail a spot check comparison
-      # without failing the entire consistency check. This
-      # can catch problems like source files that have
-      # been bulk-changed by malware, backups that have
-      # been tampered with, etc. The value must be lower
-      # than or equal to the "contents_sample_percentage".
-      # Only applies to the "spot" check.
-      # data_tolerance_percentage: 0.5
+#       The percentage of total files in the source
+#       directories that can fail a spot check comparison
+#       without failing the entire consistency check. This
+#       can catch problems like source files that have
+#       been bulk-changed by malware, backups that have
+#       been tampered with, etc. The value must be lower
+#       than or equal to the "contents_sample_percentage".
+#       Only applies to the "spot" check.
+#       data_tolerance_percentage: 0.5
 
-      # Command to use instead of "xxh64sum" to hash
-      # source files, usually found in an OS package named
-      # "xxhash". Do not substitute with a different hash
-      # type (SHA, MD5, etc.) or the check will never
-      # succeed. Only applies to the "spot" check.
-      # xxh64sum_command: /usr/local/bin/xxh64sum
+#       Command to use instead of "xxh64sum" to hash
+#       source files, usually found in an OS package named
+#       "xxhash". Do not substitute with a different hash
+#       type (SHA, MD5, etc.) or the check will never
+#       succeed. Only applies to the "spot" check.
+#       xxh64sum_command: /usr/local/bin/xxh64sum
 
 # Paths or labels for a subset of the configured "repositories" (see
 # above) on which to run consistency checks. Handy in case some of
@@ -387,7 +387,7 @@ keep_yearly: 2
 # on them would take too long. Defaults to running consistency checks
 # on all configured repositories.
 # check_repositories:
-    # - user@backupserver:sourcehostname.borg
+#     - user@backupserver:sourcehostname.borg
 
 # Restrict the number of checked archives to the last n. Applies only
 # to the "archives" check. Defaults to checking all archives.
@@ -403,88 +403,64 @@ keep_yearly: 2
 # never want to run "compact" or checkless configuration where you
 # want to skip "check". Defaults to not skipping any actions.
 # skip_actions:
-    # - compact
+#     - compact
 
-# List of one or more shell commands or scripts to execute before all
-# the actions for each repository.
-# before_actions:
-    # - echo Starting actions.
+# List of one or more command hooks to execute, triggered at
+# particular points during borgmatic's execution. For each command
+# hook, specify one of "before" or "after", not both.
+commands:
+  # Name for the point in borgmatic's execution that
+  # the commands should be run before (required if
+  # "after" isn't set):
+  #  * "action" runs before each action for each
+  # repository.
+  #  * "repository" runs before all actions for each
+  # repository.
+  #  * "configuration" runs before all actions and
+  # repositories in the current configuration file.
+  #  * "everything" runs before all configuration
+  # files.
+  # - before: action
 
-# List of one or more shell commands or scripts to execute before
-# creating a backup, run once per repository.
-# before_backup:
-    # - echo Starting a backup.
+  # Name for the point in borgmatic's execution that
+  # the commands should be run after (required if
+  # "before" isn't set):
+  #  * "action" runs after each action for each
+  # repository.
+  #  * "repository" runs after all actions for each
+  # repository.
+  #  * "configuration" runs after all actions and
+  # repositories in the current configuration file.
+  #  * "everything" runs after all configuration
+  # files.
+  #  * "error" runs after an error occurs.
+  # - after: action
 
-# List of one or more shell commands or scripts to execute before
-# pruning, run once per repository.
-# before_prune:
-    # - echo Starting pruning.
+  # Only trigger the hook when borgmatic is run with
+  # particular actions listed here. Defaults to
+  # running for all actions.
+  # when:
+  #     - create
+  #     - prune
+  #     - compact
+  #     - check
 
-# List of one or more shell commands or scripts to execute before
-# compaction, run once per repository.
-# before_compact:
-    # - echo Starting compaction.
+  # List of one or more shell commands or scripts to
+  # run when this command hook is triggered. Required.
 
-# List of one or more shell commands or scripts to execute before
-# consistency checks, run once per repository.
-# before_check:
-    # - echo Starting checks.
-
-# List of one or more shell commands or scripts to execute before
-# extracting a backup, run once per repository.
-# before_extract:
-    # - echo Starting extracting.
-
-# List of one or more shell commands or scripts to execute after
-# creating a backup, run once per repository.
-# after_backup:
-    # - echo Finished a backup.
-
-# List of one or more shell commands or scripts to execute after
-# compaction, run once per repository.
-# after_compact:
-    # - echo Finished compaction.
-
-# List of one or more shell commands or scripts to execute after
-# pruning, run once per repository.
-# after_prune:
-    # - echo Finished pruning.
-
-# List of one or more shell commands or scripts to execute after
-# consistency checks, run once per repository.
-# after_check:
-    # - echo Finished checks.
-
-# List of one or more shell commands or scripts to execute after
-# extracting a backup, run once per repository.
-# after_extract:
-    # - echo Finished extracting.
-
-# List of one or more shell commands or scripts to execute after all
-# actions for each repository.
-# after_actions:
-    # - echo Finished actions.
-
-# List of one or more shell commands or scripts to execute when an
-# exception occurs during a "create", "prune", "compact", or "check"
-# action or an associated before/after hook.
-on_error:
-    - notify-send "Failed to run borgmatic"
-
-# List of one or more shell commands or scripts to execute before
-# running all actions (if one of them is "create"). These are
-# collected from all configuration files and then run once before all
-# of them (prior to all actions).
-# before_everything:
-    # - echo Starting actions.
-
-# List of one or more shell commands or scripts to execute after
-# running all actions (if one of them is "create"). These are
-# collected from all configuration files and then run once after all
-# of them (after any action).
-# after_everything:
-    # - echo Completed actions.
-
+  # Only trigger the hook if borgmatic encounters one
+  # of the states (execution results) listed here,
+  # where:
+  #  * "finish": No errors occurred.
+  #  * "fail": An error occurred.
+  # This state is evaluated only for the scope of the
+  # configured "action", "repository", etc., rather
+  # than for the entire borgmatic run. Only available
+  # for "after" hooks. Defaults to running the hook
+  # for all states.
+  - after: error
+    run:
+      - notify-send "borgmatic backup failed."
 # List of one or more PostgreSQL databases to dump before creating a
 # backup, run once per configuration file. The database dumps are
 # added to your source directories at runtime and streamed directly
@@ -493,123 +469,123 @@ on_error:
 # https://www.postgresql.org/docs/current/libpq-ssl.html for
 # details.
 # postgresql_databases:
-    # Database name (required if using this hook). Or "all" to
-    # dump all databases on the host. (Also set the "format"
-    # to dump each database to a separate file instead of one
-    # combined file.) Note that using this database hook
-    # implicitly enables both read_special and one_file_system
-    # (see above) to support dump and restore streaming.
-    # - name: users
+#     Database name (required if using this hook). Or "all" to
+#     dump all databases on the host. (Also set the "format"
+#     to dump each database to a separate file instead of one
+#     combined file.) Note that using this database hook
+#     implicitly enables both read_special and one_file_system
+#     (see above) to support dump and restore streaming.
+#     - name: users
 
-      # Database hostname to connect to. Defaults to connecting
-      # via local Unix socket.
-      # hostname: database.example.org
+#       Database hostname to connect to. Defaults to connecting
+#       via local Unix socket.
+#       hostname: database.example.org
 
-      # Database hostname to restore to. Defaults to the
-      # "hostname" option.
-      # restore_hostname: database.example.org
+#       Database hostname to restore to. Defaults to the
+#       "hostname" option.
+#       restore_hostname: database.example.org
 
-      # Port to connect to. Defaults to 5432.
-      # port: 5433
+#       Port to connect to. Defaults to 5432.
+#       port: 5433
 
-      # Port to restore to. Defaults to the "port" option.
-      # restore_port: 5433
+#       Port to restore to. Defaults to the "port" option.
+#       restore_port: 5433
 
-      # Username with which to connect to the database. Defaults
-      # to the username of the current user. You probably want
-      # to specify the "postgres" superuser here when the
-      # database name is "all".
-      # username: dbuser
+#       Username with which to connect to the database. Defaults
+#       to the username of the current user. You probably want
+#       to specify the "postgres" superuser here when the
+#       database name is "all".
+#       username: dbuser
 
-      # Username with which to restore the database. Defaults to
-      # the "username" option.
-      # restore_username: dbuser
+#       Username with which to restore the database. Defaults to
+#       the "username" option.
+#       restore_username: dbuser
 
-      # Password with which to connect to the database. Omitting
-      # a password will only work if PostgreSQL is configured to
-      # trust the configured username without a password or you
-      # create a ~/.pgpass file.
-      # password: trustsome1
+#       Password with which to connect to the database. Omitting
+#       a password will only work if PostgreSQL is configured to
+#       trust the configured username without a password or you
+#       create a ~/.pgpass file.
+#       password: trustsome1
 
-      # Password with which to connect to the restore database.
-      # Defaults to the "password" option.
-      # restore_password: trustsome1
+#       Password with which to connect to the restore database.
+#       Defaults to the "password" option.
+#       restore_password: trustsome1
 
-      # Do not output commands to set ownership of objects to
-      # match the original database. By default, pg_dump and
-      # pg_restore issue ALTER OWNER or SET SESSION
-      # AUTHORIZATION statements to set ownership of created
-      # schema elements. These statements will fail unless the
-      # initial connection to the database is made by a
-      # superuser.
-      # no_owner: true
+#       Do not output commands to set ownership of objects to
+#       match the original database. By default, pg_dump and
+#       pg_restore issue ALTER OWNER or SET SESSION
+#       AUTHORIZATION statements to set ownership of created
+#       schema elements. These statements will fail unless the
+#       initial connection to the database is made by a
+#       superuser.
+#       no_owner: true
 
-      # Database dump output format. One of "plain", "custom",
-      # "directory", or "tar". Defaults to "custom" (unlike raw
-      # pg_dump) for a single database. Or, when database name
-      # is "all" and format is blank, dumps all databases to a
-      # single file. But if a format is specified with an "all"
-      # database name, dumps each database to a separate file of
-      # that format, allowing more convenient restores of
-      # individual databases. See the pg_dump documentation for
-      # more about formats.
-      # format: directory
+#       Database dump output format. One of "plain", "custom",
+#       "directory", or "tar". Defaults to "custom" (unlike raw
+#       pg_dump) for a single database. Or, when database name
+#       is "all" and format is blank, dumps all databases to a
+#       single file. But if a format is specified with an "all"
+#       database name, dumps each database to a separate file of
+#       that format, allowing more convenient restores of
+#       individual databases. See the pg_dump documentation for
+#       more about formats.
+#       format: directory
 
-      # SSL mode to use to connect to the database server. One
-      # of "disable", "allow", "prefer", "require", "verify-ca"
-      # or "verify-full". Defaults to "disable".
-      # ssl_mode: require
+#       SSL mode to use to connect to the database server. One
+#       of "disable", "allow", "prefer", "require", "verify-ca"
+#       or "verify-full". Defaults to "disable".
+#       ssl_mode: require
 
-      # Path to a client certificate.
-      # ssl_cert: /root/.postgresql/postgresql.crt
+#       Path to a client certificate.
+#       ssl_cert: /root/.postgresql/postgresql.crt
 
-      # Path to a private client key.
-      # ssl_key: /root/.postgresql/postgresql.key
+#       Path to a private client key.
+#       ssl_key: /root/.postgresql/postgresql.key
 
-      # Path to a root certificate containing a list of trusted
-      # certificate authorities.
-      # ssl_root_cert: /root/.postgresql/root.crt
+#       Path to a root certificate containing a list of trusted
+#       certificate authorities.
+#       ssl_root_cert: /root/.postgresql/root.crt
 
-      # Path to a certificate revocation list.
-      # ssl_crl: /root/.postgresql/root.crl
+#       Path to a certificate revocation list.
+#       ssl_crl: /root/.postgresql/root.crl
 
-      # Command to use instead of "pg_dump" or "pg_dumpall".
-      # This can be used to run a specific pg_dump version
-      # (e.g., one inside a running container). Defaults to
-      # "pg_dump" for single database dump or "pg_dumpall" to
-      # dump all databases.
-      # pg_dump_command: docker exec my_pg_container pg_dump
+#       Command to use instead of "pg_dump" or "pg_dumpall".
+#       This can be used to run a specific pg_dump version
+#       (e.g., one inside a running container). Defaults to
+#       "pg_dump" for single database dump or "pg_dumpall" to
+#       dump all databases.
+#       pg_dump_command: docker exec my_pg_container pg_dump
 
-      # Command to use instead of "pg_restore". This can be used
-      # to run a specific pg_restore version (e.g., one inside a
-      # running container). Defaults to "pg_restore".
-      # pg_restore_command: docker exec my_pg_container pg_restore
+#       Command to use instead of "pg_restore". This can be used
+#       to run a specific pg_restore version (e.g., one inside a
+#       running container). Defaults to "pg_restore".
+#       pg_restore_command: docker exec my_pg_container pg_restore
 
-      # Command to use instead of "psql". This can be used to
-      # run a specific psql version (e.g., one inside a running
-      # container). Defaults to "psql".
-      # psql_command: docker exec my_pg_container psql
+#       Command to use instead of "psql". This can be used to
+#       run a specific psql version (e.g., one inside a running
+#       container). Defaults to "psql".
+#       psql_command: docker exec my_pg_container psql
 
-      # Additional pg_dump/pg_dumpall options to pass directly
-      # to the dump command, without performing any validation
-      # on them. See pg_dump documentation for details.
-      # options: --role=someone
+#       Additional pg_dump/pg_dumpall options to pass directly
+#       to the dump command, without performing any validation
+#       on them. See pg_dump documentation for details.
+#       options: --role=someone
 
-      # Additional psql options to pass directly to the psql
-      # command that lists available databases, without
-      # performing any validation on them. See psql
-      # documentation for details.
-      # list_options: --role=someone
+#       Additional psql options to pass directly to the psql
+#       command that lists available databases, without
+#       performing any validation on them. See psql
+#       documentation for details.
+#       list_options: --role=someone
 
-      # Additional pg_restore/psql options to pass directly to
-      # the restore command, without performing any validation
-      # on them. See pg_restore/psql documentation for details.
-      # restore_options: --role=someone
+#       Additional pg_restore/psql options to pass directly to
+#       the restore command, without performing any validation
+#       on them. See pg_restore/psql documentation for details.
+#       restore_options: --role=someone
 
-      # Additional psql options to pass directly to the analyze
-      # command run after a restore, without performing any
-      # validation on them. See psql documentation for details.
-      # analyze_options: --role=someone
+#       Additional psql options to pass directly to the analyze
+#       command run after a restore, without performing any
+#       validation on them. See psql documentation for details.
+#       analyze_options: --role=someone
 
 # List of one or more MariaDB databases to dump before creating a
 # backup, run once per configuration file. The database dumps are
@@ -617,84 +593,84 @@ on_error:
 # to Borg. Requires mariadb-dump/mariadb commands. See
 # https://mariadb.com/kb/en/library/mysqldump/ for details.
 # mariadb_databases:
-    # Database name (required if using this hook). Or "all" to
-    # dump all databases on the host. Note that using this
-    # database hook implicitly enables both read_special and
-    # one_file_system (see above) to support dump and restore
-    # streaming.
-    # - name: users
+#     Database name (required if using this hook). Or "all" to
+#     dump all databases on the host. Note that using this
+#     database hook implicitly enables both read_special and
+#     one_file_system (see above) to support dump and restore
+#     streaming.
+#     - name: users
 
-      # Database hostname to connect to. Defaults to connecting
-      # via local Unix socket.
-      # hostname: database.example.org
+#       Database hostname to connect to. Defaults to connecting
+#       via local Unix socket.
+#       hostname: database.example.org
 
-      # Database hostname to restore to. Defaults to the
-      # "hostname" option.
-      # restore_hostname: database.example.org
+#       Database hostname to restore to. Defaults to the
+#       "hostname" option.
+#       restore_hostname: database.example.org
 
-      # Port to connect to. Defaults to 3306.
-      # port: 3307
+#       Port to connect to. Defaults to 3306.
+#       port: 3307
 
-      # Port to restore to. Defaults to the "port" option.
-      # restore_port: 5433
+#       Port to restore to. Defaults to the "port" option.
+#       restore_port: 5433
 
-      # Username with which to connect to the database. Defaults
-      # to the username of the current user.
-      # username: dbuser
+#       Username with which to connect to the database. Defaults
+#       to the username of the current user.
+#       username: dbuser
 
-      # Username with which to restore the database. Defaults to
-      # the "username" option.
-      # restore_username: dbuser
+#       Username with which to restore the database. Defaults to
+#       the "username" option.
+#       restore_username: dbuser
 
-      # Password with which to connect to the database. Omitting
-      # a password will only work if MariaDB is configured to
-      # trust the configured username without a password.
-      # password: trustsome1
+#       Password with which to connect to the database. Omitting
+#       a password will only work if MariaDB is configured to
+#       trust the configured username without a password.
+#       password: trustsome1
 
-      # Command to use instead of "mariadb-dump". This can be
-      # used to run a specific mariadb_dump version (e.g., one
-      # inside a running container). Defaults to "mariadb-dump".
-      # mariadb_dump_command: docker exec mariadb_container mariadb-dump
+#       Command to use instead of "mariadb-dump". This can be
+#       used to run a specific mariadb_dump version (e.g., one
+#       inside a running container). Defaults to "mariadb-dump".
+#       mariadb_dump_command: docker exec mariadb_container mariadb-dump
 
-      # Command to run instead of "mariadb". This can be used to
-      # run a specific mariadb version (e.g., one inside a
-      # running container). Defaults to "mariadb".
-      # mariadb_command: docker exec mariadb_container mariadb
+#       Command to run instead of "mariadb". This can be used to
+#       run a specific mariadb version (e.g., one inside a
+#       running container). Defaults to "mariadb".
+#       mariadb_command: docker exec mariadb_container mariadb
 
-      # Password with which to connect to the restore database.
-      # Defaults to the "password" option.
-      # restore_password: trustsome1
+#       Password with which to connect to the restore database.
+#       Defaults to the "password" option.
+#       restore_password: trustsome1
 
-      # Database dump output format. Currently only "sql" is
-      # supported. Defaults to "sql" for a single database. Or,
-      # when database name is "all" and format is blank, dumps
-      # all databases to a single file. But if a format is
-      # specified with an "all" database name, dumps each
-      # database to a separate file of that format, allowing
-      # more convenient restores of individual databases.
-      # format: directory
+#       Database dump output format. Currently only "sql" is
+#       supported. Defaults to "sql" for a single database. Or,
+#       when database name is "all" and format is blank, dumps
+#       all databases to a single file. But if a format is
+#       specified with an "all" database name, dumps each
+#       database to a separate file of that format, allowing
+#       more convenient restores of individual databases.
+#       format: directory
 
-      # Use the "--add-drop-database" flag with mariadb-dump,
-      # causing the database to be dropped right before restore.
-      # Defaults to true.
-      # add_drop_database: false
+#       Use the "--add-drop-database" flag with mariadb-dump,
+#       causing the database to be dropped right before restore.
+#       Defaults to true.
+#       add_drop_database: false
 
-      # Additional mariadb-dump options to pass directly to the
-      # dump command, without performing any validation on them.
-      # See mariadb-dump documentation for details.
-      # options: --skip-comments
+#       Additional mariadb-dump options to pass directly to the
+#       dump command, without performing any validation on them.
+#       See mariadb-dump documentation for details.
+#       options: --skip-comments
 
-      # Additional options to pass directly to the mariadb
-      # command that lists available databases, without
-      # performing any validation on them. See mariadb command
-      # documentation for details.
-      # list_options: --defaults-extra-file=mariadb.cnf
+#       Additional options to pass directly to the mariadb
+#       command that lists available databases, without
+#       performing any validation on them. See mariadb command
+#       documentation for details.
+#       list_options: --defaults-extra-file=mariadb.cnf
 
-      # Additional options to pass directly to the mariadb
-      # command that restores database dumps, without
-      # performing any validation on them. See mariadb command
-      # documentation for details.
-      # restore_options: --defaults-extra-file=mariadb.cnf
+#       Additional options to pass directly to the mariadb
+#       command that restores database dumps, without
+#       performing any validation on them. See mariadb command
+#       documentation for details.
+#       restore_options: --defaults-extra-file=mariadb.cnf
 
 # List of one or more MySQL databases to dump before creating a
 # backup, run once per configuration file. The database dumps are
@@ -703,101 +679,101 @@ on_error:
 # https://dev.mysql.com/doc/refman/8.0/en/mysqldump.html for
 # details.
 # mysql_databases:
-    # Database name (required if using this hook). Or "all" to
-    # dump all databases on the host. Note that using this
-    # database hook implicitly enables both read_special and
-    # one_file_system (see above) to support dump and restore
-    # streaming.
-    # - name: users
+#     Database name (required if using this hook). Or "all" to
+#     dump all databases on the host. Note that using this
+#     database hook implicitly enables both read_special and
+#     one_file_system (see above) to support dump and restore
+#     streaming.
+#     - name: users
 
-      # Database hostname to connect to. Defaults to connecting
-      # via local Unix socket.
-      # hostname: database.example.org
+#       Database hostname to connect to. Defaults to connecting
+#       via local Unix socket.
+#       hostname: database.example.org
 
-      # Database hostname to restore to. Defaults to the
-      # "hostname" option.
-      # restore_hostname: database.example.org
+#       Database hostname to restore to. Defaults to the
+#       "hostname" option.
+#       restore_hostname: database.example.org
 
-      # Port to connect to. Defaults to 3306.
-      # port: 3307
+#       Port to connect to. Defaults to 3306.
+#       port: 3307
 
-      # Port to restore to. Defaults to the "port" option.
-      # restore_port: 5433
+#       Port to restore to. Defaults to the "port" option.
+#       restore_port: 5433
 
-      # Username with which to connect to the database. Defaults
-      # to the username of the current user.
-      # username: dbuser
+#       Username with which to connect to the database. Defaults
+#       to the username of the current user.
+#       username: dbuser
 
-      # Username with which to restore the database. Defaults to
-      # the "username" option.
-      # restore_username: dbuser
+#       Username with which to restore the database. Defaults to
+#       the "username" option.
+#       restore_username: dbuser
 
-      # Password with which to connect to the database. Omitting
-      # a password will only work if MySQL is configured to
-      # trust the configured username without a password.
-      # password: trustsome1
+#       Password with which to connect to the database. Omitting
+#       a password will only work if MySQL is configured to
+#       trust the configured username without a password.
+#       password: trustsome1
 
-      # Password with which to connect to the restore database.
-      # Defaults to the "password" option.
-      # restore_password: trustsome1
+#       Password with which to connect to the restore database.
+#       Defaults to the "password" option.
+#       restore_password: trustsome1
 
-      # Command to use instead of "mysqldump". This can be used
-      # to run a specific mysql_dump version (e.g., one inside a
-      # running container). Defaults to "mysqldump".
-      # mysql_dump_command: docker exec mysql_container mysqldump
+#       Command to use instead of "mysqldump". This can be used
+#       to run a specific mysql_dump version (e.g., one inside a
+#       running container). Defaults to "mysqldump".
+#       mysql_dump_command: docker exec mysql_container mysqldump
 
-      # Command to run instead of "mysql". This can be used to
-      # run a specific mysql version (e.g., one inside a running
-      # container). Defaults to "mysql".
-      # mysql_command: docker exec mysql_container mysql
+#       Command to run instead of "mysql". This can be used to
+#       run a specific mysql version (e.g., one inside a running
+#       container). Defaults to "mysql".
+#       mysql_command: docker exec mysql_container mysql
 
-      # Database dump output format. Currently only "sql" is
-      # supported. Defaults to "sql" for a single database. Or,
-      # when database name is "all" and format is blank, dumps
-      # all databases to a single file. But if a format is
-      # specified with an "all" database name, dumps each
-      # database to a separate file of that format, allowing
-      # more convenient restores of individual databases.
-      # format: directory
+#       Database dump output format. Currently only "sql" is
+#       supported. Defaults to "sql" for a single database. Or,
+#       when database name is "all" and format is blank, dumps
+#       all databases to a single file. But if a format is
+#       specified with an "all" database name, dumps each
+#       database to a separate file of that format, allowing
+#       more convenient restores of individual databases.
+#       format: directory
 
-      # Use the "--add-drop-database" flag with mysqldump,
-      # causing the database to be dropped right before restore.
-      # Defaults to true.
-      # add_drop_database: false
+#       Use the "--add-drop-database" flag with mysqldump,
+#       causing the database to be dropped right before restore.
+#       Defaults to true.
+#       add_drop_database: false
 
-      # Additional mysqldump options to pass directly to the
-      # dump command, without performing any validation on them.
-      # See mysqldump documentation for details.
-      # options: --skip-comments
+#       Additional mysqldump options to pass directly to the
+#       dump command, without performing any validation on them.
+#       See mysqldump documentation for details.
+#       options: --skip-comments
 
-      # Additional options to pass directly to the mysql
-      # command that lists available databases, without
-      # performing any validation on them. See mysql command
-      # documentation for details.
-      # list_options: --defaults-extra-file=my.cnf
+#       Additional options to pass directly to the mysql
+#       command that lists available databases, without
+#       performing any validation on them. See mysql command
+#       documentation for details.
+#       list_options: --defaults-extra-file=my.cnf
 
-      # Additional options to pass directly to the mysql
-      # command that restores database dumps, without
-      # performing any validation on them. See mysql command
-      # documentation for details.
-      # restore_options: --defaults-extra-file=my.cnf
+#       Additional options to pass directly to the mysql
+#       command that restores database dumps, without
+#       performing any validation on them. See mysql command
+#       documentation for details.
+#       restore_options: --defaults-extra-file=my.cnf
 
 # sqlite_databases:
-    # This is used to tag the database dump file with a name.
-    # It is not the path to the database file itself. The name
-    # "all" has no special meaning for SQLite databases.
-    # - name: users
+#     This is used to tag the database dump file with a name.
+#     It is not the path to the database file itself. The name
+#     "all" has no special meaning for SQLite databases.
+#     - name: users
 
-      # Path to the SQLite database file to dump. If relative,
-      # it is relative to the current working directory. Note
-      # that using this database hook implicitly enables both
-      # read_special and one_file_system (see above) to support
-      # dump and restore streaming.
-      # path: /var/lib/sqlite/users.db
+#       Path to the SQLite database file to dump. If relative,
+#       it is relative to the current working directory. Note
+#       that using this database hook implicitly enables both
+#       read_special and one_file_system (see above) to support
+#       dump and restore streaming.
+#       path: /var/lib/sqlite/users.db
 
-      # Path to the SQLite database file to restore to. Defaults
-      # to the "path" option.
-      # restore_path: /var/lib/sqlite/users.db
+#       Path to the SQLite database file to restore to. Defaults
+#       to the "path" option.
+#       restore_path: /var/lib/sqlite/users.db
 
 # List of one or more MongoDB databases to dump before creating a
 # backup, run once per configuration file. The database dumps are
@@ -806,61 +782,56 @@ on_error:
 # https://docs.mongodb.com/database-tools/mongodump/ and
 # https://docs.mongodb.com/database-tools/mongorestore/ for details.
 # mongodb_databases:
-    # Database name (required if using this hook). Or "all" to
-    # dump all databases on the host. Note that using this
-    # database hook implicitly enables both read_special and
-    # one_file_system (see above) to support dump and restore
-    # streaming.
-    # - name: users
+#     Database name (required if using this hook). Or "all" to
+#     dump all databases on the host. Note that using this
+#     database hook implicitly enables both read_special and
+#     one_file_system (see above) to support dump and restore
+#     streaming.
+#     - name: users
 
-      # Database hostname to connect to. Defaults to connecting
-      # to localhost.
-      # hostname: database.example.org
+#       Database hostname to connect to. Defaults to connecting
+#       to localhost.
+#       hostname: database.example.org
 
-      # Database hostname to restore to. Defaults to the
-      # "hostname" option.
-      # restore_hostname: database.example.org
+#       Database hostname to restore to. Defaults to the
+#       "hostname" option.
+#       restore_hostname: database.example.org
 
-      # Port to connect to. Defaults to 27017.
-      # port: 27018
+#       Port to connect to. Defaults to 27017.
+#       port: 27018
 
-      # Port to restore to. Defaults to the "port" option.
-      # restore_port: 5433
+#       Port to restore to. Defaults to the "port" option.
+#       restore_port: 5433
 
-      # Username with which to connect to the database. Skip it
-      # if no authentication is needed.
-      # username: dbuser
+#       Username with which to connect to the database. Skip it
+#       if no authentication is needed.
+#       username: dbuser
 
-      # Username with which to restore the database. Defaults to
-      # the "username" option.
-      # restore_username: dbuser
+#       Username with which to restore the database. Defaults to
+#       the "username" option.
+#       restore_username: dbuser
 
-      # Password with which to connect to the database. Skip it
-      # if no authentication is needed.
-      # password: trustsome1
+#       Password with which to connect to the database. Skip it
+#       if no authentication is needed.
+#       password: trustsome1
 
-      # Password with which to connect to the restore database.
-      # Defaults to the "password" option.
-      # restore_password: trustsome1
+#       Password with which to connect to the restore database.
+#       Defaults to the "password" option.
+#       restore_password: trustsome1
 
-      # Authentication database where the specified username
-      # exists. If no authentication database is specified, the
-      # database provided in "name" is used. If "name" is "all",
-      # the "admin" database is used.
-      # authentication_database: admin
+#       Authentication database where the specified username
+#       exists. If no authentication database is specified, the
+#       database provided in "name" is used. If "name" is "all",
+#       the "admin" database is used.
+#       authentication_database: admin
 
-      # Database dump output format. One of "archive", or
-      # "directory". Defaults to "archive". See mongodump
-      # documentation for details. Note that format is ignored
-      # when the database name is "all".
-      # format: directory
+#       Database dump output format. One of "archive", or
+#       "directory". Defaults to "archive". See mongodump
+#       documentation for details. Note that format is ignored
+#       when the database name is "all".
+#       format: directory
 
-      # Additional mongodump options to pass directly to the
-      # dump command, without performing any validation on them.
-      # See mongodump documentation for details.
-      # options: --dumpDbUsersAndRoles
-
-      # Additional mongorestore options to pass directly to the
-      # dump command, without performing any validation on them.
-      # See mongorestore documentation for details.
-      # restore_options: --restoreDbUsersAndRoles
+#       Additional mongodump options to pass directly to the
+#       dump command, without performing any validation on them.
+#       See mongodump documentation for details.
+#       options: --dumpDbUsersAndRoles

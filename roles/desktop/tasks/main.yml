@@ -57,7 +57,7 @@
 - name: Ensure accountservice path exists
   ansible.builtin.file:
     path: /var/lib/AccountsService/icons
-    mode: u=rwx,g=rx,o=rx
+    mode: ug=rwx,o=rx
     state: directory
 
 - name: Set up user avatar
