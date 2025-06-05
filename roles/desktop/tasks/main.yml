@@ -4,15 +4,28 @@
     name:
       - kanshi
       - kitty
-      - swaync
       - nemo
+      - engrampa
+      - imv
+      - xed
+      - xreader
       - otf-font-awesome
       - papirus-icon-theme
+      - ttf-fira-code
       - sddm
       - sway
-      - ttf-fira-code
+      - swaybg
+      - swayidle
+      - swaylock
+      - swaync
       - waybar
       - rofi
+      - xdg-desktop-portal-gtk
+      - xdg-desktop-portal-wlr
+      - xdg-user-dirs
+      - polkit-gnome
+      - grim
+      - slurp
     state: installed
   become: true
   when: ansible_os_family == "Archlinux"
@@ -40,6 +53,12 @@
     - { owner: dirkdavidis, repo: papirus-icon-theme }
     - { owner: oleastre, repo: kitty-terminal }
   when: ansible_distribution == 'Fedora' and ansible_pkg_mgr != "atomic_container"
+
+- name: Ensure accountservice path exists
+  ansible.builtin.file:
+    path: /var/lib/AccountsService/icons
+    mode: u=rwx,g=rx,o=rx
+    state: directory
 
 - name: Set up user avatar
   ansible.builtin.copy:
