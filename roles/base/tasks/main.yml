@@ -62,7 +62,6 @@
     name:
       - git
       - htop
-      - mise
       - tmux
       - uv
       - neovim

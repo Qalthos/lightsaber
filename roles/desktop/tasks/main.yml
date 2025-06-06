@@ -3,15 +3,6 @@
   ansible.builtin.package:
     name:
       - kanshi
-      - kitty
-      - nemo
-      - engrampa
-      - imv
-      - xed
-      - xreader
-      - otf-font-awesome
-      - papirus-icon-theme
-      - ttf-fira-code
       - sddm
       - sway
       - swaybg
@@ -26,6 +17,20 @@
       - polkit-gnome
       - grim
       - slurp
+      # Theming
+      - papirus-icon-theme
+      # Applications
+      - engrampa
+      - imv
+      - kitty
+      - thunar
+      - xed
+      - xreader
+      # Fonts
+      - otf-font-awesome
+      - ttf-fira-code
+      - ttf-firacode-nerd
+      - ttf-noto-nerd
     state: installed
   become: true
   when: ansible_os_family == "Archlinux"
@@ -51,7 +56,6 @@
   loop:
     - { owner: yaroslav, repo: i3desktop }
     - { owner: dirkdavidis, repo: papirus-icon-theme }
-    - { owner: oleastre, repo: kitty-terminal }
   when: ansible_distribution == 'Fedora' and ansible_pkg_mgr != "atomic_container"
 
 - name: Ensure accountservice path exists
