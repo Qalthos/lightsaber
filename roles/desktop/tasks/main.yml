@@ -31,6 +31,8 @@
       - ttf-fira-code
       - ttf-firacode-nerd
       - ttf-noto-nerd
+      - noto-fonts-cjk
+      - noto-fonts-emoji
     state: installed
   become: true
   when: ansible_os_family == "Archlinux"

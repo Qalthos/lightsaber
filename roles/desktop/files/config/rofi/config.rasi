@@ -1,6 +1,4 @@
 configuration {
-	modi: "drun,run,combi";
-	combi-modi: "drun,run";
 	show-icons: true;
 	sort: true;
 }

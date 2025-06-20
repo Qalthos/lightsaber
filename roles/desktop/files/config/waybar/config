@@ -20,10 +20,11 @@
             "4": "",
             "mail": "",
             "steam": "",
+            "game": "",
             "urgent": "",
             "focused": "",
             "default": "",
-            "high-priority-named": ["1", "2", "3", "4", "mail", "steam"]
+            "high-priority-named": ["1", "2", "3", "4", "mail", "steam", "game"]
         },
         "persistent-workspaces": {
             "1": [],
