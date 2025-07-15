@@ -163,7 +163,7 @@
   },
   "custom/arch": {
     "format": "| {} A📦",
-    "exec": "check-updates | wc -l | sed 's/^0$//'",
+    "exec": "checkupdates | wc -l | sed 's/^0$//'",
     "tooltip": false,
     "hide-empty-text": true,
     "interval": 3600,
@@ -196,7 +196,7 @@
     "escape": true,
   },
   "custom/weather": {
-    "format": "{}",
+    "format": "| {}",
     "return-type": "json",
     "tooltip": true,
     "interval": 300,
