@@ -30,15 +30,13 @@
     flatpakrepo_url: https://dl.flathub.org/repo/flathub.flatpakrepo
     method: user
 
-
 - name: Install flatpaks
   community.general.flatpak:
     name:
-      - com.discordapp.Discord
       - com.github.tchx84.Flatseal
       - hu.irl.cameractrls
-      - org.atheme.audacious
       - org.keepassxc.KeePassXC
       - org.mozilla.Thunderbird
+      - org.pipewire.Helvum
     method: user
     state: present

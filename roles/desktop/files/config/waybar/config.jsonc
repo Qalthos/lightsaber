@@ -10,13 +10,13 @@
   "modules-right": [
     "tray",
     "backlight",
+    "battery",
     "idle_inhibitor",
     "custom/notification",
-    "battery",
-    "pulseaudio",
     "custom/weather",
     "custom/arch",
     "custom/flatpak",
+    "pulseaudio",
     "clock",
   ],
   // Modules configuration
