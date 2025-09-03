@@ -1,0 +1,6 @@
+- name: Install work apps
+  community.general.flatpak:
+    name:
+      - com.slack.Slack
+    method: user
+    state: present

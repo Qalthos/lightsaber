@@ -55,6 +55,9 @@
       - fira-code-fonts
       - google-noto-emoji-fonts
       - google-noto-sans-cjk-fonts
+      # Required for waypaper
+      - cairo-gobject-devel
+      - python-devel
     state: installed
   become: true
   when: ansible_os_family == "RedHat" and ansible_pkg_mgr != "atomic_container"
@@ -106,6 +109,7 @@
     mode: u=rwX,g=rX,o=rX
     state: directory
   loop:
+    - files/applications
     - files/desktop
     - files/documents
     - files/downloads

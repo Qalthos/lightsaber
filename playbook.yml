@@ -12,3 +12,9 @@
   roles:
     - desktop
   tags: desktop
+
+- name: Set up work environment
+  hosts: work
+  roles:
+    - work
+  tags: work
