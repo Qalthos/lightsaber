@@ -19,11 +19,16 @@
       - papirus-icon-theme
       # Applications
       - engrampa
+      - firefox
+      - flatpak
       - imv
       - kitty
+      - mpv
       - thunar
       - xed
       - xreader
+    state: installed
+  become: true
 
 - name: Install desktop on Arch
   ansible.builtin.package:
@@ -47,9 +52,9 @@
     name:
       - borgbackup
       # Fonts
+      - fira-code-fonts
       - google-noto-emoji-fonts
       - google-noto-sans-cjk-fonts
-      - mozilla-fira-code-fonts
     state: installed
   become: true
   when: ansible_os_family == "RedHat" and ansible_pkg_mgr != "atomic_container"

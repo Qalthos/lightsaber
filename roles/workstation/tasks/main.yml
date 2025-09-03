@@ -1,5 +1,5 @@
 ---
-- name: Install Arch Linux-flavored development tools
+- name: Install development tools on Arch Linux
   ansible.builtin.package:
     name:
       - base-devel
@@ -8,20 +8,13 @@
   become: true
   when: ansible_os_family == 'Archlinux'
 
-- name: Install general programs
+- name: Install development tools on Red Hat
   ansible.builtin.package:
     name:
-      - rsync
-      - firefox
-      - flatpak
-      - imv
-      - mpv
-      - engrampa
-      - xed
-      - xreader
+      - gh
     state: installed
   become: true
-  when: ansible_pkg_mgr != "atomic_container"
+  when: ansible_os_family == "RedHat" and ansible_pkg_mgr != "atomic_container"
 
 - name: Add the flathub flatpak repository remote to the user installation
   community.general.flatpak_remote:
