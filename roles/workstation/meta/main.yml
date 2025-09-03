@@ -1,9 +1,0 @@
----
-dependencies:
-  - { role: desktop }
-galaxy_info:
-  role_name: workstation
-  author: Kate Case (@qalthos)
-  description: Workstation Provisioning
-  license: MIT
-  min_ansible_version: "2.10"

@@ -69,6 +69,24 @@
   changed_when:
     - '"is already installed" not in desktop_uv.stdout'
 
+- name: Add the flathub flatpak repository remote to the user installation
+  community.general.flatpak_remote:
+    name: flathub
+    state: present
+    flatpakrepo_url: https://dl.flathub.org/repo/flathub.flatpakrepo
+    method: user
+
+- name: Install flatpaks
+  community.general.flatpak:
+    name:
+      - com.github.tchx84.Flatseal
+      - hu.irl.cameractrls
+      - org.keepassxc.KeePassXC
+      - org.mozilla.Thunderbird
+      - org.pipewire.Helvum
+    method: user
+    state: present
+
 - name: Ensure accountservice path exists
   ansible.builtin.file:
     path: /var/lib/AccountsService/icons
