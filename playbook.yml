@@ -1,12 +1,14 @@
 ---
 - name: Run base role on all hosts
   import_playbook: base.yml
+  tags: base
 
 - name: Handle Raspberry Pi hosts
   import_playbook: raspberry.yml
+  tags: raspberry
 
-- name: Provision workstations
-  hosts: workstation
-  remote_user: kate
+- name: Set up desktop environment
+  hosts: desktop
   roles:
-    - workstation
+    - desktop
+  tags: desktop
