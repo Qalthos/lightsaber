@@ -56,6 +56,13 @@
     state: present
   when: ansible_os_family != 'RedHat'
 
+- name: Add mise copr repo
+  community.general.copr:
+    name: jdxcode/mise
+    state: enabled
+  become: true
+  when: ansible_os_family == "RedHat" and ansible_pkg_mgr != "atomic_container"
+
 - name: Install required environment tools
   become: true
   ansible.builtin.package:
@@ -63,6 +70,7 @@
       - git
       - htop
       - uv
+      - mise
       - neovim
       - zsh
     state: present

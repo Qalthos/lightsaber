@@ -15,6 +15,7 @@
       - xdg-user-dirs
       - grim
       - slurp
+      - network-manager-applet
       # Theming
       - papirus-icon-theme
       # Applications
@@ -59,6 +60,14 @@
       - cairo-gobject-devel
       - python-devel
     state: installed
+  become: true
+  when: ansible_os_family == "RedHat" and ansible_pkg_mgr != "atomic_container"
+
+- name: Add swaync copr repo
+  community.general.copr:
+    name: erikreider/SwayNotificationCenter
+    state: enabled
+    includepkgs: SwayNotificationCenter
   become: true
   when: ansible_os_family == "RedHat" and ansible_pkg_mgr != "atomic_container"
 
