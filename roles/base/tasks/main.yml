@@ -62,7 +62,6 @@
     name:
       - git
       - htop
-      - tmux
       - uv
       - neovim
       - zsh
@@ -74,3 +73,4 @@
   ansible.builtin.user:
     name: "{{ ansible_user }}"
     shell: /usr/bin/zsh
+  when: ansible_os_family != "RedHat"
