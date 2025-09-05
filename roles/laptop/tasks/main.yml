@@ -1,7 +1,7 @@
 ---
 - name: Install bluetooth & applet
   ansible.builtin.package:
-    name: blueberry
+    name: blueman
   become: true
 
 - name: Copy udev hibernate rule
