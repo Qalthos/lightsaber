@@ -4,36 +4,29 @@
     name: blueberry
   become: true
 
-- name: Set up network bond
-  community.general.nmcli:
-    type: bond
-    conn_name: "dock-bond"
-    ifname: bond0
-    state: present
-    mode: "active-backup"
-    primary: "{{ ethernet }}"
-    miimon: 100
-    updelay: 200
-    downdelay: 0
+- name: Copy udev hibernate rule
+  ansible.builtin.copy:
+    src: 99-lowbatt.rules
+    dest: /etc/udev/rules.d/
+    mode: u=rw,g=r,o=r
+  become: true
 
-- name: Assign Ethernet to bond
-  community.general.nmcli:
-    type: ethernet
-    conn_name: "Dock Ethernet"
-    ifname: "{{ ethernet }}"
-    master: bond0
-    state: present
+- name: Create .config directory tree
+  ansible.builtin.file:
+    path: ~/.config/{{ item.path }}
+    mode: u=rwx,g=rx,o=rx
+    state: directory
+  loop: "{{ query('filetree', 'config/') }}"
+  when: item.state == 'directory'
+  tags:
+    - dotfiles
 
-- name: Assign WiFi to bond
-  community.general.nmcli:
-    type: wifi
-    conn_name: "{{ wifi_name }}"
-    ifname: "{{ wifi }}"
-    master: bond0
-    state: present
-    ssid: "{{ wifi_name }}"
-    wifi:
-      hidden: true
-    wifi_sec:
-      key-mgmt: wpa-psk
-      psk: "{{ wifi_psk }}"
+- name: Copy .config directory
+  ansible.builtin.copy:
+    src: config/{{ item.path }}
+    dest: ~/.config/{{ item.path }}
+    mode: u=rw,g=r,o=r
+  loop: "{{ query('filetree', 'config/') }}"
+  when: item.state == 'file'
+  tags:
+    - dotfiles
