@@ -1,12 +1,11 @@
 output 'LG Electronics LG HDR WQHD+ 306NTSUB8630' {
-	mode 3840x1600@60Hz
-	adaptive_sync off
+	mode 3840x1600
 	alias $ultrawide
 }
+
 output 'ASUSTek COMPUTER INC VG245 G6LMQS144188' {
-	mode 1920x1080@60Hz
+	mode 1920x1080
 	transform 90
-	adaptive_sync off
 	alias $tall
 }
 
@@ -15,17 +14,14 @@ profile dock {
 	output $ultrawide enable position 0,0
 	output $tall enable position 3840,0
 }
+
 profile fallback {
 	output eDP-1 enable
 	output $ultrawide disable
 	output $tall disable
 }
-profile single {
-	output eDP-1 disable
-	output $ultrawide enable position 0,0
-	output $tall disable
-}
-profile halfsies {
+
+profile squish {
 	output eDP-1 disable
 	output $ultrawide enable position 0,0 mode 1920x1600
 	output $tall enable position 1920,0
