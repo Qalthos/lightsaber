@@ -4,3 +4,11 @@
       - com.slack.Slack
     method: user
     state: present
+
+- name: Override shell in sssd
+  ansible.builtin.command:
+    cmd: sss_override user-add {{ ansible_user }} -s /usr/bin/zsh
+  become: true
+  register: work_sss_override
+  changed_when: '"SSSD needs to be restarted" in work_sss_override'
+  notify: sssd_restart
