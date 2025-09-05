@@ -11,4 +11,4 @@
   become: true
   register: work_sss_override
   changed_when: '"SSSD needs to be restarted" in work_sss_override'
-  notify: sssd_restart
+  notify: Restart sssd
