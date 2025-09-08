@@ -37,7 +37,6 @@
     name:
       - swaync
       - polkit-gnome
-      - borg
       # Fonts
       - otf-font-awesome
       - ttf-fira-code
@@ -52,7 +51,6 @@
 - name: Install desktop on Red Hat
   ansible.builtin.package:
     name:
-      - borgbackup
       # Fonts
       - fira-code-fonts
       - google-noto-emoji-fonts
@@ -77,7 +75,6 @@
     cmd: uv tool install {{ item }}
   register: desktop_uv
   loop:
-    - borgmatic
     - waypaper
   changed_when:
     - '"is already installed" not in desktop_uv.stdout'

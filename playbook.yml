@@ -19,6 +19,12 @@
     - laptop
   tags: laptop
 
+- name: Set up personal touches
+  hosts: personal
+  roles:
+    - personal
+  tags: personal
+
 - name: Set up work environment
   hosts: work
   roles:

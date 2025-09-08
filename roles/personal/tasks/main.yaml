@@ -1,0 +1,25 @@
+---
+- name: Install borg on Arch Linux
+  ansible.builtin.package:
+    name:
+      - borg
+    state: installed
+  become: true
+  when: ansible_os_family == "Archlinux"
+
+- name: Install borg on Red Hat
+  ansible.builtin.package:
+    name:
+      - borgbackup
+    state: installed
+  become: true
+  when: ansible_os_family == "RedHat" and ansible_pkg_mgr != "atomic_container"
+
+- name: Install borgmatic
+  ansible.builtin.command:
+    cmd: uv tool install {{ item }}
+  register: personal_uv
+  loop:
+    - borgmatic
+  changed_when:
+    - '"is already installed" not in personal_uv.stdout'
