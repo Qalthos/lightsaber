@@ -91,7 +91,6 @@
     name:
       - com.github.tchx84.Flatseal
       - hu.irl.cameractrls
-      - org.keepassxc.KeePassXC
       - org.mozilla.Thunderbird
       - org.pipewire.Helvum
     method: user
@@ -174,6 +173,5 @@
     enabled: true
     scope: user
   loop:
-    - borgmatic.timer
     - kanshi.service
     - sway-xdg-autostart.target

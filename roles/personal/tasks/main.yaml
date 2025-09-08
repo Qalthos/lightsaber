@@ -23,3 +23,39 @@
     - borgmatic
   changed_when:
     - '"is already installed" not in personal_uv.stdout'
+
+- name: Install flatpaks
+  community.general.flatpak:
+    name:
+      - com.discordapp.Discord
+      - com.valvesoftware.Steam
+      - dev.goats.xivlauncher
+      - org.keepassxc.KeePassXC
+      - org.signal.Signal
+    method: user
+    state: present
+
+- name: Ensure user services dir exists
+  ansible.builtin.file:
+    path: ~/.config/systemd/user/
+    mode: u=rwx,g=rx,o=rx
+    state: directory
+
+- name: Install user services
+  ansible.builtin.copy:
+    src: "{{ item }}"
+    dest: ~/.config/systemd/user/
+    mode: preserve
+  loop: "{{ query('fileglob', 'services/*') }}"
+  notify: Reload systemd
+
+- name: Ensure services are available
+  ansible.builtin.meta: flush_handlers
+
+- name: Enable services
+  ansible.builtin.systemd_service:
+    name: "{{ item }}"
+    enabled: true
+    scope: user
+  loop:
+    - borgmatic.timer
