@@ -3,7 +3,7 @@
 # functions, options, key bindings, etc.
 
 # mise
-eval "$(mise activate)"
+eval "$(mise activate zsh)"
 # direnv
 eval "$(direnv hook zsh)"
 
@@ -41,9 +41,6 @@ stty -ixon -ixoff
 ## automatically decide when to page a list of completions
 #LISTMAX=0
 
-## disable mail checking
-#MAILCHECK=0
-
 # autoload -U colors
 #colors
 
@@ -53,13 +50,10 @@ export EDITOR=nvim
 bindkey -e
 
 source /etc/profile
-source distro_check.sh
-echo $DISTRO
 
 eval "$(fasd --init auto)"
 
-source ~/.zsh/aliases
-source ~/.zsh/prompt
+for file in ~/.zsh/rc.d/*(.); source $file
 
 if hash fortune 2>/dev/null; then
     fortune -c
