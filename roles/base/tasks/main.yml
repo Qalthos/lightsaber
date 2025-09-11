@@ -7,47 +7,20 @@
 - name: Transfer dotfiles
   ansible.builtin.copy:
     src: "{{ item }}"
-    dest: /home/{{ ansible_user }}/.{{ item }}
+    dest: ~/.{{ item }}
+    directory_mode: u=rwx,g=rx,o=rx
     mode: u=rw,g=r,o=r
-    force: true
-    backup: true
   tags:
     - dotfiles
   loop:
+    - config
     - gitconfig
+    - local
     - profile
-    - ssh/
-    - zsh/
+    - ssh
+    - zsh
     - zshrc
     - zprofile
-
-- name: Create .config directory tree
-  ansible.builtin.file:
-    path: ~/.config/{{ item.path }}
-    mode: u=rwx,g=rx,o=rx
-    state: directory
-  loop: "{{ query('filetree', 'config/') }}"
-  when: item.state == 'directory'
-  tags:
-    - dotfiles
-
-- name: Copy .config directory
-  ansible.builtin.copy:
-    mode: u=rw,g=r,o=r
-    src: config/{{ item.path }}
-    dest: ~/.config/{{ item.path }}
-  loop: "{{ query('filetree', 'config/') }}"
-  when: item.state == 'file'
-  tags:
-    - dotfiles
-
-- name: Set up scripts
-  ansible.builtin.copy:
-    src: "{{ item }}"
-    dest: "/home/{{ ansible_user }}/.local/bin/"
-    mode: u=rwx,g=r,o=r
-  loop: "{{ query('fileglob', 'bin/*') }}"
-  when: ansible_pkg_mgr != "atomic_container"
 
 - name: Enable en_US.UTF-8 locale
   become: true
