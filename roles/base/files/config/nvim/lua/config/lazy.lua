@@ -40,6 +40,9 @@ require('lualine').setup({
     lualine_x = { 'encoding', 'fileformat', 'filetype', 'lsp_status' },
   },
 })
+require("nvim-treesitter.configs").setup({
+  ensure_installed = { "python" },
+})
 
 -- Autoupdate plugins
 local group = vim.api.nvim_create_augroup("autoupdate", { clear = true })

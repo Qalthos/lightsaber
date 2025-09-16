@@ -66,6 +66,16 @@
   become: true
   when: ansible_os_family == "RedHat" and ansible_pkg_mgr != "atomic_container"
 
+- name: Install uv tools
+  ansible.builtin.command:
+    cmd: uv tool install {{ item }}
+  register: base_uv
+  loop:
+    - pyrefly
+    - ruff
+  changed_when:
+    - '"is already installed" not in base_uv.stdout'
+
 - name: Set shell to zsh
   become: true
   ansible.builtin.user:
