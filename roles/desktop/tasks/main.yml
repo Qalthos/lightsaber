@@ -123,45 +123,23 @@
     - media/pictures
     - media/videos
 
-- name: Create .config directory tree
-  ansible.builtin.file:
-    path: ~/.config/{{ item.path }}
-    mode: u=rwx,g=rx,o=rx
-    state: directory
-  loop: "{{ query('filetree', 'config/') }}"
-  when: item.state == 'directory'
-  tags:
-    - dotfiles
-
-- name: Copy .config directory
-  ansible.builtin.copy:
-    src: config/{{ item.path }}
-    dest: ~/.config/{{ item.path }}
-    mode: u=rw,g=r,o=r
-  loop: "{{ query('filetree', 'config/') }}"
-  when: item.state == 'file'
-  tags:
-    - dotfiles
-
-- name: Copy helper scripts
+- name: Copy config files and scripts
   ansible.builtin.copy:
     src: "{{ item }}"
-    dest: ~/.local/bin/
-    mode: preserve
-  loop: "{{ query('fileglob', 'bin/*') }}"
-
-- name: Ensure user services dir exists
-  ansible.builtin.file:
-    path: ~/.config/systemd/user/
-    mode: u=rwx,g=rx,o=rx
-    state: directory
+    dest: "~/.{{ item }}"
+    directory_mode: u=rwx,g=rx,o=rx
+    mode: u=rw,g=r,o=r
+  loop:
+    - config
+    - local
+  tags:
+    - dotfiles
 
 - name: Install user services
   ansible.builtin.copy:
-    src: "{{ item }}"
+    src: services/
     dest: ~/.config/systemd/user/
     mode: preserve
-  loop: "{{ query('fileglob', 'services/*') }}"
   notify: Reload systemd
 
 - name: Ensure services are available
