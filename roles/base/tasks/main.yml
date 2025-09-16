@@ -8,19 +8,25 @@
   ansible.builtin.copy:
     src: "{{ item }}"
     dest: ~/.{{ item }}
-    directory_mode: u=rwx,g=rx,o=rx
-    mode: u=rw,g=r,o=r
+    mode: preserve
   tags:
     - dotfiles
   loop:
-    - config
     - gitconfig
-    - local
     - profile
-    - ssh
-    - zsh
     - zshrc
     - zprofile
+
+- name: Transfer dotfiles filetree
+  ansible.builtin.include_role:
+    name: base
+    tasks_from: copy_filetree
+  vars:
+    base_dest: "~/."
+  loop:
+    - config
+    - local
+    - zsh
 
 - name: Enable en_US.UTF-8 locale
   become: true

@@ -1,10 +1,7 @@
 [tools]
 direnv = "latest"
-jq = "latest"
 node = "latest"
-"npm:@ansible/ansible-language-server" = "latest"
 "npm:bash-language-server" = "latest"
-"npm:cspell" = "latest"
 "npm:vscode-json-languageserver" = "latest"
 "npm:yaml-language-server" = "latest"
 usage = "latest"
