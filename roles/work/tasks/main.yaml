@@ -13,3 +13,15 @@
   register: work_sss_override
   changed_when: '"SSSD needs to be restarted" in work_sss_override'
   notify: Restart sssd
+
+- name: Set up work directory
+  ansible.builtin.file:
+    path: ~/workspace/ansible/
+    state: directory
+    mode: u=rwx,g=rx,o=rx
+
+- name: Add mise config for work
+  ansible.builtin.copy:
+    src: mise.toml
+    dest: ~/workspace/ansible/
+    mode: preserve

@@ -1,0 +1,5 @@
+[tools]
+"npm:@ansible/ansible-language-server" = "latest"
+"npm:@anthropic-ai/claude-code" = "latest"
+"npm:cspell" = "latest"
+python = ["3.13", "3.12", "3.11", "3.10"]
