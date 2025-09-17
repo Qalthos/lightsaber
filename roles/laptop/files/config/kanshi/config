@@ -1,5 +1,0 @@
-include ~/.config/kanshi/home_dock
-
-profile {
-	output eDP-1 enable
-}
