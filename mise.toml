@@ -1,0 +1,2 @@
+[tools]
+"npm:@ansible/ansible-language-server" = "latest"

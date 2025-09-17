@@ -14,6 +14,19 @@
   changed_when: '"SSSD needs to be restarted" in work_sss_override'
   notify: Restart sssd
 
+- name: Get current authselect profile
+  ansible.builtin.command:
+    cmd: authselect current
+  changed_when: never
+  register: work_authselect
+
+- name: Enable fingerprint auth
+  ansible.builtin.command:
+    cmd: authselect select sssd with-fingerprint
+  become: true
+  when: '"with-fingerprint" not in work_authselect.stdout'
+  changed_when: always
+
 - name: Set up work directory
   ansible.builtin.file:
     path: ~/workspace/ansible/
