@@ -11,22 +11,9 @@
     mode: u=rw,g=r,o=r
   become: true
 
-- name: Create .config directory tree
-  ansible.builtin.file:
-    path: ~/.config/{{ item.path }}
-    mode: u=rwx,g=rx,o=rx
-    state: directory
-  loop: "{{ query('filetree', 'config/') }}"
-  when: item.state == 'directory'
-  tags:
-    - dotfiles
-
-- name: Copy .config directory
-  ansible.builtin.copy:
-    src: config/{{ item.path }}
-    dest: ~/.config/{{ item.path }}
-    mode: u=rw,g=r,o=r
-  loop: "{{ query('filetree', 'config/') }}"
-  when: item.state == 'file'
+- name: Copy config files
+  ansible.builtin.include_tasks: copy_filetree.yaml
+  loop:
+    - config
   tags:
     - dotfiles
