@@ -21,7 +21,6 @@
   ansible.builtin.include_tasks: copy_filetree.yaml
   loop:
     - config
-    - local
     - zsh
   tags:
     - dotfiles
