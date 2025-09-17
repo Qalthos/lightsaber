@@ -17,16 +17,14 @@
     - zshrc
     - zprofile
 
-- name: Transfer dotfiles filetree
-  ansible.builtin.include_role:
-    name: base
-    tasks_from: copy_filetree
-  vars:
-    base_dest: "~/."
+- name: Copy config files
+  ansible.builtin.include_tasks: copy_filetree.yaml
   loop:
     - config
     - local
     - zsh
+  tags:
+    - dotfiles
 
 - name: Enable en_US.UTF-8 locale
   become: true

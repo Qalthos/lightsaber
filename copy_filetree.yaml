@@ -1,7 +1,7 @@
 ---
 - name: Create directory structure
   ansible.builtin.file:
-    path: "{{ base_dest }}{{ item }}/{{ dir.path }}"
+    path: "~/.{{ item }}/{{ dir.path }}"
     mode: u=rwx,g=rx,o=rx
     state: directory
   loop: "{{ query('filetree', item) }}"
@@ -13,7 +13,7 @@
 - name: Copy files into destination tree
   ansible.builtin.copy:
     src: "{{ item }}/{{ file.path }}"
-    dest: "{{ base_dest }}{{ item }}/{{ file.path }}"
+    dest: "~/.{{ item }}/{{ file.path }}"
     mode: preserve
   loop: "{{ query('filetree', item) }}"
   loop_control:

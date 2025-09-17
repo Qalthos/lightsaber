@@ -1,6 +1,8 @@
 ---
 - name: Run base role on all hosts
-  import_playbook: base.yml
+  hosts: all
+  roles:
+    - base
   tags: base
 
 - name: Handle Raspberry Pi hosts

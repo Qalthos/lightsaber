@@ -124,11 +124,7 @@
     - media/videos
 
 - name: Copy config files and scripts
-  ansible.builtin.copy:
-    src: "{{ item }}"
-    dest: "~/.{{ item }}"
-    directory_mode: u=rwx,g=rx,o=rx
-    mode: u=rw,g=r,o=r
+  ansible.builtin.include_tasks: copy_filetree.yaml
   loop:
     - config
     - local
