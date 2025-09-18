@@ -1,0 +1,6 @@
+---
+ansible_user: kcase
+monitor:
+  name: LG Display LP140WU4-SPK1 Unknown
+  width: 1920
+  height: 1200

@@ -17,3 +17,9 @@
     - config
   tags:
     - dotfiles
+
+- name: Template internal kanshi config
+  ansible.builtin.template:
+    src: internal.j2
+    dest: ~/.config/kanshi/internal
+    mode: u=rw,g=r,o=r

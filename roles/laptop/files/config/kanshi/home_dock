@@ -10,19 +10,19 @@ output 'ASUSTek COMPUTER INC VG245 G6LMQS144188' {
 }
 
 profile dock {
-	output eDP-1 disable
+	output $internal disable
 	output $ultrawide enable position 0,0
 	output $tall enable position 3840,0
 }
 
-profile fallback {
-	output eDP-1 enable
-	output $ultrawide disable
-	output $tall disable
+profile everything {
+	output $internal enable
+	output $ultrawide enable position 0,0
+	output $tall enable position 3840,0
 }
 
 profile squish {
-	output eDP-1 disable
+	output $internal disable
 	output $ultrawide enable position 0,0 mode 1920x1600
 	output $tall enable position 1920,0
 }
