@@ -1,5 +1,7 @@
 [tools]
+"cargo:taplo-cli" = "latest"
 direnv = "latest"
+go = "latest"
 node = "latest"
 "npm:bash-language-server" = "latest"
 "npm:vscode-json-languageserver" = "latest"
