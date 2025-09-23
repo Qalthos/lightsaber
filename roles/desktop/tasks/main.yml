@@ -1,74 +1,17 @@
 ---
-- name: Install common desktop packages
-  ansible.builtin.package:
-    name:
-      - kanshi
-      - sddm
-      - sway
-      - swaybg
-      - swayidle
-      - swaylock
-      - waybar
-      - rofi
-      - xdg-desktop-portal-gtk
-      - xdg-desktop-portal-wlr
-      - xdg-user-dirs
-      - grim
-      - slurp
-      - network-manager-applet
-      # Theming
-      - papirus-icon-theme
-      # Applications
-      - engrampa
-      - firefox
-      - flatpak
-      - imv
-      - kitty
-      - mpv
-      - pavucontrol
-      - thunar
-      - xed
-      - xreader
-    state: installed
-  become: true
-
-- name: Install desktop on Arch
-  ansible.builtin.package:
-    name:
-      - swaync
-      - polkit-gnome
-      # Fonts
-      - otf-font-awesome
-      - ttf-fira-code
-      - ttf-firacode-nerd
-      - ttf-noto-nerd
-      - noto-fonts-cjk
-      - noto-fonts-emoji
-    state: installed
-  become: true
-  when: ansible_os_family == "Archlinux"
-
-- name: Install desktop on Red Hat
-  ansible.builtin.package:
-    name:
-      # Fonts
-      - fira-code-fonts
-      - google-noto-emoji-fonts
-      - google-noto-sans-cjk-fonts
-      # Required for waypaper
-      - cairo-gobject-devel
-      - python-devel
-    state: installed
-  become: true
-  when: ansible_os_family == "RedHat" and ansible_pkg_mgr != "atomic_container"
-
 - name: Add swaync copr repo
   community.general.copr:
     name: erikreider/SwayNotificationCenter
     state: enabled
-    includepkgs: SwayNotificationCenter
   become: true
   when: ansible_os_family == "RedHat" and ansible_pkg_mgr != "atomic_container"
+
+- name: Install common desktop packages
+  ansible.builtin.package:
+    name: "{{ desktop_packages.common + desktop_packages[ansible_os_family] }}"
+    state: installed
+  become: true
+  when: ansible_pkg_mgr != "atomic_container"
 
 - name: Install uv tools
   ansible.builtin.command:

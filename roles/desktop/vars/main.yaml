@@ -1,0 +1,50 @@
+---
+desktop_packages:
+  common:
+    - kanshi
+    - sddm
+    - sway
+    - swaybg
+    - swayidle
+    - swaylock
+    - waybar
+    - rofi-wayland
+    - xdg-desktop-portal-gtk
+    - xdg-desktop-portal-wlr
+    - xdg-user-dirs
+    - clipman
+    - grim
+    - slurp
+    - network-manager-applet
+    # Theming
+    - papirus-icon-theme
+    # Applications
+    - engrampa
+    - firefox
+    - flatpak
+    - imv
+    - kitty
+    - mpv
+    - pavucontrol
+    - thunar
+    - xed
+    - xreader
+  Archlinux:
+    - swaync
+    - polkit-gnome
+    # Fonts
+    - otf-font-awesome
+    - ttf-fira-code
+    - ttf-firacode-nerd
+    - ttf-noto-nerd
+    - noto-fonts-cjk
+    - noto-fonts-emoji
+  RedHat:
+    - SwayNotificationCenter
+    # Fonts
+    - fira-code-fonts
+    - google-noto-emoji-fonts
+    - google-noto-sans-cjk-fonts
+    # Required for waypaper
+    - cairo-gobject-devel
+    - python-devel
