@@ -19,7 +19,7 @@
     - zprofile
 
 - name: Copy config files
-  ansible.builtin.include_tasks: copy_filetree.yaml
+  ansible.builtin.import_playbook: qalthos.lightsaber.copy_filetree
   loop:
     - config
     - zsh

@@ -1,6 +1,0 @@
----
-- name: Provision Raspberry pi hosts
-  hosts: raspberry
-  become: true
-  roles:
-    - raspberry

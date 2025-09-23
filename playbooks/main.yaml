@@ -6,7 +6,9 @@
   tags: base
 
 - name: Handle Raspberry Pi hosts
-  import_playbook: raspberry.yml
+  hosts: raspberry
+  roles:
+    - raspberry
   tags: raspberry
 
 - name: Set up desktop environment

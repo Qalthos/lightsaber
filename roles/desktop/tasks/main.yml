@@ -67,7 +67,7 @@
     - media/videos
 
 - name: Copy config files and scripts
-  ansible.builtin.include_tasks: copy_filetree.yaml
+  ansible.builtin.import_playbook: qalthos.lightsaber.copy_filetree
   loop:
     - config
     - local
