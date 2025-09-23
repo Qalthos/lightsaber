@@ -12,7 +12,7 @@
   become: true
 
 - name: Copy config files
-  ansible.builtin.import_playbook: qalthos.lightsaber.copy_filetree
+  ansible.builtin.include_tasks: tasks/copy_filetree.yaml
   loop:
     - config
   tags:

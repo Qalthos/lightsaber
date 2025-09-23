@@ -16,7 +16,7 @@ vim.api.nvim_create_autocmd(
 vim.api.nvim_create_autocmd(
   { 'FileType' },
   {
-    pattern = { "css", "html", "json", "lua", "spajson", "yaml" },
+    pattern = { "css", "html", "json", "lua", "spajson", "toml", "yaml" },
     group = indent_group,
     command = "set tabstop=2 shiftwidth=2 expandtab",
   }
