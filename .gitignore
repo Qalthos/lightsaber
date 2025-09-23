@@ -166,3 +166,4 @@ cython_debug/
 
 # Ansible
 .ansible/
+ansible_collections
