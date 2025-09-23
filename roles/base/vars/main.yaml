@@ -1,0 +1,13 @@
+base_packages:
+  common:
+    - git
+    - htop
+    - uv
+    - mise
+    - neovim
+    - zsh
+  Archlinux:
+    - base-devel
+    - github-cli
+  RedHat:
+    - gh

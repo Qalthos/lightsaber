@@ -9,14 +9,14 @@
     src: "{{ item }}"
     dest: ~/.{{ item }}
     mode: preserve
-  tags:
-    - dotfiles
   loop:
     - bashrc
     - gitconfig
     - profile
     - zshrc
     - zprofile
+  tags:
+    - dotfiles
 
 - name: Copy config files
   ansible.builtin.include_tasks: tasks/copy_filetree.yaml
@@ -27,10 +27,10 @@
     - dotfiles
 
 - name: Enable en_US.UTF-8 locale
-  become: true
   community.general.locale_gen:
     name: en_US.UTF-8
     state: present
+  become: true
   when: ansible_os_family != 'RedHat'
 
 - name: Add mise copr repo
@@ -41,34 +41,11 @@
   when: ansible_os_family == "RedHat" and ansible_pkg_mgr != "atomic_container"
 
 - name: Install required environment tools
-  become: true
   ansible.builtin.package:
-    name:
-      - git
-      - htop
-      - uv
-      - mise
-      - neovim
-      - zsh
+    name: "{{ base_packages.common + base_packages[ansible_os_family] }}"
     state: present
+  become: true
   when: ansible_pkg_mgr != "atomic_container"
-
-- name: Install gh cli (Arch)
-  ansible.builtin.package:
-    name:
-      - base-devel
-      - github-cli
-    state: installed
-  become: true
-  when: ansible_os_family == "Archlinux"
-
-- name: Install gh cli (Red Hat)
-  ansible.builtin.package:
-    name:
-      - gh
-    state: installed
-  become: true
-  when: ansible_os_family == "RedHat" and ansible_pkg_mgr != "atomic_container"
 
 - name: Install uv tools
   ansible.builtin.command:
@@ -81,7 +58,7 @@
     - '"is already installed" not in base_uv.stdout'
 
 - name: Set shell to zsh
-  become: true
   ansible.builtin.user:
     name: "{{ ansible_user }}"
     shell: /usr/bin/zsh
+  become: true
