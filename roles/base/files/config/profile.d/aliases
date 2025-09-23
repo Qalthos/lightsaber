@@ -1,0 +1,7 @@
+#==Common======
+alias ls="ls --color"
+alias cp="cp -v"
+alias chx="chmod +x"
+alias q="touch /tmp/q && less +F -R /tmp/q"
+alias vim="nvim"
+alias v="f -e nvim"

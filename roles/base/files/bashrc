@@ -1,0 +1,32 @@
+# .bashrc
+
+# Source global definitions
+if [ -f /etc/bashrc ]; then
+	. /etc/bashrc
+fi
+
+# User specific environment
+if ! [[ "$PATH" =~ $HOME/.local/bin: ]]; then
+	PATH="$HOME/.local/bin:$PATH"
+fi
+export PATH
+
+# Uncomment the following line if you don't like systemctl's auto-paging feature:
+# export SYSTEMD_PAGER=
+
+# mise
+eval "$(mise activate bash)"
+# direnv
+eval "$(direnv hook bash)"
+# fasd
+eval "$(fasd --init auto)"
+
+# User specific aliases and functions
+for file in ~/.config/profile.d/*; do source "$file"; done
+if [ -d ~/.bashrc.d ]; then
+	for file in ~/.bashrc.d/*; do source "$file"; done
+fi
+
+if hash fortune 2>/dev/null; then
+	fortune -c
+fi

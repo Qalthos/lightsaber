@@ -12,6 +12,7 @@
   tags:
     - dotfiles
   loop:
+    - bashrc
     - gitconfig
     - profile
     - zshrc

@@ -56,6 +56,7 @@ source /etc/profile
 
 eval "$(fasd --init auto)"
 
+for file in ~/.config/profile.d/*(.); source $file
 for file in ~/.zsh/rc.d/*(.); source $file
 
 if hash fortune 2>/dev/null; then
