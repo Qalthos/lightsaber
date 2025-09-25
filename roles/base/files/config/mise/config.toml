@@ -1,12 +1,14 @@
 [tools]
-"cargo:taplo-cli" = "latest"
 direnv = "latest"
+usage = "latest"
+# Go
 go = "latest"
+"cargo:taplo-cli" = "latest"
+# Node
 node = "latest"
 "npm:bash-language-server" = "latest"
 "npm:vscode-json-languageserver" = "latest"
 "npm:yaml-language-server" = "latest"
-usage = "latest"
 
 [settings]
 idiomatic_version_file_enable_tools = []

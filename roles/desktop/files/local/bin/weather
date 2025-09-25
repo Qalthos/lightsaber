@@ -1,4 +1,5 @@
 #!/usr/bin/env -S uv run --script
+# vi: ft=python
 # /// script
 # dependencies = [
 #   "pygobject",
@@ -15,7 +16,7 @@ from urllib.request import urlopen, Request
 import gi
 
 gi.require_version("Geoclue", "2.0")
-from gi.repository import Geoclue
+from gi.repository import Geoclue  # noqa: E402
 
 
 ICON_MAP = {
@@ -79,7 +80,7 @@ def fetch(url: str):  # pyright: ignore[reportAny]
 
 def get_location() -> LocationData:
     clue = Geoclue.Simple.new_sync(
-        "something",
+        "weather.py",
         Geoclue.AccuracyLevel.NEIGHBORHOOD,
         None,
     )
