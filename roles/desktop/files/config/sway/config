@@ -26,9 +26,10 @@ set $record 'wf-recorder -F fps=30 -c gif -f "$(xdg-user-dir PICTURES)/screensho
 default_border pixel 2
 
 ### Workspaces
-assign [class="Slack"] workspace 2
-assign [class="discord"] workspace 3
-assign [app_id="com.discordapp.Discord"] workspace 3
+assign [class="Slack"] workspace slack
+assign [app_id="org.signal.Signal"] workspace signal
+assign [class="discord"] workspace discord
+assign [app_id="com.discordapp.Discord"] workspace discord
 assign [app_id="org.mozilla.Thunderbird"] workspace mail
 # Steam
 assign [class="steam"] workspace steam
