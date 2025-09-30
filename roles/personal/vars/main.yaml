@@ -1,0 +1,6 @@
+personal_packages:
+  common: []
+  Archlinux:
+    - borg
+  RedHat:
+    - borgbackup

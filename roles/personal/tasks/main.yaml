@@ -1,19 +1,10 @@
 ---
-- name: Install borg on Arch Linux
+- name: Install borg
   ansible.builtin.package:
-    name:
-      - borg
-    state: installed
+    name: "{{ personal_packages.common + personal_packages[ansible_os_family] }}"
+    state: present
   become: true
-  when: ansible_os_family == "Archlinux"
-
-- name: Install borg on Red Hat
-  ansible.builtin.package:
-    name:
-      - borgbackup
-    state: installed
-  become: true
-  when: ansible_os_family == "RedHat" and ansible_pkg_mgr != "atomic_container"
+  when: ansible_pkg_mgr != "atomic_container"
 
 - name: Install borgmatic
   ansible.builtin.command:
@@ -22,7 +13,7 @@
   loop:
     - borgmatic
   changed_when:
-    - '"is already installed" not in personal_uv.stdout'
+    - '"is already installed" not in personal_uv.stderr'
 
 - name: Install flatpaks
   community.general.flatpak:
