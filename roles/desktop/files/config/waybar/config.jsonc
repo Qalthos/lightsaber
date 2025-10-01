@@ -17,8 +17,9 @@
     "custom/arch",
     "custom/fedora",
     "custom/flatpak",
-    "pulseaudio",
-    "clock",
+    "wireplumber#sink",
+    "wireplumber#source",
+    "clock"
   ],
   // Modules configuration
   "sway/workspaces": {
@@ -35,15 +36,8 @@
       "urgent": "",
       "focused": "",
       "default": "",
-      "high-priority-named": [
-        "discord",
-        "mail",
-        "signal",
-        "slack",
-        "steam",
-        "game",
-      ],
-    },
+      "high-priority-named": ["discord", "mail", "signal", "slack", "steam", "game"]
+    }
   },
   "keyboard-state": {
     "numlock": true,
@@ -51,11 +45,11 @@
     "format": "{name} {icon}",
     "format-icons": {
       "locked": "",
-      "unlocked": "",
-    },
+      "unlocked": ""
+    }
   },
   "sway/mode": {
-    "format": "<span style=\"italic\">{}</span>",
+    "format": "<span style=\"italic\">{}</span>"
   },
   "mpd": {
     "format": "{stateIcon} {consumeIcon}{randomIcon}{repeatIcon}{singleIcon}{artist} - {album} - {title} ({elapsedTime:%M:%S}/{totalTime:%M:%S}) ⸨{songPosition}|{queueLength}⸩ {volume}% ",
@@ -64,47 +58,47 @@
     "unknown-tag": "N/A",
     "interval": 2,
     "consume-icons": {
-      "on": " ",
+      "on": " "
     },
     "random-icons": {
       "off": "<span color=\"#f53c3c\"></span> ",
-      "on": " ",
+      "on": " "
     },
     "repeat-icons": {
-      "on": " ",
+      "on": " "
     },
     "single-icons": {
-      "on": "1 ",
+      "on": "1 "
     },
     "state-icons": {
       "paused": "",
-      "playing": "",
+      "playing": ""
     },
     "tooltip-format": "MPD (connected)",
-    "tooltip-format-disconnected": "MPD (disconnected)",
+    "tooltip-format-disconnected": "MPD (disconnected)"
   },
   "idle_inhibitor": {
     "format": "{icon}",
     "format-icons": {
       "activated": "",
-      "deactivated": "",
-    },
+      "deactivated": ""
+    }
   },
   "tray": {
     // "icon-size": 21,
-    "spacing": 10,
+    "spacing": 10
   },
   "clock": {
     // "timezone": "America/New_York",
     "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>",
-    "format-alt": "{:%Y-%m-%d}",
+    "format-alt": "{:%Y-%m-%d}"
   },
   "cpu": {
     "format": "{usage}% ",
-    "tooltip": false,
+    "tooltip": false
   },
   "memory": {
-    "format": "{}% ",
+    "format": "{}% "
   },
   "temperature": {
     // "thermal-zone": 2,
@@ -112,18 +106,18 @@
     "critical-threshold": 80,
     // "format-critical": "{temperatureC}°C {icon}",
     "format": "{temperatureC}°C {icon}",
-    "format-icons": ["", "", ""],
+    "format-icons": ["", "", ""]
   },
   "backlight": {
     // "device": "acpi_video1",
     "format": "{percent}% {icon}",
-    "format-icons": ["", ""],
+    "format-icons": ["", ""]
   },
   "battery": {
     "states": {
       // "good": 95,
       "warning": 30,
-      "critical": 15,
+      "critical": 15
     },
     "format": "{capacity}% {icon}",
     "format-charging": "{capacity}% ",
@@ -131,10 +125,10 @@
     "format-alt": "{time} {icon}",
     // "format-good": "", // An empty format will hide the module
     // "format-full": "",
-    "format-icons": ["", "", "", "", ""],
+    "format-icons": ["", "", "", "", ""]
   },
   "battery#bat2": {
-    "bat": "BAT2",
+    "bat": "BAT2"
   },
   "network": {
     // "interface": "wlp2*", // (Optional) To force the use of this interface
@@ -143,27 +137,21 @@
     "tooltip-format": "{ifname} via {gwaddr} ",
     "format-linked": "{ifname} (No IP) ",
     "format-disconnected": "Disconnected ⚠",
-    "format-alt": "{ifname}: {ipaddr}/{cidr}",
+    "format-alt": "{ifname}: {ipaddr}/{cidr}"
   },
-  "pulseaudio": {
-    // "scroll-step": 1, // %, can be a float
-    "format": "{volume}% {icon} {format_source}",
-    "format-bluetooth": "{volume}% {icon} {format_source}",
-    "format-bluetooth-muted": " {icon} {format_source}",
-    "format-muted": " {format_source}",
-    "format-source": "{volume}% ",
-    "format-source-muted": "",
-    "format-icons": {
-      "headphone": "",
-      "hands-free": "",
-      "headset": "",
-      "phone": "",
-      "portable": "",
-      "car": "",
-      "default": ["", "", ""],
-    },
-    "on-click": "pavucontrol",
-    "on-click-right": "flatpak run org.pipewire.Helvum",
+  "wireplumber#sink": {
+    "format": "{volume}% {icon}",
+    "format-bluetooth": "{volume}% {icon}",
+    "format-bluetooth-muted": " {icon}",
+    "format-muted": "",
+    "format-icons": ["", "", ""],
+    "on-click": "flatpak run com.saivert.pwvucontrol",
+    "on-click-right": "flatpak run org.pipewire.Helvum"
+  },
+  "wireplumber#source": {
+    "node-type": "Audio/Source",
+    "format": "{volume}% ",
+    "format-muted": ""
   },
   "custom/arch": {
     "format": "| {} ",
@@ -171,7 +159,7 @@
     "on-click": "kitty yay -Syu",
     "tooltip": false,
     "hide-empty-text": true,
-    "interval": 3600,
+    "interval": 3600
   },
   "custom/fedora": {
     "format": "| {} ",
@@ -179,7 +167,7 @@
     "on-click": "kitty sudo dnf upgrade",
     "tooltip": false,
     "hide-empty-text": true,
-    "interval": 3600,
+    "interval": 3600
   },
   "custom/flatpak": {
     "format": "| {} 📦",
@@ -187,7 +175,7 @@
     "on-click": "kitty flatpak update",
     "tooltip": false,
     "hide-empty-text": true,
-    "interval": 3600,
+    "interval": 3600
   },
   "custom/notification": {
     "tooltip": false,
@@ -200,20 +188,20 @@
       "inhibited-notification": "<span foreground='red'><sup></sup></span>",
       "inhibited-none": "",
       "dnd-inhibited-notification": "<span foreground='red'><sup></sup></span>",
-      "dnd-inhibited-none": "",
+      "dnd-inhibited-none": ""
     },
     "return-type": "json",
     "exec-if": "which swaync-client",
     "exec": "swaync-client -swb",
     "on-click": "swaync-client -t -sw",
     "on-click-right": "swaync-client -d -sw",
-    "escape": true,
+    "escape": true
   },
   "custom/weather": {
     "format": "| {}",
     "return-type": "json",
     "tooltip": true,
     "interval": 300,
-    "exec": "weather",
-  },
+    "exec": "weather"
+  }
 }

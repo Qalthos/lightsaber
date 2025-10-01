@@ -106,6 +106,7 @@ input "type:keyboard" {
 #
     # Start your launcher
     bindsym $mod+F2 exec $menu
+    bindsym $mod+Shift+F2 exec rofimoji -a copy
 
     # Start a terminal
     bindsym $mod+F3 exec $term

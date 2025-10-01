@@ -1,2 +1,2 @@
 #!/usr/bin/bash
-exit $(cat /sys/class/power_supply/AC/online)
+exit "$(cat /sys/class/power_supply/AC/online)"

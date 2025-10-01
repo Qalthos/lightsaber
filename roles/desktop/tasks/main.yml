@@ -33,6 +33,7 @@
   community.general.flatpak:
     name:
       - com.github.tchx84.Flatseal
+      - com.saivert.pwvuconfig
       - hu.irl.cameractrls
       - org.mozilla.Thunderbird
       - org.pipewire.Helvum

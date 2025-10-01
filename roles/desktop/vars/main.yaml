@@ -9,6 +9,7 @@ desktop_packages:
     - swaylock
     - waybar
     - rofi-wayland
+    - rofimoji
     - xdg-desktop-portal-gtk
     - xdg-desktop-portal-wlr
     - xdg-user-dirs
@@ -25,7 +26,6 @@ desktop_packages:
     - imv
     - kitty
     - mpv
-    - pavucontrol
     - thunar
     - xed
     - xreader
