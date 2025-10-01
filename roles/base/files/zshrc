@@ -2,9 +2,6 @@
 # It should contain commands to set up aliases,
 # functions, options, key bindings, etc.
 
-# Add local bin
-export PATH="$HOME/.local/bin:$PATH"
-
 # mise
 eval "$(mise activate zsh)"
 # direnv

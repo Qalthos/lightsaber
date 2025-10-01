@@ -54,6 +54,7 @@
   loop:
     - pyrefly
     - ruff
+    - tombi
   changed_when:
     - '"is already installed" not in base_uv.stderr'
 

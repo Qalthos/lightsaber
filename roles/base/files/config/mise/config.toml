@@ -1,12 +1,11 @@
 [tools]
 direnv = "latest"
 usage = "latest"
-# Go
-go = "latest"
-"cargo:taplo-cli" = "latest"
 # Node
 node = "latest"
 "npm:bash-language-server" = "latest"
+"npm:@biomejs/biome" = "latest"
+"npm:@vlabo/cspell-lsp" = "latest"
 "npm:vscode-json-languageserver" = "latest"
 "npm:yaml-language-server" = "latest"
 
