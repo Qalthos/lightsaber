@@ -3,7 +3,6 @@ base_packages:
     - git
     - htop
     - uv
-    - mise
     - neovim
     - zsh
   Archlinux:
