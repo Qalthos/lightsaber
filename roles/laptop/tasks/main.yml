@@ -24,3 +24,36 @@
     src: internal.j2
     dest: ~/.config/kanshi/internal
     mode: u=rw,g=r,o=r
+
+- name: Set up wireless/ethernet bond
+  community.general.nmcli:
+    conn_name: bond
+    fail_over_mac: active
+    ifname: bond0
+    miimon: 100
+    mode: active-backup
+    primary: "{{ laptop_dock_ifname }}"
+    state: present
+    type: bond
+    updelay: 200
+
+- name: Set up wireless subordinate connection
+  community.general.nmcli:
+    conn_name: bond-wlan
+    ifname: "{{ wireless_ifname }}"
+    master: bond0
+    slave_type: bond
+    ssid: "Casa del Caso"
+    state: present
+    type: wifi
+    wifi_sec:
+      key-mgmt: wpa-psk
+
+- name: Set up ethernet subordinate connection
+  community.general.nmcli:
+    conn_name: bond-eth
+    ifname: "{{ laptop_dock_ifname }}"
+    master: bond0
+    slave_type: bond
+    state: present
+    type: ethernet
