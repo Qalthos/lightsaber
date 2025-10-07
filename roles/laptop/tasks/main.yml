@@ -17,6 +17,7 @@
     src: 99-dock-ethernet.link.j2
     dest: /etc/systemd/network/99-dock-ethernet.link
     mode: preserve
+  become: true
 
 - name: Copy config files
   ansible.builtin.include_tasks: tasks/copy_filetree.yaml
@@ -38,7 +39,7 @@
     ifname: bond0
     miimon: 100
     mode: active-backup
-    primary: "{{ laptop_dock_ifname }}"
+    primary: dock0
     state: present
     type: bond
     updelay: 200
