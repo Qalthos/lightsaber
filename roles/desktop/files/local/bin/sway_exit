@@ -1,0 +1,5 @@
+#!/bin/bash
+# Wait for sway to exit
+swaymsg -m -t SUBSCRIBE '[]'
+# run cleanup
+systemctl --user start sway-session-shutdown.target

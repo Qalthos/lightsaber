@@ -25,10 +25,11 @@
   "sway/workspaces": {
     "disable-scroll": true,
     "all-outputs": true,
-    "format": "{name}: {icon}",
+    "format": "{icon} {name}",
     "format-icons": {
       "discord": "",
       "mail": "",
+      "matrix": "",
       "signal": "",
       "slack": "",
       "steam": "",
@@ -36,7 +37,7 @@
       "urgent": "",
       "focused": "",
       "default": "",
-      "high-priority-named": ["discord", "mail", "signal", "slack", "steam", "game"]
+      "high-priority-named": ["discord", "mail", "matrix", "signal", "slack", "steam", "game"]
     }
   },
   "keyboard-state": {
