@@ -11,6 +11,7 @@
     "tray",
     "backlight",
     "battery",
+    "custom/media",
     "idle_inhibitor",
     "custom/notification",
     "custom/weather",
@@ -84,6 +85,16 @@
       "activated": "",
       "deactivated": ""
     }
+  },
+  "custom/media": {
+    "exec": "playerctl -a metadata --format '{\"text\": \"{{playerName}}\", \"tooltip\": \"{{markup_escape(title)}}\", \"alt\": \"{{status}}\", \"class\": \"{{status}}\"}' -F",
+    "format": "{icon} {text}",
+    "format-icons": {
+      "Paused": "󰎈",
+      "Playing": ""
+    },
+    "on-click": "playerctl play-pause",
+    "return-type": "json"
   },
   "tray": {
     // "icon-size": 21,

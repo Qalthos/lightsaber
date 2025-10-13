@@ -8,6 +8,7 @@ node = "latest"
 "npm:@vlabo/cspell-lsp" = "latest"
 "npm:vscode-json-languageserver" = "latest"
 "npm:yaml-language-server" = "latest"
+deno = "latest"
 
 [settings]
 idiomatic_version_file_enable_tools = []

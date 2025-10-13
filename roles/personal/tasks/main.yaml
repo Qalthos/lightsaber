@@ -6,12 +6,13 @@
   become: true
   when: ansible_pkg_mgr != "atomic_container"
 
-- name: Install borgmatic
+- name: Install uv tools
   ansible.builtin.command:
     cmd: uv tool install {{ item }}
   register: personal_uv
   loop:
     - borgmatic
+    - "yt-dlp[default]"
   changed_when:
     - '"is already installed" not in personal_uv.stderr'
 
