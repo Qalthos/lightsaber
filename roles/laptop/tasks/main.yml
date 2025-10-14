@@ -26,11 +26,16 @@
   tags:
     - dotfiles
 
-- name: Template internal kanshi config
+- name: Template kanshi configs
   ansible.builtin.template:
-    src: internal.j2
-    dest: ~/.config/kanshi/internal
+    src: "{{ item.src }}"
+    dest: "~/.config/kanshi/{{ item.dest }}"
     mode: u=rw,g=r,o=r
+  loop:
+    - src: internal.j2
+      dest: internal
+    - src: home_dock.j2
+      dest: home_dock
 
 - name: Set up wireless/ethernet bond
   community.general.nmcli:
