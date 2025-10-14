@@ -14,9 +14,11 @@
 
 - name: Template dock ethernet persistent name
   ansible.builtin.template:
-    src: 50-dock-ethernet.link.j2
-    dest: /etc/systemd/network/50-dock-ethernet.link
+    src: "{{ item }}"
+    dest: "/etc/systemd/network/{{ item | splitext | first }}"
     mode: preserve
+  loop:
+    - 50-dock-ethernet.link.j2
   become: true
 
 - name: Copy config files
@@ -28,14 +30,12 @@
 
 - name: Template kanshi configs
   ansible.builtin.template:
-    src: "{{ item.src }}"
-    dest: "~/.config/kanshi/{{ item.dest }}"
+    src: "{{ item }}"
+    dest: "~/.config/kanshi/{{ item | splitext | first }}"
     mode: preserve
   loop:
-    - src: internal.j2
-      dest: internal
-    - src: home_dock.j2
-      dest: home_dock
+    - internal.j2
+    - home_dock.j2
 
 - name: Set up wireless/ethernet bond
   community.general.nmcli:
