@@ -67,6 +67,17 @@
     - media/pictures
     - media/videos
 
+- name: Download latest releases
+  ansible.builtin.include_tasks: tasks/download_latest_release.yaml
+  loop:
+    - repo: timrogers/litra-autotoggle
+      match: "^(.*_linux-amd64)$"
+    - repo: timrogers/litra-rs
+      match: "^(.*_linux-amd64)$"
+    - repo: TheAssassin/AppImageLauncher
+      match: "^(.*-x86_64.AppImage)$"
+      dest: "~/files/applications"
+
 - name: Copy config files and scripts
   ansible.builtin.include_tasks: tasks/copy_filetree.yaml
   loop:

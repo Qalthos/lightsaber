@@ -1,0 +1,29 @@
+---
+- name: Get latest release information
+  ansible.builtin.uri:
+    url: "https://api.github.com/repos/{{ item.repo }}/releases/latest"
+  register: result
+
+- name: Extract matching release by name
+  ansible.builtin.set_fact:
+    release_data: "{{ result.json.assets | selectattr('name', 'match', item.match | default('^(.*)$')) | first }}"
+    dest_path: "{{ item.dest | default('~/.local/bin') }}/{{ item.repo | split('/') | last }}"
+
+- name: Extract release checksum
+  ansible.builtin.set_fact:
+    checksum: "{{ release_data.digest | split(':') }}"
+
+- name: Get file info if present
+  ansible.builtin.stat:
+    path: "{{ dest_path }}"
+    get_checksum: true
+    checksum_algorithm: "{{ checksum.0 }}"
+  register: local_file
+
+- name: Download file to dest
+  ansible.builtin.get_url:
+    url: "{{ release_data.browser_download_url }}"
+    dest: "{{ dest_path }}"
+    checksum: "{{ release_data.digest }}"
+    mode: "u=rwx,g=rx,o=rx"
+  when: not local_file.stat.exists or local_file.stat.checksum != checksum.1
