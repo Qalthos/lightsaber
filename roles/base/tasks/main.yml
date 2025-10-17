@@ -45,11 +45,18 @@
     cmd: uv tool install {{ item }}
   register: base_uv
   loop:
+    - pre-commit
     - pyrefly
     - ruff
     - tombi
   changed_when:
     - '"is already installed" not in base_uv.stderr'
+
+- name: Install fasd
+  ansible.builtin.include_tasks: tasks/download_latest_release.yaml
+  loop:
+    - repo: whjvenyl/fasd
+      match: fasd
 
 - name: Set shell to zsh
   ansible.builtin.user:

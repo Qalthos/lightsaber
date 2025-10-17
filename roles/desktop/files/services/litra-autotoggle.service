@@ -1,0 +1,11 @@
+[Unit]
+Description=Autotoggler for Logitech Litra devices
+Documentation=https://github.com/timrogers/litra-autotoggle
+BindsTo=sway-session.target
+
+[Service]
+Type=simple
+ExecStart=%h/.local/bin/litra-autotoggle
+
+[Install]
+WantedBy=sway-session.target
