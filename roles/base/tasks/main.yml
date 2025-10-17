@@ -40,6 +40,16 @@
   become: true
   when: ansible_facts['pkg_mgr'] != "atomic_container"
 
+- name: Overlay required packages
+  community.general.rpm_ostree_pkg:
+    name:
+        - kitty
+        - neovim
+        - uv
+    apply_live: true
+  become: true
+  when: ansible_pkg_mgr == "atomic_container"
+
 - name: Install uv tools
   ansible.builtin.command:
     cmd: uv tool install {{ item }}
