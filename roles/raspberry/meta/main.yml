@@ -1,7 +1,0 @@
----
-galaxy_info:
-  role_name: raspberry
-  author: Kate Case (@qalthos)
-  description: Raspberry pi Provisioning
-  license: MIT
-  min_ansible_version: "2.10"
