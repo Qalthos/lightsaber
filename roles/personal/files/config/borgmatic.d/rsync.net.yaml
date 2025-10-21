@@ -1,0 +1,7 @@
+repositories:
+  - path: ssh://rsync.net/./borg/{hostname}
+    label: rsync.net
+
+remote_path: borg14
+
+<<: !include ~/.config/borgmatic/common.yaml

@@ -16,6 +16,13 @@
   changed_when:
     - '"is already installed" not in personal_uv.stderr'
 
+- name: Copy config files and scripts
+  ansible.builtin.include_tasks: tasks/copy_filetree.yaml
+  loop:
+    - config
+  tags:
+    - dotfiles
+
 - name: Install flatpaks
   community.general.flatpak:
     name:
