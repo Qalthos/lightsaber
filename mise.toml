@@ -1,2 +1,5 @@
+[env]
+_.python.venv = { path = ".venv", create = true }
+
 [tools]
 "npm:@ansible/ansible-language-server" = "latest"
