@@ -21,18 +21,24 @@ repos:
       - id: trailing-whitespace
 
   - repo: https://github.com/asottile/add-trailing-comma
-    rev: v3.2.0
+    rev: v4.0.0
     hooks:
       - id: add-trailing-comma
 
+  - repo: https://github.com/tombi-toml/tombi-pre-commit
+    rev: v0.6.38
+    hooks:
+      - id: tombi-format
+      - id: tombi-lint
+
   - repo: https://github.com/biomejs/pre-commit
-    rev: "v2.0.6" # Use the sha / tag you want to point at
+    rev: "v2.2.7"
     hooks:
       - id: biome-ci
         additional_dependencies: ["@biomejs/biome@2.1.1"]
 
   - repo: https://github.com/astral-sh/ruff-pre-commit
-    rev: v0.13.1
+    rev: v0.14.1
     hooks:
       - id: ruff-check
       - id: ruff-format
@@ -46,6 +52,6 @@ repos:
         entry: yamllint --strict
 
   - repo: https://github.com/ansible/ansible-lint
-    rev: v25.9.0
+    rev: v25.9.2
     hooks:
       - id: ansible-lint
