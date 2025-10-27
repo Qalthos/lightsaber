@@ -35,6 +35,9 @@
 
 - name: Add mise config for work
   ansible.builtin.copy:
-    src: mise.toml
+    src: "{{ item }}"
     dest: ~/workspace/ansible/
     mode: preserve
+  loop:
+    - mise.toml
+    - .gitconfig

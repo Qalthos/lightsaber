@@ -1,5 +1,5 @@
 [tools]
-direnv = "latest"
+deno = "latest"
 usage = "latest"
 # Node
 node = "latest"
@@ -8,7 +8,12 @@ node = "latest"
 "npm:@vlabo/cspell-lsp" = "latest"
 "npm:vscode-json-languageserver" = "latest"
 "npm:yaml-language-server" = "latest"
-deno = "latest"
+# Rust
+rust = "latest"
+"cargo:jinja-lsp" = "latest"
 
 [settings]
 idiomatic_version_file_enable_tools = []
+
+[settings.python]
+compile = false

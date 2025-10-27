@@ -14,7 +14,7 @@
 return {
   cmd = { "ansible-language-server", "--stdio" },
   filetypes = { "ansible", "yaml.ansible" },
-  root_markers = { 'ansible.cfg', ".ansible-lint", '.git' },
+  root_markers = { "ansible.cfg", ".ansible-lint", ".git" },
   settings = {
     ansible = {
       executionEnvironment = {
@@ -24,7 +24,7 @@ return {
         enabled = true,
         lint = {
           enabled = true,
-          path = 'ansible-lint',
+          path = "ansible-lint",
         },
       },
     },

@@ -43,8 +43,6 @@ export PATH
 
 # mise
 eval "$(mise activate bash)"
-# direnv
-eval "$(direnv hook bash)"
 # fasd
 eval "$(fasd --init auto)"
 

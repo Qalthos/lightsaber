@@ -33,3 +33,5 @@
 	forceDeleteBranch = false
 [gpg]
 	format = ssh
+[includeIf "gitdir:~/workspace/ansible/"]
+	path = "~/workspace/.gitconfig"

@@ -4,8 +4,8 @@
 
 # mise
 eval "$(mise activate zsh)"
-# direnv
-eval "$(direnv hook zsh)"
+# fasd
+eval "$(fasd --init auto)"
 
 fpath+=~/.zsh/zfunc
 autoload -Uz compinit && compinit
@@ -50,8 +50,6 @@ export EDITOR=nvim
 bindkey -e
 
 source /etc/profile
-
-eval "$(fasd --init auto)"
 
 for file in ~/.config/profile.d/*(.); source $file
 for file in ~/.zsh/rc.d/*(.); source $file
