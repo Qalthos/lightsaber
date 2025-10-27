@@ -1,28 +1,30 @@
 output 'LG Electronics LG HDR WQHD+ 306NTSUB8630' {
 	mode 3840x1600@60Hz
+	position {{ monitor.width }},0
 	alias $ultrawide
 }
 
 output 'ASUSTek COMPUTER INC VG245 G6LMQS144188' {
 	mode 1920x1080@60Hz
+	position {{ monitor.width + 3840 }},0
 	transform 90
 	alias $tall
 }
 
-profile dock {
-	output $internal disable
-	output $ultrawide enable position 0,0
-	output $tall enable position 3840,0
-}
-
 profile everything {
 	output $internal enable
-	output $ultrawide enable position {{ monitor.width }},0
-	output $tall enable position {{ monitor.width + 3840 }},0
+	output $ultrawide enable
+	output $tall enable
+}
+
+profile dock {
+	output $internal disable
+	output $ultrawide enable
+	output $tall enable
 }
 
 profile squish {
 	output $internal disable
-	output $ultrawide enable position 0,0 mode 1920x1600
-	output $tall enable position 1920,0
+	output $ultrawide enable mode 1920x1600
+	output $tall enable position {{ monitor.width + 1920 }},0
 }
