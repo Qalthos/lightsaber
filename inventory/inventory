@@ -1,6 +1,3 @@
-[all:vars]
-ansible_user=kate
-
 [work]
 kcase-thinkpadt14gen5
 
