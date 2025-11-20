@@ -21,6 +21,7 @@
     - waypaper
   changed_when:
     - '"is already installed" not in desktop_uv.stderr'
+  when: ansible_pkg_mgr != "atomic_container"
 
 - name: Add the flathub flatpak repository remote to the user installation
   community.general.flatpak_remote:

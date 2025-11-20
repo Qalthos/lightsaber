@@ -50,6 +50,17 @@
   become: true
   when: ansible_pkg_mgr == "atomic_container"
 
+- name: Install mise
+  ansible.builtin.command:
+    cmd: "curl https://mise.run | sh"
+    creates: ~/.local/bin/mise
+
+- name: Ensure mise tools are loaded
+  ansible.builtin.command:
+    cmd: ~/.local/bin/mise install
+  register: base_mise
+  changed_when: '"all tools are installed" not in base_mise.stderr'
+
 - name: Install uv tools
   ansible.builtin.command:
     cmd: uv tool install {{ item }}
