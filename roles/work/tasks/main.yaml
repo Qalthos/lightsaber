@@ -1,3 +1,10 @@
+- name: Install docker
+  ansible.builtin.package:
+    name: "{{ work_packages.common + work_packages[ansible_os_family] }}"
+    state: present
+  become: true
+  when: ansible_pkg_mgr != "atomic_container"
+
 - name: Install work apps
   community.general.flatpak:
     name:

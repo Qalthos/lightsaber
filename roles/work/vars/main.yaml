@@ -1,0 +1,5 @@
+---
+work_packages:
+  common: []
+  RedHat:
+    - docker-cli
