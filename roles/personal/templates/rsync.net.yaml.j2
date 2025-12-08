@@ -2,6 +2,7 @@ repositories:
   - path: ssh://rsync.net/./borg/{hostname}
     label: rsync.net
 
+encryption_passcommand: secret-tool lookup host {{ ansible_hostname }} remote rsync.net
 remote_path: borg14
 
 <<: !include ~/.config/borgmatic/common.yaml

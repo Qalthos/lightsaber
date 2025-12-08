@@ -23,6 +23,18 @@
   tags:
     - dotfiles
 
+- name: Create borgmatic configs directory
+  ansible.builtin.file:
+    path: ~/.config/borgmatic.d/
+    state: directory
+    mode: "0755"
+
+- name: Template borgmatic configs
+  ansible.builtin.template:
+    src: rsync.net.yaml.j2
+    dest: ~/.config/borgmatic.d/rsync.net.yaml
+    mode: "0644"
+
 - name: Install flatpaks
   community.general.flatpak:
     name:
