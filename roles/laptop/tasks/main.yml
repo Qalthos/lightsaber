@@ -3,7 +3,7 @@
   ansible.builtin.package:
     name: blueman
   become: true
-  when: ansible_pkg_mgr != "atomic_container"
+  when: ansible_facts['pkg_mgr'] != "atomic_container"
 
 - name: Copy udev hibernate rule
   ansible.builtin.copy:

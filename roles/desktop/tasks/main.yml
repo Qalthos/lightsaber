@@ -4,14 +4,14 @@
     name: erikreider/SwayNotificationCenter
     state: enabled
   become: true
-  when: ansible_os_family == "RedHat" and ansible_pkg_mgr != "atomic_container"
+  when: ansible_facts['os_family'] == "RedHat" and ansible_facts['pkg_mgr'] != "atomic_container"
 
 - name: Install common desktop packages
   ansible.builtin.package:
-    name: "{{ desktop_packages.common + desktop_packages[ansible_os_family] }}"
+    name: "{{ desktop_packages.common + desktop_packages[ansible_facts['os_family']] }}"
     state: installed
   become: true
-  when: ansible_pkg_mgr != "atomic_container"
+  when: ansible_facts['pkg_mgr'] != "atomic_container"
 
 - name: Install uv tools
   ansible.builtin.command:
