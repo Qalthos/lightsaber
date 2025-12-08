@@ -36,6 +36,7 @@
   loop:
     - internal.j2
     - home_dock.j2
+    - quinn.j2
 
 - name: Set up wireless/ethernet bond
   community.general.nmcli:

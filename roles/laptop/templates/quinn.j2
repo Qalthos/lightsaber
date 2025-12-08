@@ -1,0 +1,18 @@
+output 'Dell Inc. DELL SE2422HX 27X3XB3' {
+	mode 1920x1080
+	position 0,0
+	alias $quinn_wide
+}
+
+output 'Dell Inc. DELL P2214H KW14V5AC0FFS' {
+	mode 1920x1080
+	position {{ monitor.width }},0
+	alias $quinn_tall
+	transform 90
+}
+
+profile {
+	output $internal disable
+	output $quinn_wide enable
+	output $quinn_tall enable
+}
