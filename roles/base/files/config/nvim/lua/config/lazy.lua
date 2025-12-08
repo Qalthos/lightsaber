@@ -29,15 +29,20 @@ require("lazy").setup({
   },
   -- Configure any other settings here. See the documentation for more details.
   -- colorscheme that will be used when installing plugins.
-  install = { colorscheme = { "habamax" } },
+  -- install = { colorscheme = { "habamax" } },
   -- automatically check for plugin updates
   checker = { enabled = true },
 })
 
 require('lualine').setup({
-  options = { theme = "codedark" },
+  options = { theme = "auto" },
   sections = {
     lualine_x = { 'encoding', 'fileformat', 'filetype', 'lsp_status' },
+  },
+})
+require("nightfox").setup({
+  options = {
+    transparent = true;
   },
 })
 require("nvim-treesitter.configs").setup({
