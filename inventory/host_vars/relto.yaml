@@ -3,3 +3,4 @@ monitor:
   name: BOE 0x0BC9 Unknown
   width: 2560
   height: 1600
+wireless_ifname: wlp4s0
