@@ -46,6 +46,7 @@ assign [class="winedbg.exe"] workspace error
 for_window [app_id="com.core447.StreamController"] floating enable
 for_window [app_id="zenity"] floating enable
 for_window [class="Litra Controller"] floating enable
+for_window [title="Unlock Database - KeePassXC"] floating enable
 
 ### Output configuration
 #
@@ -77,8 +78,8 @@ output "LG Electronics LG HDR WQHD+ 306NTSUB8630" resolution 3840x1600@60Hz
 exec swayidle -w
 
 bindsym $mod+z exec swaylock
-bindsym $mod+Shift+z exec systemctl suspend
-bindsym $mod+Control+Shift+z exec systemctl hibernate
+bindsym --locked $mod+Shift+z exec systemctl suspend
+bindsym --locked $mod+Control+Shift+z exec systemctl hibernate
 
 ### Input configuration
 #

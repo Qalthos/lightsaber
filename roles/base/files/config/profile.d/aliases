@@ -5,3 +5,5 @@ alias chx="chmod +x"
 alias q="touch /tmp/q && less +F -R /tmp/q"
 alias vim="nvim"
 alias v="f -e nvim"
+
+alias purge_orig="find . -name='*.orig' -delete"
