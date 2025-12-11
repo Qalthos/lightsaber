@@ -64,6 +64,8 @@
     - files/desktop
     - files/documents
     - files/downloads
+    - files/public
+    - files/templates
     - media/music
     - media/pictures
     - media/videos
