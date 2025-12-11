@@ -89,6 +89,12 @@
   tags:
     - dotfiles
 
+- name: Template config files
+  ansible.builtin.template:
+    src: appimagelauncher.cfg.j2
+    dest: ~/.config/appimagelauncher.cfg
+    mode: u=rw,g=r,o=r
+
 - name: Install user services
   ansible.builtin.copy:
     src: services/
