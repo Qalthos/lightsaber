@@ -1,3 +1,2 @@
 # This file contains ignores rule violations for ansible-lint
 galaxy.yml galaxy[no-changelog]
-roles/personal/files/config/borgmatic.d/rsync.net.yaml load-failure[runtimeerror]

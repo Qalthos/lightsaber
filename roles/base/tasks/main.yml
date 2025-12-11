@@ -50,7 +50,7 @@
   become: true
   when: ansible_pkg_mgr == "atomic_container"
 
-- name: Install mise
+- name: Install mise  # noqa: command-instead-of-module
   ansible.builtin.command:
     cmd: "curl https://mise.run | sh"
     creates: ~/.local/bin/mise
