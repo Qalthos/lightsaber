@@ -1,3 +1,0 @@
-[submodule "roles/base/files/bin"]
-	path = roles/base/files/local/bin
-	url = git@github.com:Qalthos/scripts.git
