@@ -1,0 +1,11 @@
+---
+ansible-navigator:
+  collection-doc-cache-path: ~/.cache/ansible-navigator/collection_doc_cache.db
+  enable-prompts: false
+  execution-environment:
+    enabled: false
+  format: yaml
+  mode: interactive
+  time-zone: UTC
+  playbook-artifact:
+    enable: false
