@@ -48,7 +48,7 @@
         - uv
     apply_live: true
   become: true
-  when: ansible_pkg_mgr == "atomic_container"
+  when: ansible_facts['pkg_mgr'] == "atomic_container"
 
 - name: Install mise  # noqa: command-instead-of-module
   ansible.builtin.command:
