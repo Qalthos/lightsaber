@@ -11,6 +11,7 @@ node = "latest"
 # Rust
 rust = "latest"
 "cargo:jinja-lsp" = "latest"
+"cargo:harper-ls" = "latest"
 
 [settings]
 idiomatic_version_file_enable_tools = []

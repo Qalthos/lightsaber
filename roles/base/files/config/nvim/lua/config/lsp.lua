@@ -1,4 +1,4 @@
-vim.lsp.enable({ "ansible_ls", "bash_ls", "biome", "jinja_ls", "lua_ls", "marksman", "ruff", "tombi", "ty", "yaml_ls" })
+vim.lsp.enable({ "ansible_ls", "bash_ls", "biome", "harper", "jinja_ls", "lua_ls", "marksman", "ruff", "tombi", "ty", "yaml_ls" })
 
 vim.api.nvim_create_autocmd('LspAttach', {
   callback = function(event)

@@ -26,6 +26,7 @@ set $record 'wf-recorder -F fps=30 -c gif -f "$(xdg-user-dir PICTURES)/screensho
 default_border pixel 2
 
 ### Workspaces
+assign [title="Google Calendar"] workspace calendar
 assign [class="discord"] workspace discord
 assign [app_id="com.discordapp.Discord"] workspace discord
 assign [app_id="org.mozilla.Thunderbird"] workspace mail
