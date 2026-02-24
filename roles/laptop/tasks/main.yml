@@ -59,8 +59,13 @@
     ssid: "Casa del Caso"
     state: present
     type: wifi
+    autoconnect_priority: 100
+    wifi:
+      hidden: true
+      mac-address-randomization: "never"
     wifi_sec:
-      key-mgmt: wpa-psk
+      key-mgmt: sae
+      psk: "{{ laptop_home_wifi_key }}"
 
 - name: Set up ethernet subordinate connection
   community.general.nmcli:
