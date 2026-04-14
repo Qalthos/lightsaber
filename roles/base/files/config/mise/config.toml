@@ -9,7 +9,7 @@ node = "latest"
 "npm:vscode-json-languageserver" = "latest"
 "npm:yaml-language-server" = "latest"
 # Rust
-rust = "latest"
+rust = "stable"
 "cargo:jinja-lsp" = "latest"
 "cargo:harper-ls" = "latest"
 
