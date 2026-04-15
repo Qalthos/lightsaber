@@ -10,6 +10,7 @@ from __future__ import annotations
 import json
 from datetime import datetime
 from http.client import HTTPResponse
+from pathlib import Path
 from typing import TypedDict, cast
 from urllib.request import urlopen, Request
 
@@ -71,11 +72,11 @@ ICON_MAP = {
 }
 
 
-def fetch(url: str):  # pyright: ignore[reportAny]
+def fetch(url: str):
     # urllib default user agent is blocked
     request = Request(url, headers={"User-Agent": "Mozilla"})
     response = cast(HTTPResponse, urlopen(request))
-    return json.loads(response.read())  # pyright: ignore[reportAny]
+    return json.loads(response.read())
 
 
 def get_location() -> LocationData:
@@ -92,7 +93,7 @@ def get_location() -> LocationData:
 
 
 def get_weather(location_str: str) -> WttrResponse:
-    return fetch(f"https://wttr.in/{location_str}?format=j1")  # pyright: ignore[reportAny]
+    return fetch(f"https://wttr.in/{location_str}?format=j1")
 
 
 def desc(status: CurrentCondition | HourlyData) -> str:
@@ -146,7 +147,9 @@ def main() -> None:
     weather = get_weather(location_str)
     weather_str = parse_weather(weather)
 
-    print(weather_str)
+    cache = Path("~/.cache").expanduser() / "weather.json"
+    with cache.open("w") as cache_file:
+        cache_file.write(weather_str)
 
 
 if __name__ == "__main__":
@@ -171,6 +174,7 @@ class SimpleValue(TypedDict):
 
 class CurrentCondition(TypedDict):
     humidity: str
+    observation_time: str
     temp_C: str
     weatherCode: str
     weatherDesc: list[SimpleValue]

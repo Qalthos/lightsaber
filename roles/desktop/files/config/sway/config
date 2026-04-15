@@ -32,8 +32,7 @@ assign [app_id="com.discordapp.Discord"] workspace discord
 assign [app_id="org.mozilla.Thunderbird"] workspace mail
 assign [app_id="cinny"] workspace matrix
 assign [app_id="org.signal.Signal"] workspace signal
-assign [class="Slack"] workspace slack
-assign [app_id="com.slack.Slack"] workspace slack
+assign [app_id=".*Slack"] workspace slack
 # Steam
 assign [class="steam"] workspace steam
 assign [class="steam_app"] workspace game

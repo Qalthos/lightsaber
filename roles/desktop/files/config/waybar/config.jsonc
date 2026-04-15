@@ -214,6 +214,6 @@
     "return-type": "json",
     "tooltip": true,
     "interval": 300,
-    "exec": "weather"
+    "exec": "cat ~/.cache/weather.json"
   }
 }
