@@ -50,16 +50,10 @@
   become: true
   when: ansible_facts['pkg_mgr'] == "atomic_container"
 
-- name: Install mise  # noqa: command-instead-of-module
-  ansible.builtin.command:
-    cmd: "curl https://mise.run | sh"
-    creates: ~/.local/bin/mise
-
-- name: Ensure mise tools are loaded
-  ansible.builtin.command:
-    cmd: ~/.local/bin/mise install
-  register: base_mise
-  changed_when: '"all tools are installed" not in base_mise.stderr'
+- name: Install mise
+  ansible.builtin.include_role:
+    name: base
+    tasks_from: mise
 
 - name: Install uv tools
   ansible.builtin.command:

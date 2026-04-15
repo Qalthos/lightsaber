@@ -1,0 +1,33 @@
+---
+- name: Check for mise
+  ansible.builtin.stat:
+    path: ~/.local/bin/mise
+  register: base_mise_st
+
+- name: Install mise
+  when: not base_mise_st.stat.exists
+  block:
+    - name: Fetch install script
+      ansible.builtin.uri:
+        url: "https://mise.run"
+        return_content: true
+      register: base_mise_script
+
+    - name: Run install script
+      ansible.builtin.command:
+        cmd: sh
+        stdin: "{{ base_mise_script.content }}"
+        creates: ~/.local/bin/mise
+
+- name: Update mise
+  ansible.builtin.command:
+    cmd: ~/.local/bin/mise self-update
+  register: base_mise_up
+  changed_when: '"mise is already up to date" not in base_mise_up.stdout'
+  when: base_mise_st.stat.exists
+
+- name: Ensure mise tools are loaded
+  ansible.builtin.command:
+    cmd: ~/.local/bin/mise install
+  register: base_mise_in
+  changed_when: '"all tools are installed" not in base_mise_in.stderr'
