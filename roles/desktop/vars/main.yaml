@@ -17,6 +17,7 @@ desktop_packages:
     - grim
     - slurp
     - network-manager-applet
+    - polkit-gnome
     # Theming
     - papirus-icon-theme
     # Applications
@@ -31,20 +32,18 @@ desktop_packages:
     - xreader
   Archlinux:
     - swaync
-    - polkit-gnome
     # Fonts
     - otf-font-awesome
     - ttf-fira-code
-    - ttf-firacode-nerd
-    - ttf-noto-nerd
+    - ttf-roboto-mono
     - noto-fonts-cjk
     - noto-fonts-emoji
   RedHat:
-    - SwayNotificationCenter
     # Fonts
     - fira-code-fonts
-    - google-noto-emoji-fonts
-    - google-noto-sans-cjk-fonts
+    - fontawesome-fonts-all
+    - google-noto-fonts
+    - google-roboto-mono-fonts
     # Required for waypaper
     - cairo-gobject-devel
     - python-devel

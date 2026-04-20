@@ -15,8 +15,7 @@
     "idle_inhibitor",
     "custom/notification",
     "custom/weather",
-    "custom/arch",
-    "custom/fedora",
+    "custom/packages",
     "custom/flatpak",
     "wireplumber#sink",
     "wireplumber#source",
@@ -87,7 +86,7 @@
     }
   },
   "custom/media": {
-    "exec": "playerctl -a metadata --format '{\"text\": \"{{playerName}}\", \"tooltip\": \"{{markup_escape(title)}}\", \"alt\": \"{{status}}\", \"class\": \"{{status}}\"}' -F",
+    "exec": "playerctl -a metadata --format '{\"text\": \"{% raw %}{{playerName}}\", \"tooltip\": \"{{markup_escape(title)}}\", \"alt\": \"{{status}}\", \"class\": \"{{status}}\"}{% endraw %}' -F",
     "format": "{icon} {text}",
     "format-icons": {
       "Paused": "󰎈",
@@ -157,38 +156,17 @@
     "format-bluetooth-muted": " {icon}",
     "format-muted": "",
     "format-icons": ["", "", ""],
+    "max-volume": 100,
     "on-click": "flatpak run com.saivert.pwvucontrol",
-    "on-click-right": "flatpak run org.pipewire.Helvum"
+    "on-click-right": "flatpak run org.pipewire.Helvum",
+    "scroll-step": 5
   },
   "wireplumber#source": {
     "node-type": "Audio/Source",
     "format": "{volume}% ",
     "format-muted": ""
   },
-  "custom/arch": {
-    "format": "| {} ",
-    "exec": "checkupdates | wc -l | sed 's/^0$//'",
-    "on-click": "kitty yay -Syu",
-    "tooltip": false,
-    "hide-empty-text": true,
-    "interval": 3600
-  },
-  "custom/fedora": {
-    "format": "| {} ",
-    "exec": "dnf check-update -q | wc -l | sed 's/^0$//'",
-    "on-click": "kitty sudo dnf upgrade",
-    "tooltip": false,
-    "hide-empty-text": true,
-    "interval": 3600
-  },
-  "custom/flatpak": {
-    "format": "| {} 📦",
-    "exec": "flatpak remote-ls --updates | wc -l | sed 's/^0$//'",
-    "on-click": "kitty flatpak update",
-    "tooltip": false,
-    "hide-empty-text": true,
-    "interval": 3600
-  },
+{% if ansible_facts["os_family"] == "ArchLinux" %}
   "custom/notification": {
     "tooltip": false,
     "format": "{icon} {text}",
@@ -207,7 +185,42 @@
     "exec": "swaync-client -swb",
     "on-click": "swaync-client -t -sw",
     "on-click-right": "swaync-client -d -sw",
+    "hide-empty-text": true,
     "escape": true
+  },
+  "custom/packages": {
+    "format": "| {} ",
+    "exec": "checkupdates | wc -l | sed 's/^0$//'",
+    "on-click": "kitty yay -Syu",
+    "tooltip": false,
+    "hide-empty-text": true,
+    "interval": 3600
+  },
+{% elif ansible_facts["os_family"] == "RedHat" %}
+  "custom/notification": {
+    "exec": "dunst-waybar",
+    "return-type": "json",
+    "exec-if": "which dunst-waybar",
+    "on-click": "dunst-waybar-history",
+    "on-click-middle": "dunstctl set-paused toggle",
+    "tooltip": true
+  },
+  "custom/packages": {
+    "format": "| {} ",
+    "exec": "dnf check-update -q | wc -l | sed 's/^0$//'",
+    "on-click": "kitty sudo dnf upgrade",
+    "tooltip": false,
+    "hide-empty-text": true,
+    "interval": 3600
+  },
+{% endif %}
+  "custom/flatpak": {
+    "format": "| {} 📦",
+    "exec": "flatpak remote-ls --updates | wc -l | sed 's/^0$//'",
+    "on-click": "kitty flatpak update",
+    "tooltip": false,
+    "hide-empty-text": true,
+    "interval": 3600
   },
   "custom/weather": {
     "format": "| {}",

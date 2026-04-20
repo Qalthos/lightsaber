@@ -1,11 +1,4 @@
 ---
-- name: Add swaync copr repo
-  community.general.copr:
-    name: erikreider/SwayNotificationCenter
-    state: enabled
-  become: true
-  when: ansible_facts['os_family'] == "RedHat" and ansible_facts['pkg_mgr'] != "atomic_container"
-
 - name: Install common desktop packages
   ansible.builtin.package:
     name: "{{ desktop_packages.common + desktop_packages[ansible_facts['os_family']] }}"
@@ -91,9 +84,14 @@
 
 - name: Template config files
   ansible.builtin.template:
-    src: appimagelauncher.cfg.j2
-    dest: ~/.config/appimagelauncher.cfg
+    src: "{{ item.name }}.j2"
+    dest: "{{ item.dest }}{{ item.name }}"
     mode: u=rw,g=r,o=r
+  loop:
+    - name: appimagelauncher.cfg
+      dest: ~/.config/
+    - name: config.jsonc
+      dest: ~/.config/waybar/
 
 - name: Install user services
   ansible.builtin.copy:
