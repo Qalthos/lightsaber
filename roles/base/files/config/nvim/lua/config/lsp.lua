@@ -1,4 +1,5 @@
-vim.lsp.enable({ "ansible_ls", "bash_ls", "biome", "harper", "jinja_ls", "lua_ls", "marksman", "ruff", "tombi", "ty", "yaml_ls" })
+vim.lsp.enable({ "ansible_ls", "bash_ls", "biome", "harper", "jinja_ls", "lua_ls", "marksman", "ruff", "tombi", "ty",
+  "yaml_ls" })
 
 vim.api.nvim_create_autocmd('LspAttach', {
   callback = function(event)
@@ -25,6 +26,13 @@ vim.api.nvim_create_autocmd('LspAttach', {
     if client:supports_method("textDocument/formatting") then
       vim.keymap.set("n", "\\qf", vim.lsp.buf.format)
       vim.keymap.set("v", "\\qf", vim.lsp.buf.format)
+
+      -- Format on save
+      vim.api.nvim_create_autocmd("BufWritePre", {
+        callback = function()
+          vim.lsp.buf.format { async = false, id = event.data.client_id }
+        end
+      })
     end
 
     -- LSP hints
@@ -40,13 +48,6 @@ vim.api.nvim_create_autocmd('LspAttach', {
     vim.keymap.set("n", "gO", vim.lsp.buf.document_symbol, { buffer = event.buf })
     vim.keymap.set("i", "<c-s>", vim.lsp.buf.signature_help, { buffer = event.buf })
   end,
-})
-
--- Format on save
-vim.api.nvim_create_autocmd("BufWritePre", {
-  callback = function(event)
-    vim.lsp.buf.format()
-  end
 })
 
 vim.diagnostic.config({
