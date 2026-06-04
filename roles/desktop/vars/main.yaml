@@ -29,6 +29,8 @@ desktop_packages:
     - thunar
     - xed
     - xreader
+    - thunar-archive-plugin
+    - tumbler
   Archlinux:
     - swaync
     # Fonts
