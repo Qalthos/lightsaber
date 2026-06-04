@@ -296,7 +296,6 @@ bar {
     swaybar_command waybar
 }
 
-exec wl-paste -t text --watch clipman store
 exec swaync
 exec /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
 

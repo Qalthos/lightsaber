@@ -13,7 +13,6 @@ desktop_packages:
     - xdg-desktop-portal-gtk
     - xdg-desktop-portal-wlr
     - xdg-user-dirs
-    - clipman
     - grim
     - slurp
     - network-manager-applet
