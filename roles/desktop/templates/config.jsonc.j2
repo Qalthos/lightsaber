@@ -151,7 +151,6 @@
     "format": "{volume}% ",
     "format-muted": ""
   },
-{% if ansible_facts["os_family"] == "ArchLinux" %}
   "custom/notification": {
     "tooltip": false,
     "format": "{icon} {text}",
@@ -173,6 +172,7 @@
     "hide-empty-text": true,
     "escape": true
   },
+{% if ansible_facts["os_family"] == "ArchLinux" %}
   "custom/packages": {
     "format": "| {} ",
     "exec": "checkupdates | wc -l | sed 's/^0$//'",
@@ -182,14 +182,6 @@
     "interval": 3600
   },
 {% elif ansible_facts["os_family"] == "RedHat" %}
-  "custom/notification": {
-    "exec": "dunst-waybar",
-    "return-type": "json",
-    "exec-if": "which dunst-waybar",
-    "on-click": "dunst-waybar-history",
-    "on-click-middle": "dunstctl set-paused toggle",
-    "tooltip": true
-  },
   "custom/packages": {
     "format": "  {}",
     "exec": "dnf check-update -q | wc -l | sed 's/^0$//'",

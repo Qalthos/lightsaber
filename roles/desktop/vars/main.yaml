@@ -16,7 +16,6 @@ desktop_packages:
     - grim
     - slurp
     - network-manager-applet
-    - polkit-gnome
     # Theming
     - papirus-icon-theme
     # Applications
@@ -32,6 +31,7 @@ desktop_packages:
     - thunar-archive-plugin
     - tumbler
   Archlinux:
+    - polkit-gnome
     - swaync
     # Fonts
     - otf-font-awesome
@@ -40,6 +40,8 @@ desktop_packages:
     - noto-fonts-cjk
     - noto-fonts-emoji
   RedHat:
+    - lxqt-policykit
+    - SwayNotificationCenter
     # Fonts
     - fira-code-fonts
     - fontawesome-fonts-all
