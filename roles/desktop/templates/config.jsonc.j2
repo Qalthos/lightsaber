@@ -9,35 +9,49 @@
   "modules-center": ["sway/window"],
   "modules-right": [
     "tray",
-    "backlight",
-    "battery",
     "custom/media",
+    "group/power",
+    "backlight",
     "idle_inhibitor",
-    "custom/notification",
-    "custom/weather",
     "custom/packages",
     "custom/flatpak",
-    "wireplumber#sink",
-    "wireplumber#source",
+    "custom/notification",
+    "group/audio",
+    "privacy",
+    "custom/weather",
     "clock"
   ],
+  // Groups
+  "group/power": {
+    "drawer": {},
+    "orientation": "horizontal",
+    "modules": [
+      "battery",
+      "power-profiles-daemon",
+    ]
+  },
+  "group/audio": {
+    "drawer": {},
+    "orientation": "horizontal",
+    "modules": [
+      "wireplumber#sink",
+      "wireplumber#source"
+    ]
+  },
   // Modules configuration
   "sway/workspaces": {
     "disable-scroll": true,
     "all-outputs": true,
-    "format": "{icon} {name}",
+    "format": "{icon}",
     "format-icons": {
       "discord": "",
+      "calendar": "",
       "mail": "",
       "matrix": "",
       "signal": "",
       "slack": "",
       "steam": "",
       "game": "",
-      "urgent": "",
-      "focused": "",
-      "default": "",
-      "high-priority-named": ["discord", "mail", "matrix", "signal", "slack", "steam", "game"]
     }
   },
   "keyboard-state": {
@@ -52,31 +66,8 @@
   "sway/mode": {
     "format": "<span style=\"italic\">{}</span>"
   },
-  "mpd": {
-    "format": "{stateIcon} {consumeIcon}{randomIcon}{repeatIcon}{singleIcon}{artist} - {album} - {title} ({elapsedTime:%M:%S}/{totalTime:%M:%S}) ⸨{songPosition}|{queueLength}⸩ {volume}% ",
-    "format-disconnected": "Disconnected ",
-    "format-stopped": "{consumeIcon}{randomIcon}{repeatIcon}{singleIcon}Stopped ",
-    "unknown-tag": "N/A",
-    "interval": 2,
-    "consume-icons": {
-      "on": " "
-    },
-    "random-icons": {
-      "off": "<span color=\"#f53c3c\"></span> ",
-      "on": " "
-    },
-    "repeat-icons": {
-      "on": " "
-    },
-    "single-icons": {
-      "on": "1 "
-    },
-    "state-icons": {
-      "paused": "",
-      "playing": ""
-    },
-    "tooltip-format": "MPD (connected)",
-    "tooltip-format-disconnected": "MPD (disconnected)"
+  "sway/window": {
+	  "swap-icon-label": false,
   },
   "idle_inhibitor": {
     "format": "{icon}",
@@ -103,21 +94,6 @@
     // "timezone": "America/New_York",
     "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>",
     "format-alt": "{:%Y-%m-%d}"
-  },
-  "cpu": {
-    "format": "{usage}% ",
-    "tooltip": false
-  },
-  "memory": {
-    "format": "{}% "
-  },
-  "temperature": {
-    // "thermal-zone": 2,
-    // "hwmon-path": "/sys/class/hwmon/hwmon2/temp1_input",
-    "critical-threshold": 80,
-    // "format-critical": "{temperatureC}°C {icon}",
-    "format": "{temperatureC}°C {icon}",
-    "format-icons": ["", "", ""]
   },
   "backlight": {
     // "device": "acpi_video1",
@@ -149,6 +125,15 @@
     "format-linked": "{ifname} (No IP) ",
     "format-disconnected": "Disconnected ⚠",
     "format-alt": "{ifname}: {ipaddr}/{cidr}"
+  },
+  "power-profiles-daemon": {
+    "format": "{icon}",
+    "format-icons": {
+      "default": "",
+      "performance": "<span color='#B37F34'><small></small></span>",
+      "balanced": "<span><small> </small></span>",
+      "power-saver": "<span color='#a6e3a1'><small></small></span>"
+    }
   },
   "wireplumber#sink": {
     "format": "{volume}% {icon}",
@@ -206,7 +191,7 @@
     "tooltip": true
   },
   "custom/packages": {
-    "format": "| {} ",
+    "format": "  {}",
     "exec": "dnf check-update -q | wc -l | sed 's/^0$//'",
     "on-click": "kitty sudo dnf upgrade",
     "tooltip": false,
@@ -215,7 +200,7 @@
   },
 {% endif %}
   "custom/flatpak": {
-    "format": "| {} 📦",
+    "format": "📦 {}",
     "exec": "flatpak remote-ls --updates | wc -l | sed 's/^0$//'",
     "on-click": "kitty flatpak update",
     "tooltip": false,
@@ -223,7 +208,6 @@
     "interval": 3600
   },
   "custom/weather": {
-    "format": "| {}",
     "return-type": "json",
     "tooltip": true,
     "interval": 300,

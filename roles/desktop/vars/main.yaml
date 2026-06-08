@@ -43,7 +43,7 @@ desktop_packages:
     # Fonts
     - fira-code-fonts
     - fontawesome-fonts-all
-    - google-noto-fonts
+    - google-noto-fonts-all
     - google-roboto-mono-fonts
     # Required for waypaper
     - cairo-gobject-devel
