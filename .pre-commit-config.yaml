@@ -26,19 +26,19 @@ repos:
       - id: add-trailing-comma
 
   - repo: https://github.com/tombi-toml/tombi-pre-commit
-    rev: v0.9.16
+    rev: v1.2.4
     hooks:
       - id: tombi-format
       - id: tombi-lint
 
   - repo: https://github.com/biomejs/pre-commit
-    rev: "v2.4.11"
+    rev: "v2.5.4"
     hooks:
       - id: biome-ci
         additional_dependencies: ["@biomejs/biome@2.1.1"]
 
   - repo: https://github.com/astral-sh/ruff-pre-commit
-    rev: v0.15.10
+    rev: v0.15.22
     hooks:
       - id: ruff-check
       - id: ruff-format
@@ -52,6 +52,6 @@ repos:
         entry: yamllint --strict
 
   - repo: https://github.com/ansible/ansible-lint
-    rev: v26.4.0
+    rev: v26.6.0
     hooks:
       - id: ansible-lint
