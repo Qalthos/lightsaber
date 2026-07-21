@@ -1,5 +1,6 @@
 [tools]
 deno = "latest"
+harper-ls = "latest"
 usage = "latest"
 "aqua:LuaLS/lua-language-server" = "latest"
 # Node
@@ -12,7 +13,6 @@ node = "latest"
 # Rust
 rust = "stable"
 "cargo:jinja-lsp" = "latest"
-"cargo:harper-ls" = "latest"
 
 [settings]
 idiomatic_version_file_enable_tools = []
