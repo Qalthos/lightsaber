@@ -30,5 +30,5 @@ return {
     'vue',
   },
   root_markers = { ".git", 'package-lock.json', 'yarn.lock' },
-  workspace_required = true,
+  workspace_required = false,
 }
