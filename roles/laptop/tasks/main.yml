@@ -12,13 +12,14 @@
     mode: u=rw,g=r,o=r
   become: true
 
-- name: Template dock ethernet persistent name
+- name: Template persistent network interface names
   ansible.builtin.template:
     src: "{{ item }}"
-    dest: "/etc/systemd/network/{{ item | splitext | first }}"
+    dest: "/etc/systemd/{{ item | splitext | first }}"
     mode: preserve
   loop:
-    - 50-dock-ethernet.link.j2
+    - network/50-dock-ethernet.link.j2
+    - network/50-wifi.link.j2
   become: true
 
 - name: Copy config files
@@ -53,7 +54,7 @@
 - name: Set up wireless subordinate connection
   community.general.nmcli:
     conn_name: bond-wlan
-    ifname: "{{ wireless_ifname }}"
+    ifname: wifi0
     master: bond0
     slave_type: bond
     ssid: "Casa del Caso"

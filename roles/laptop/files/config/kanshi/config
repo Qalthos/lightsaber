@@ -1,3 +1,13 @@
 include ~/.config/kanshi/internal
 include ~/.config/kanshi/home_dock
 include ~/.config/kanshi/quinn
+
+output 'Dell Inc. DELL U2725QE JXZ5PF4' {
+	scale 1.5
+	alias $ottoman
+}
+
+profile {
+	output $internal disable
+	output $ottoman enable position 0,0
+}
