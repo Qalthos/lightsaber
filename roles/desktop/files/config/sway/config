@@ -46,6 +46,7 @@ assign [class="winedbg.exe"] workspace error
 for_window [app_id="com.core447.StreamController"] floating enable
 for_window [app_id="zenity"] floating enable
 for_window [class="Litra Controller"] floating enable
+for_window [class="pcloud"] floating enable
 for_window [title="Unlock Database - KeePassXC"] floating enable
 for_window [title="Extract" app_id="engrampa"] floating enable
 
@@ -59,8 +60,6 @@ for_window [title="Extract" app_id="engrampa"] floating enable
 #   output HDMI-A-1 resolution 1920x1080 position 1920,0
 #
 # You can get the names of your outputs by running: swaymsg -t get_outputs
-# Framework internal screen
-output "BOE 0x0BC9 Unknown" scale 1.15
 # Ultrawide monitor
 output "LG Electronics LG HDR WQHD+ 306NTSUB8630" resolution 3840x1600@60Hz
 
@@ -79,7 +78,7 @@ output "LG Electronics LG HDR WQHD+ 306NTSUB8630" resolution 3840x1600@60Hz
 exec swayidle -w
 
 bindsym $mod+z exec swaylock
-bindsym --locked $mod+Shift+z exec systemctl suspend
+bindsym --locked $mod+Shift+z exec systemctl suspend-then-hibernate
 bindsym --locked $mod+Control+Shift+z exec systemctl hibernate
 
 ### Input configuration

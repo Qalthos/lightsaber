@@ -48,11 +48,11 @@
       "calendar": "",
       "mail": "",
       "matrix": "",
-      "signal": "",
+      "signal": "",
       "slack": "",
       "steam": "",
-      "game": "",
-    }
+      "game": "",
+    },
   },
   "keyboard-state": {
     "numlock": true,
@@ -172,7 +172,7 @@
     "hide-empty-text": true,
     "escape": true
   },
-{% if ansible_facts["os_family"] == "ArchLinux" %}
+{% if ansible_facts["os_family"] == "Archlinux" %}
   "custom/packages": {
     "format": "| {} ",
     "exec": "checkupdates | wc -l | sed 's/^0$//'",

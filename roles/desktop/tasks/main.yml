@@ -62,6 +62,7 @@
     - media/music
     - media/pictures
     - media/videos
+    - workspace
 
 - name: Download latest releases
   ansible.builtin.include_tasks: tasks/download_latest_release.yaml
