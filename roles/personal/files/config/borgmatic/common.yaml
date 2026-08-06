@@ -452,13 +452,19 @@ commands:
   # for "after" hooks. Defaults to running the hook
   # for all states.
   - before: everything
+    when:
+      - create
     run:
       - notify-send -a borgmatic -i drive-harddisk "Backup starting" -p > /tmp/backup_id
   - after: everything
+    when:
+      - create
     states:
       - finish
     run:
       - notify-send -ea borgmatic -i drive-harddisk "Backup complete" -r $(cat /tmp/backup_id)
   - after: error
+    when:
+      - create
     run:
       - notify-send -a borgmatic -i drive-harddisk -u critical "Backup failed." -r $(cat /tmp/backup_id)
