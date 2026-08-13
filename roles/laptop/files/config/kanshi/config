@@ -1,6 +1,7 @@
 include ~/.config/kanshi/internal
 include ~/.config/kanshi/home_dock
 include ~/.config/kanshi/quinn
+include ~/.config/kanshi/tricia
 
 output 'Dell Inc. DELL U2725QE JXZ5PF4' {
 	scale 1.5

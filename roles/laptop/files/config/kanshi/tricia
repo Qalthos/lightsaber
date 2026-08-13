@@ -1,0 +1,24 @@
+output 'Samsung Electric Company C27F390 HCPN205396' {
+	mode 1920x1080
+	position 0,0
+	alias $heather_left
+}
+
+output 'Dell Inc. DELL C2722DE 6JGV8H3'
+	mode 2560x1440
+	position 1920,0
+	alias $heather_center
+}
+
+output 'Dell Inc. DELL P2219H 3H29D93' {
+	mode 1920x1080
+	position 4480,0
+	alias $heather_right
+}
+
+profile {
+	output $internal disable
+	output $heather_left enable
+	output $heather_center enable
+	output $heather_right enable
+}
