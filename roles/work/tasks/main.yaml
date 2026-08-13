@@ -40,7 +40,14 @@
     state: directory
     mode: u=rwx,g=rx,o=rx
 
-- name: Add mise config for work
+- name: Copy config files
+  ansible.builtin.include_tasks: tasks/copy_filetree.yaml
+  loop:
+    - config
+  tags:
+    - dotfiles
+
+- name: Add work-specific overrides
   ansible.builtin.copy:
     src: "{{ item }}"
     dest: ~/workspace/ansible/
@@ -48,3 +55,5 @@
   loop:
     - mise.toml
     - .gitconfig
+  tags:
+    - dotfiles
