@@ -9,7 +9,6 @@
   community.general.flatpak:
     name:
       - com.bitwarden.desktop
-      - com.slack.Slack
     method: user
     state: present
 

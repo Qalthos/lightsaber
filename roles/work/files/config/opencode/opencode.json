@@ -1,11 +1,15 @@
 {
   "$schema": "https://opencode.ai/config.json",
   "default_agent": "plan",
-  "model": "google-vertex-anthropic/claude-opus-4-6",
-  "small_model": "google-vertex-anthropic/claude-haiku-4-5",
+  "model": "google-vertex-anthropic/claude-opus-4-6@default",
+  "small_model": "google-vertex-anthropic/claude-haiku-4-5@default",
   "agent": {
     "build": {
-      "color": "warning"
+      "color": "warning",
+      "model": "google-vertex-anthropic/claude-sonnet-4-6@default"
+    },
+    "plan": {
+      "model": "google-vertex-anthropic/claude-opus-4-6@default"
     }
   },
   "lsp": {
@@ -30,7 +34,8 @@
       "type": "remote",
       "url": "https://api.sonarcloud.io/mcp",
       "headers": {
-        "Authorization": "Bearer {env:SONARQUBE_TOKEN}"
+        "Authorization": "Bearer {env:SONARQUBE_TOKEN}",
+        "SONARQUBE_ORG": "automation-nexus"
       }
     }
   }
