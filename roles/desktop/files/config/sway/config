@@ -28,7 +28,7 @@ default_border pixel 2
 ### Workspaces
 assign [title="Google Calendar"] workspace calendar
 assign [class="discord"] workspace discord
-assign [app_id="com.discordapp.Discord"] workspace discord
+assign [app_id="discord"] workspace discord
 assign [app_id="org.mozilla.thunderbird.*"] workspace mail
 assign [app_id="cinny"] workspace matrix
 assign [app_id="org.signal.Signal"] workspace signal
@@ -49,6 +49,8 @@ for_window [class="Litra Controller"] floating enable
 for_window [class="pcloud"] floating enable
 for_window [title="Unlock Database - KeePassXC"] floating enable
 for_window [title="Extract" app_id="engrampa"] floating enable
+for_window [app_id="net.windower.Lumoria"] floating enable
+for_window [app_id="pol.exe"] floating enable
 
 ### Output configuration
 #
